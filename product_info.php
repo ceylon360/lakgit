@@ -227,7 +227,82 @@
       echo '<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"><meta itemprop="ratingValue" content="' . $reviews['avgrating'] . '" /><meta itemprop="ratingCount" content="' . $reviews['count'] . '" /></span>';
     }
 ?>
+<div class="container">	
+				<div class="col-md-4">
+				<?php
+    if (tep_not_null($product_info['products_image'])) {
 
+      echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], NULL, NULL, NULL, 'itemprop="image" style="display:none;"');
+
+      $photoset_layout = '1';
+
+      $pi_query = tep_db_query("select image, htmlcontent from " . TABLE_PRODUCTS_IMAGES . " where products_id = '" . (int)$product_info['products_id'] . "' order by sort_order");
+      $pi_total = tep_db_num_rows($pi_query);
+
+      if ($pi_total > 0) {
+        $pi_sub = $pi_total-1;
+
+        while ($pi_sub > 5) {
+          $photoset_layout .= 5;
+          $pi_sub = $pi_sub-5;
+        }
+
+        if ($pi_sub > 0) {
+          $photoset_layout .= ($pi_total > 5) ? 5 : $pi_sub;
+        }
+?>
+
+    <div class="piGal pull-right" data-imgcount="<?php echo $photoset_layout; ?>">
+
+<?php
+        $pi_counter = 0;
+        $pi_html = array();
+
+        while ($pi = tep_db_fetch_array($pi_query)) {
+          $pi_counter++;
+
+          if (tep_not_null($pi['htmlcontent'])) {
+            $pi_html[] = '<div id="piGalDiv_' . $pi_counter . '">' . $pi['htmlcontent'] . '</div>';
+          }
+
+          echo tep_image(DIR_WS_IMAGES . $pi['image'], '', '', '', 'id="piGalImg_' . $pi_counter . '"');
+        }
+?>
+
+    </div>
+
+<?php
+        if ( !empty($pi_html) ) {
+          echo '    <div style="display: none;">' . implode('', $pi_html) . '</div>';
+        }
+      } else {
+?>
+
+    <div class="piGal pull-right">
+      <?php echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name'])); ?>
+    </div>
+
+<?php
+      }
+    }
+?>
+				</div>
+					
+				<div class="col-md-8">
+					<div class="product-title"  itemprop="offers" itemscope itemtype="http://schema.org/Offer"><?php echo $products_name; ?></div>
+					<div class="product-desc"><?php echo stripslashes($product_info['products_description']); ?></div>
+					<div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>
+					<hr>
+					<div class="product-price"><?php echo $products_price; ?></div>
+					<div class="product-stock">In Stock</div>
+					<hr>
+					<div class="buttonSet row">
+    <div class="col-xs-6"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'glyphicon glyphicon-shopping-cart', null, 'primary', null, 'btn-success'); ?></div>
+    <div class="col-xs-6 text-right"><?php echo tep_draw_button(IMAGE_BUTTON_REVIEWS . (($reviews['count'] > 0) ? ' (' . $reviews['count'] . ')' : ''), 'glyphicon glyphicon-comment', tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params())); ?></div>
+  </div>
+				</div>
+			</div> 
+		</div>
   <div class="buttonSet row">
     <div class="col-xs-6"><?php echo tep_draw_button(IMAGE_BUTTON_REVIEWS . (($reviews['count'] > 0) ? ' (' . $reviews['count'] . ')' : ''), 'glyphicon glyphicon-comment', tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params())); ?></div>
     <div class="col-xs-6 text-right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'glyphicon glyphicon-shopping-cart', null, 'primary', null, 'btn-success'); ?></div>
