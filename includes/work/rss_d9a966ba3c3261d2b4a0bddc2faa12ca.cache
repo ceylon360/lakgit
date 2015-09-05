@@ -1,0 +1,58 @@
+a:12:{s:8:"encoding";s:5:"UTF-8";s:5:"title";s:18:"osCommerce Add-Ons";s:4:"link";s:25:"http://www.oscommerce.com";s:11:"description";s:29:"osCommerce, Sell With Emotion";s:8:"language";s:2:"en";s:9:"copyright";s:29:"Copyright (c) 2015 osCommerce";s:14:"managingEditor";s:19:"hpdl@oscommerce.com";s:11:"image_title";s:10:"osCommerce";s:9:"image_url";s:53:"http://www.oscommerce.com/images/oscommerce_88x31.gif";s:10:"image_link";s:25:"http://www.oscommerce.com";s:5:"items";a:5:{i:0;a:4:{s:5:"title";s:74:"Increase/Decrease price by x% for all products or products from a category";s:4:"link";s:38:"http://addons.oscommerce.com/info/4663";s:11:"description";s:463:"Features<br />
+Increase and Decrease product prices by a percentage.<br />
+Increase and Decrease product prices by specific values.<br />
+Filter products by categories.<br />
+Filter products by manufacturer.<br />
+<br />
+Changes<br />
++ updated osCommerce 2.2ms2 vers buttons for compatibility<br />
+<br />
+<br />
+this is a full package for osCommerce 2.2ms2 and osCommerce 2.3.x<br />
+<br />
+Support Forum: http://forums.oscommerce.com/index.php?showtopic=397659";s:7:"pubDate";s:31:"Thu, 03 Sep 2015 03:08:55 +0200";}i:1;a:4:{s:5:"title";s:20:"Featured Products BS";s:4:"link";s:38:"http://addons.oscommerce.com/info/9355";s:11:"description";s:366:"- Fixed database query inside the featured_products.php<br />
+ - Main content has been moved to a module and can now be easily installed through<br />
+your admin section.<br />
+- SQL has been implemented into the content module.<br />
+- Core code changes have been reduced to a minimum.<br />
+(Special thanks for all this goes to marcello)<br />
+<br />
+FULL PACKAGE!";s:7:"pubDate";s:31:"Tue, 01 Sep 2015 07:59:55 +0200";}i:2;a:4:{s:5:"title";s:18:"Google Tag Manager";s:4:"link";s:38:"http://addons.oscommerce.com/info/9356";s:11:"description";s:65:"This add-on allows you to use Google Tag Manager on your website.";s:7:"pubDate";s:31:"Fri, 28 Aug 2015 16:01:23 +0200";}i:3;a:4:{s:5:"title";s:29:"Elfinder browser for Ckeditor";s:4:"link";s:38:"http://addons.oscommerce.com/info/9354";s:11:"description";s:822:"This contribution help you to implement elfinder.<br />
+You need to install ckeditor in first and follow the instruction to add elfinder like image browser.<br />
+<br />
+demo : elfinder : http://elfinder.org/#elf_l1_Lw<br />
+// Documentation for connector options:<br />
+https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options<br />
+<br />
+This contribution must work with this contribution without there browser <br />
+<br />
+Ckeditor addon<br />
+CKEditor osC 2.3.1 - http://addons.oscommerce.com/info/7650<br />
+This contribution can use Kcfinder, I prefer elfinder more interesting<br />
+<br />
+or<br />
+<br />
+CKEditor with KFM Filemanager : http://addons.oscommerce.com/info/8302<br />
+This contribution can use Filemanager, I prefer elfinder more interesting<br />
+<br />
+GoodLuck<br />
+Gyakutsuki";s:7:"pubDate";s:31:"Wed, 26 Aug 2015 15:11:53 +0200";}i:4;a:4:{s:5:"title";s:45:"canada.post.rest.rate.service.oscommerce.V2.3";s:4:"link";s:38:"http://addons.oscommerce.com/info/8887";s:11:"description";s:1073:"Now labeled v1.1<br />
+<br />
+Tested on 2.3.4 Responsive Gold<br />
+<br />
+1) Fixed service exclusions config - was not working on USA or INT quotes.<br />
+<br />
+2) Corrected the way rates are where being received - the original author had set to receive the rate including taxes (due) - when they are typically added by the store owner using a Tax Class.<br />
+Rates are now received without taxes (base) - and (as mentioned above) are added by the store owner by setting a tax in the module.<br />
+<br />
+3) Handling fee for both fixed and percent fixed<br />
+<br />
+4) Removed duplicate $this-_title<br />
+<br />
+5) Added shipping zone config.<br />
+<br />
+6) Added expected delivery date and a Enter Turn Around Time Config.<br />
+<br />
+Full Package<br />
+<br />
+To update &quot;remove&quot; old module in admin (be sure to write down your; Canada Post Customer Number, Canada Post API Username, Canada Post API Password, Canada Post Contract ID - they WILL be removed when the module is removed). Then replace includes/modules/shipping/canadapost.php and re-install.";s:7:"pubDate";s:31:"Tue, 25 Aug 2015 02:06:56 +0200";}}s:11:"items_count";i:5;}

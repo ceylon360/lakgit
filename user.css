@@ -1,0 +1,27 @@
+/* user.css ----------------------------------------------------------------- */
+
+/* BO Back-to-Top-Button*/
+#toTop {cursor: pointer; position: fixed; bottom: 30px; right:15px; z-index: 2; display:none; border: 1px solid #000;  color: #ffffff;
+  border-color: #357ebd;
+  background-color: #0489FB;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#B5DCFD), to(#0489FB));
+  background-image: -webkit-linear-gradient(top, #B5DCFD, 0%, #0489FB, 100%);
+  background-image: -moz-linear-gradient(top, #B5DCFD 0%, #0489FB 100%);
+  background-image: linear-gradient(to bottom, #B5DCFD 0%, #0489FB 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#B5DCFD', endColorstr='#0489FB', GradientType=0);}
+
+#toTop:hover,
+#toTop:focus {background-color:#fff;}
+/* EO Back-to-Top-Button*/
+
+.product-stock{
+	color: #74DF00;
+	font-size: 20px;
+	margin-top: 10px;
+}
+.product-out-stock{
+	color: #d9534f;
+	font-size: 20px;
+	margin-top: 10px;
+}
