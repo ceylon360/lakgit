@@ -18,14 +18,7 @@
 
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PRODUCT_INFO);
 
-  //$product_check_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
-  //cat state
-  if (!empty($hiddencats)) {
-    $product_check_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and p.products_id = p2c.products_id and (not (p2c.categories_id in (" . implode(',', $hiddencats) . "))) and pd.language_id = '" . (int)$languages_id . "'");
-  } else {
-    $product_check_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
-  }
-  //cat state
+  $product_check_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
   $product_check = tep_db_fetch_array($product_check_query);
 
   require(DIR_WS_INCLUDES . 'template_top.php');
@@ -65,32 +58,25 @@
     }
 
     $products_price .= '<meta itemprop="priceCurrency" content="' . tep_output_string($currency) . '" />';
-	
+
     $products_name = '<a href="' . tep_href_link('product_info.php', 'products_id=' . $product_info['products_id']) . '" itemprop="url"><span itemprop="name">' . $product_info['products_name'] . '</span></a>';
-	//stock info
-	$stock_check .='';
+
     if (tep_not_null($product_info['products_model'])) {
       $products_name .= '<br /><small>[<span itemprop="model">' . $product_info['products_model'] . '</span>]</small>';
-   
-   }
-   //stock info
-	    if (tep_get_products_stock($product_info['products_id'])>0 ) {
-      $stock_check .='<div class="product-stock">In Stock</div>';
-    } else {
-      $stock_check .='<div class="product-out-stock">Out of Stock</div>';
     }
-	//stock info
 ?>
 
 <?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')). 'action=add_product', 'NONSSL'), 'post', 'class="form-horizontal" role="form"'); ?>
+
+<div class="item-container">	
+			
+
 
 <div itemscope itemtype="http://schema.org/Product">
 
 <div class="page-header">
   <h1 class="pull-right" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><?php echo $products_price; ?></h1>
   <h1><?php echo $products_name; ?></h1>
-  <!--stock info-->
-  <div><?php echo $stock_check; ?></div>
 </div>
 
 <?php
@@ -102,63 +88,6 @@
 <div class="contentContainer">
   <div class="contentText">
 
-<?php
-    if (tep_not_null($product_info['products_image'])) {
-
-      echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], NULL, NULL, NULL, 'itemprop="image" style="display:none;"');
-
-      $photoset_layout = '1';
-
-      $pi_query = tep_db_query("select image, htmlcontent from " . TABLE_PRODUCTS_IMAGES . " where products_id = '" . (int)$product_info['products_id'] . "' order by sort_order");
-      $pi_total = tep_db_num_rows($pi_query);
-
-      if ($pi_total > 0) {
-        $pi_sub = $pi_total-1;
-
-        while ($pi_sub > 5) {
-          $photoset_layout .= 5;
-          $pi_sub = $pi_sub-5;
-        }
-
-        if ($pi_sub > 0) {
-          $photoset_layout .= ($pi_total > 5) ? 5 : $pi_sub;
-        }
-?>
-
-    <div class="piGal pull-right" data-imgcount="<?php echo $photoset_layout; ?>">
-
-<?php
-        $pi_counter = 0;
-        $pi_html = array();
-
-        while ($pi = tep_db_fetch_array($pi_query)) {
-          $pi_counter++;
-
-          if (tep_not_null($pi['htmlcontent'])) {
-            $pi_html[] = '<div id="piGalDiv_' . $pi_counter . '">' . $pi['htmlcontent'] . '</div>';
-          }
-
-          echo tep_image(DIR_WS_IMAGES . $pi['image'], '', '', '', 'id="piGalImg_' . $pi_counter . '"');
-        }
-?>
-
-    </div>
-
-<?php
-        if ( !empty($pi_html) ) {
-          echo '    <div style="display: none;">' . implode('', $pi_html) . '</div>';
-        }
-      } else {
-?>
-
-    <div class="piGal pull-right">
-      <?php echo tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name'])); ?>
-    </div>
-
-<?php
-      }
-    }
-?>
 
 <div itemprop="description">
   <?php echo stripslashes($product_info['products_description']); ?>
@@ -202,10 +131,6 @@
 ?>
 
     <div class="clearfix"></div>
-	
-
-
-
 
 <?php
     if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) {
@@ -227,6 +152,7 @@
       echo '<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"><meta itemprop="ratingValue" content="' . $reviews['avgrating'] . '" /><meta itemprop="ratingCount" content="' . $reviews['count'] . '" /></span>';
     }
 ?>
+
 <div class="container">	
 				<div class="col-md-4">
 				<?php
@@ -303,6 +229,8 @@
 				</div>
 			</div> 
 		</div>
+
+
   <div class="buttonSet row">
     <div class="col-xs-6"><?php echo tep_draw_button(IMAGE_BUTTON_REVIEWS . (($reviews['count'] > 0) ? ' (' . $reviews['count'] . ')' : ''), 'glyphicon glyphicon-comment', tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params())); ?></div>
     <div class="col-xs-6 text-right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'glyphicon glyphicon-shopping-cart', null, 'primary', null, 'btn-success'); ?></div>
@@ -326,16 +254,6 @@
         echo '<span itemprop="manufacturer" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="' . tep_output_string($manufacturer['manufacturers_name']) . '" /></span>';
       }
     }
-?>
-
-<?php 
-//better together
-require(DIR_FS_CATALOG. 'better_together_marketing.php');
-if (sizeof($bt_strings) > 0) { 
-   for ($i = 0, $n = sizeof($bt_strings); $i < $n; $i++) { 
-       echo '<tr><td>' . $bt_strings[$i]  . '</td></tr>'; 
-   }
-}
 ?>
 
 </div>
