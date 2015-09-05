@@ -1,13 +1,13 @@
 <?php
-  define('HTTP_SERVER', 'http://eranga.a2hosted.com');
-  define('HTTPS_SERVER', 'http://eranga.a2hosted.com');
+  define('HTTP_SERVER', 'http://127.0.0.1');
+  define('HTTPS_SERVER', 'http://127.0.0.1');
   define('ENABLE_SSL', false);
   define('HTTP_COOKIE_DOMAIN', '');
   define('HTTPS_COOKIE_DOMAIN', '');
-  define('HTTP_COOKIE_PATH', '/sudhara/osc3/');
-  define('HTTPS_COOKIE_PATH', '/sudhara/osc3/');
-  define('DIR_WS_HTTP_CATALOG', '/sudhara/osc3/');
-  define('DIR_WS_HTTPS_CATALOG', '/sudhara/osc3/');
+  define('HTTP_COOKIE_PATH', '/lakgit/');
+  define('HTTPS_COOKIE_PATH', '/lakgit/');
+  define('DIR_WS_HTTP_CATALOG', '/lakgit/');
+  define('DIR_WS_HTTPS_CATALOG', '/lakgit/');
   define('DIR_WS_IMAGES', 'images/');
   define('DIR_WS_ICONS', DIR_WS_IMAGES . 'icons/');
   define('DIR_WS_INCLUDES', 'includes/');
@@ -17,14 +17,14 @@
   define('DIR_WS_LANGUAGES', DIR_WS_INCLUDES . 'languages/');
 
   define('DIR_WS_DOWNLOAD_PUBLIC', 'pub/');
-  define('DIR_FS_CATALOG', '/home/erangaah/public_html/sudhara/osc3/');
+  define('DIR_FS_CATALOG', 'C:/wamp/www/lakgit/');
   define('DIR_FS_DOWNLOAD', DIR_FS_CATALOG . 'download/');
   define('DIR_FS_DOWNLOAD_PUBLIC', DIR_FS_CATALOG . 'pub/');
 
   define('DB_SERVER', 'localhost');
-  define('DB_SERVER_USERNAME', 'erangaah_osc3');
-  define('DB_SERVER_PASSWORD', 'Pa$$w0rd');
-  define('DB_DATABASE', 'erangaah_osc3');
+  define('DB_SERVER_USERNAME', 'root');
+  define('DB_SERVER_PASSWORD', '');
+  define('DB_DATABASE', 'lakgit');
   define('USE_PCONNECT', 'false');
   define('STORE_SESSIONS', 'mysql');
   define('CFG_TIME_ZONE', 'Asia/Colombo');
