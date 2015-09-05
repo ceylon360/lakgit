@@ -153,7 +153,7 @@
     }
 ?>
 
-<div class="container">	
+
 				<div class="col-md-4">
 				<?php
     if (tep_not_null($product_info['products_image'])) {
@@ -227,7 +227,7 @@
     <div class="col-xs-6 text-right"><?php echo tep_draw_button(IMAGE_BUTTON_REVIEWS . (($reviews['count'] > 0) ? ' (' . $reviews['count'] . ')' : ''), 'glyphicon glyphicon-comment', tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params())); ?></div>
   </div>
 				</div>
-			</div> 
+			 
 		</div>
 
 
