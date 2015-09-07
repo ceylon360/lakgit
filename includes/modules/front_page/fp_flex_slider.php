@@ -70,7 +70,7 @@
         $banner_query = tep_db_query($banner_query_raw);
         if (tep_db_num_rows($banner_query) > 0) {
           $body_text = '<!-- Flex Slider BOF -->' . PHP_EOL;
-          $body_text .= '  <div class="flexslider clearboth" style="max-width: 100%;">' . PHP_EOL;
+          $body_text .= '  <div class="flexslider clearboth col-md-12" style="max-width: 100%;">' . PHP_EOL;
           $body_text .= '    <ul class="slides">' . PHP_EOL;
 
           while ($banner = tep_db_fetch_array($banner_query)) {

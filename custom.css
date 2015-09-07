@@ -513,3 +513,16 @@ p.lead del {
 /* small margine for product grid */
 
 .lowMargin{padding-left:5px; padding-right:5px;}
+
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    -webkit-transition: border .8s ease-in-out;
+    -o-transition: border .8s ease-in-out;
+    transition: border .8s ease-in-out;
+}
