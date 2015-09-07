@@ -32,6 +32,7 @@
 <link href="ext/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="custom.css" rel="stylesheet">
 <link href="user.css" rel="stylesheet">
+<link href="animate.css" rel="stylesheet">
 
 <!--[if lt IE 9]>
    <script src="ext/js/html5shiv.js"></script>
