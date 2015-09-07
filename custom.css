@@ -508,3 +508,8 @@ p.lead del {
 .service-image-left > center > img,.service-image-right > center > img{
 	max-height: 155px;
 }
+/* css by ceylon360 */
+
+/* small margine for product grid */
+
+.lowMargin{padding-left:5px; padding-right:5px;}
