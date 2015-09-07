@@ -61,7 +61,7 @@
           $body_text .= '    <div class="row">' . PHP_EOL;
 
           while ($banner = tep_db_fetch_array($banner_query)) {
-            $body_text .= '      <div class="col-sm-6 col-md-3">';
+            $body_text .= '      <div class="col-sm-6 col-md-3 lowMargin">';
 			$body_text .= '      <div class="thumbnail" style="border:0px;">';
             if ($banner['banners_url'] != '') {
               $body_text .= '<a href="' . tep_href_link(FILENAME_REDIRECT, 'action=banner&goto=' . $banner['banners_id']) . '" target="_self">';
