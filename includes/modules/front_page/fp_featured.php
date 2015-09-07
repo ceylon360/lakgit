@@ -99,7 +99,7 @@
 
             $width = (floor(100 / MODULE_FRONT_PAGE_FEATURED_COLUMNS));
 
-            $featured__content .= '<div class="col-sm-6 col-md-4">';
+            $featured__content .= '<div class="col-sm-6 col-md-3 lowMargin">';
 			$featured__content .= '  <div class="thumbnail equal-height">';
             $featured__content .= '          <a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_products['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $featured_products['products_image'], $featured_products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a>' . PHP_EOL;
 			$featured__content .= '    <div class="caption">';
