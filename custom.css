@@ -459,7 +459,41 @@ p.lead del {
 /*********************************************
 				ITEM 
 *********************************************/
+.product{
+	border: 1px solid #dddddd;
+	height: 321px;
+}
 
+.product>img{
+	max-width: 230px;
+}
+
+.product-rating{
+	font-size: 20px;
+	margin-bottom: 25px;
+}
+
+.product-title{
+	font-size: 20px;
+}
+
+.product-desc{
+	font-size: 14px;
+}
+
+.product-price{
+	font-size: 22px;
+}
+
+.product-stock{
+	color: #74DF00;
+	font-size: 20px;
+	margin-top: 10px;
+}
+
+.product-info{
+		margin-top: 50px;
+}
 .service1-items {
 	padding: 0px 0 0px 0;
 	float: left;
