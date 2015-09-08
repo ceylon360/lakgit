@@ -46,27 +46,47 @@
 	$category = tep_db_fetch_array($category_query);
 ?>
 
-<div class="page-header">
-  <h1><?php echo $category['categories_name']; ?></h1>
-</div>
+<!--<div class="page-header">
+  <h2><?php echo $category['categories_name']; ?></h2>
+</div> -->
 
 <?php
   if ($messageStack->size('product_action') > 0) {
     echo $messageStack->output('product_action');
   }
 ?>
-
-<?php
-//cat description
-if (tep_not_null($category['categories_description'])) {
-  echo '<div class="well well-sm">' . $category['categories_description'] . '</div>';
-}  
-//cat description
-?>
-
 <div class="contentContainer">
   <div class="contentText">
     <div class="row">
+
+  <header class="jumbotron hero-spacer lowMargin">
+  <img class="img-responsive img-center" src="http://placehold.it/200x200&text=Logo" alt="">
+  <hr>
+            <h1><?php echo $category['categories_name']; ?></h1>
+<p><?php
+//cat description
+if (tep_not_null($category['categories_description'])) {
+  echo '<div class="">' . $category['categories_description'] . '</div>';
+}  
+//cat description
+?>            </p>
+            <p><a class="btn btn-primary btn-large">Call to action!</a>
+            </p>
+        </header>
+
+        <hr>
+<?php
+//cat description
+//if (tep_not_null($category['categories_description'])) {
+ // echo '<div class="well well-sm">' . $category['categories_description'] . '</div>';
+//}  
+//cat description
+?>
+
+
+
+	
+
 <?php
     if (isset($cPath) && strpos('_', $cPath)) {
 // check to see if there are deeper categories within the current category
@@ -96,7 +116,7 @@ if (tep_not_null($category['categories_description'])) {
 
     while ($categories = tep_db_fetch_array($categories_query)) {
       $cPath_new = tep_get_path($categories['categories_id']);
-      echo '<div class="col-sm-6 col-md-3 lowMargin animated fadeInLeft">';
+      echo '<div class="col-sm-6 col-md-4 lowMargin animated fadeInLeft">';
       echo '  <div class="text-center">';
       echo '    <a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a>';
       echo '    <div class="caption text-center">';
@@ -246,14 +266,32 @@ $listing_sql .= $hiddenlist;
     }
 ?>
 
-<div class="page-header">
-  <h1><?php echo $catname; ?></h1>
-</div>
+	<header class="jumbotron lowMargin">
+		<img class="img-responsive img-center img-circle" src="http://placehold.it/200x200&text=Logo" alt="">
+  
+			<div class="page-header text-center">
+				<h2><?php echo $catname; ?></h2>
+			</div>
+			<hr>
+		<p><?php
+			//cat description
+			if (tep_not_null($image['catdesc'])) {
+			  echo '<div class="">' . $image['catdesc'] . '</div>';
+			}
+			//cat description
+			?>  
+		</p>      
+    </header>
+
+        <hr>
+	<div class="page-header">
+	  <h1><?php echo $catname; ?></h1>
+	</div>
 <?php
 //cat description
-if (tep_not_null($image['catdesc'])) {
-  echo '<div class="well well-sm">' . $image['catdesc'] . '</div>';
-}
+//if (tep_not_null($image['catdesc'])) {
+  //echo '<div class="well well-sm">' . $image['catdesc'] . '</div>';
+//}
 //cat description
 ?>
 <div class="contentContainer">
