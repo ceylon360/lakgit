@@ -60,8 +60,10 @@
     <div class="row">
 
   <header class="jumbotron hero-spacer lowMargin">
-  <img class="img-responsive img-center" src="http://placehold.it/200x200&text=Logo" alt="">
+  <?php echo'<img class="img-responsive img-center" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">;' ?>
+  
   <hr>
+  
             <h1><?php echo $category['categories_name']; ?></h1>
 <p><?php
 //cat description
@@ -263,12 +265,13 @@ $listing_sql .= $hiddenlist;
       //, cd.categories_description as catdesc added //above code for categories_description
 	  $image = tep_db_fetch_array($image);
       $catname = $image['catname'];
+	  
     }
 ?>
 
 	<header class="jumbotron lowMargin">
-		<img class="img-responsive img-center img-circle" src="http://placehold.it/200x200&text=Logo" alt="">
-  
+	<!--	<img class="img-responsive img-center img-circle" src="http://placehold.it/200x200&text=Logo" alt=""> -->
+			<?php echo'<img class="img-responsive img-center img-circle" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">;' ?>
 			<div class="page-header text-center">
 				<h2><?php echo $catname; ?></h2>
 			</div>
@@ -280,9 +283,59 @@ $listing_sql .= $hiddenlist;
 			}
 			//cat description
 			?>  
-		</p>      
+		</p>  
+		<!-- start sub categories buttons //-->	
+<?php
+    if (isset($cPath) && strpos($cPath, '_')) {
+// check to see if there are deeper categories within the current category
+      $category_links = array_reverse($cPath_array);
+      for($i=0, $n=sizeof($category_links); $i<$n; $i++) {
+        $categories_query = tep_db_query("select count(*) as total from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$category_links[$i] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
+        $categories = tep_db_fetch_array($categories_query);
+        if ($categories['total'] < 1) {
+          // do nothing, go through the loop
+        } else {
+          $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$category_links[$i] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+          break; // we've found the deepest category the customer is in
+        }
+      }
+    } else {
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+    }
+
+   
+ echo '<div id="filter_box">';
+ 
+    while ($categories = tep_db_fetch_array($categories_query)) {
+      
+      $cPath_new = tep_get_path($categories['categories_id']);
+
+      echo '<a class="btn btn-primary btn-large" href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> <span class="filter_name">
+	 
+	  ' . $categories['categories_name'] . '
+	 </span>
+	  
+	  </a>' . "\n";
+       
+    }
+	 
+	 
+	 
+echo '</div>';
+
+// needed for the new products module shown below
+    $new_products_category_id = $current_category_id;
+?>
+             
+
+<!-- end sub categories buttons //-->
     </header>
 
+
+	
+	
+	
+	
         <hr>
 	<div class="page-header">
 	  <h1><?php echo $catname; ?></h1>
