@@ -31,14 +31,22 @@
     }
 
     function execute() {
-      global $oscTemplate;
-
+      global $PHP_SELF, $oscTemplate, $cPath;
+     if (($PHP_SELF == 'login.php') 
+	 || ($PHP_SELF == 'shopping_cart.php')
+     || ($PHP_SELF == 'account_pwa.php')
+     || ($PHP_SELF == 'checkout_shipping_address.php')	
+     || ($PHP_SELF == 'checkout_shipping.php')	
+     || ($PHP_SELF == 'checkout_payment.php')
+     || ($PHP_SELF == 'checkout_confirmation.php')
+     || ($PHP_SELF == 'checkout_success_pwa.php')) {
       ob_start();
       include(DIR_WS_MODULES . 'boxes/templates/information2.php');
       $data = ob_get_clean();
 
       $oscTemplate->addBlock($data, $this->group);
-    }
+     }
+	}
 
     function isEnabled() {
       return $this->enabled;

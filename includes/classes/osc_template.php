@@ -59,10 +59,45 @@
       $this->_blocks[$group][] = $block;
     }
 
-    function hasBlocks($group) {
+  /*  function hasBlocks($group) {
       return (isset($this->_blocks[$group]) && !empty($this->_blocks[$group]));
-    }
-
+    }*/
+	//for disable column
+function hasBlocks($group) {
+	 global $PHP_SELF, $category_depth;
+	 if (($group == 'boxes_column_left') 
+		 and ($PHP_SELF == 'login.php') 
+	 || ($PHP_SELF == 'shopping_cart.php')
+     || ($PHP_SELF == 'account_pwa.php')
+     || ($PHP_SELF == 'checkout_shipping_address.php')	
+     || ($PHP_SELF == 'checkout_shipping.php')	
+     || ($PHP_SELF == 'checkout_payment.php')
+     || ($PHP_SELF == 'checkout_confirmation.php')
+     || ($PHP_SELF == 'checkout_success_pwa.php')
+	 ) {
+		 return 0;
+	 } else {
+		 return (isset($this->_blocks[$group]) && !empty($this->_blocks[$group]));
+	 }
+	/* /////
+	 	 if (($group == 'boxes_column_right') 
+		 and ($PHP_SELF == 'index.php') 
+	 || ($PHP_SELF == 'shopping_cart.php')
+     || ($PHP_SELF == 'account_pwa.php')
+     || ($PHP_SELF == 'checkout_shipping_address.php')	
+     || ($PHP_SELF == 'checkout_shipping.php')	
+     || ($PHP_SELF == 'checkout_payment.php')
+     || ($PHP_SELF == 'checkout_confirmation.php')
+     || ($PHP_SELF == 'checkout_success_pwa.php')
+	 ) {
+		 return 0;
+		 
+	 } else {
+		 return (isset($this->_blocks[$group]) && !empty($this->_blocks[$group]));
+	 }
+	 /////*/
+}
+//for disable column
     function getBlocks($group) {
       if ($this->hasBlocks($group)) {
         return implode("\n", $this->_blocks[$group]);
