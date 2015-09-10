@@ -31,8 +31,14 @@
     }
 
     function execute() {
-      global $cart, $new_products_id_in_cart, $currencies, $oscTemplate;
-
+      global $PHP_SELF,$cart, $new_products_id_in_cart, $currencies, $oscTemplate;
+if (($PHP_SELF == 'login.php') 
+	 || ($PHP_SELF == 'shopping_cart.php')
+     || ($PHP_SELF == 'account_pwa.php')
+     || ($PHP_SELF == 'checkout_shipping_address.php')	
+     || ($PHP_SELF == 'checkout_shipping.php')	
+     || ($PHP_SELF == 'checkout_payment.php')
+     || ($PHP_SELF == 'checkout_confirmation.php')) {
       $cart_contents_string = '';
 
       if ($cart->count_contents() > 0) {
@@ -71,7 +77,7 @@
 
       $oscTemplate->addBlock($data, $this->group);
     }
-
+	}
     function isEnabled() {
       return $this->enabled;
     }
