@@ -26,7 +26,7 @@
       $this->description = MODULE_CONTENT_PRODUCT_INFO_GEN_INFO_DESCRIPTION;
       $this->description .= '<div class="secWarning">' . MODULE_CONTENT_BOOTSTRAP_ROW_DESCRIPTION . '</div>';
 
-      if ( defined('MODULE_CONTENT_PRODUCT_INFO_GEN_INFO_STATUS_STATUS') ) {
+      if ( defined('MODULE_CONTENT_PRODUCT_INFO_GEN_INFO_STATUS') ) {
         $this->sort_order = MODULE_CONTENT_PRODUCT_INFO_GEN_INFO_SORT_ORDER;
         $this->enabled = (MODULE_CONTENT_PRODUCT_INFO_GEN_INFO_STATUS == 'True');
       }
