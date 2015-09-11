@@ -13,7 +13,7 @@
 ?>
 
 </div>
-
+<?php echo $oscTemplate->getContent('footer_st'); ?>
 <footer>
   <div class="footer">
     <div class="<?php echo BOOTSTRAP_CONTAINER; ?>">
