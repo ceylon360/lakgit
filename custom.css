@@ -569,6 +569,8 @@ p.lead del {
   padding: 0;
   border: 1px solid #eaeaea;
 }
+
+.cat_nav>li>a {color:red; padding:0px}
 .cat_nav ul li {
   background: #f3f4f6 none repeat scroll 0 0;
   border-bottom: 1px solid #eaeaea;
@@ -595,7 +597,7 @@ p.lead del {
 }
 .cat_nav ul li:hover{
 	border-left: 4px solid #2ecc71;
-	padding-left:25px;
+	padding-left:10px;
 	transition:.1s;
 	color:#333;
 	background: #F9F9F9;
