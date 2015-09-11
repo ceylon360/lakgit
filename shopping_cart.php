@@ -176,7 +176,12 @@
 </div>
 
 </form>
-
+  <div class="contentText">
+<div class="row">
+    <?php echo $oscTemplate->getContent('shipping_info'); ?>
+  </div>
+  <div class="clearfix"></div>
+  </div>
 <?php
   } else {
 ?>
