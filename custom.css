@@ -560,3 +560,81 @@ p.lead del {
     -o-transition: border .8s ease-in-out;
     transition: border .8s ease-in-out;
 }
+
+
+/*CATOGORY bOX */
+.cat_nav ul {
+  list-style: outside none none;
+  margin: 0;
+  padding: 0;
+  /*border: 1px solid #eaeaea; */
+}
+
+.cat_nav ul li {
+  background: #f3f4f6 none repeat scroll 0 0;
+  border-bottom: 1px solid #eaeaea;
+  border-left: 4px solid #f3f4f6;
+  color: #333333;
+  padding: 5px 12px;
+  position: relative;
+  transition: all 0.6s ease 0s;
+}
+.home_three .home_three_sidebar .cat_nav ul li:hover {
+  border-left: 4px solid #f9c831;
+}
+.cat_nav ul.cat_csub.cat_csub00, .cat_nav ul.cat_csub.cat_csub01, .cat_nav ul.cat_csub.cat_csub05, .cat_nav ul.cat_csub_sub.cat_csub_sub07, .cat_nav ul.cat_csub_sub.cat_csub_sub06, .cat_nav ul.cat_csub_sub.cat_csub_sub03, .cat_nav ul.cat_csub_sub.cat_csub_sub02, .cat_nav ul.cat_csub_sub.cat_csub_sub04 {
+  border: 0 solid;
+}
+.cat_nav ul.cat_csub.cat_csub00 li, .cat_nav ul.cat_csub.cat_csub01 li, .cat_nav ul.cat_csub.cat_csub05 li, .cat_nav ul.cat_csub_sub.cat_csub_sub07 li, .cat_nav ul.cat_csub_sub.cat_csub_sub06 li, .cat_nav ul.cat_csub_sub.cat_csub_sub03 li, .cat_nav ul.cat_csub_sub.cat_csub_sub02 li, .cat_nav ul.cat_csub_sub.cat_csub_sub04 li {
+  padding: 4px 0 4px 3px;
+}
+.support-info .info-title {
+  margin-bottom: 3px;
+}
+.cat_nav ul.cat_csub.cat_csub00 li {
+  padding: 4px 0 4px 3px;
+}
+.cat_nav ul li:hover{
+	border-left: 4px solid #2ecc71;
+	padding-left:20px;
+	transition:.1s;
+	color:#333;
+	background: #F9F9F9;
+}
+.cat_nav ul li>a {
+    position: relative;
+    display: block;
+    padding: 2px 3px;
+	color: #4E4D4D;
+}
+.categories_title {
+  background: #2ecc71 none repeat scroll 0 0;
+  margin-top: 0px;
+  padding: 0;
+}
+.categories_title {
+ /* background: #f9c831 none repeat scroll 0 0;  */
+  margin-top: 0px;
+  padding: 0;
+}
+.categories_title span {
+background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+border: 0 none;
+color: #ffffff;
+display: inline-block;
+font-size: 16px;
+font-weight: 700;
+letter-spacing: 2px;
+line-height: 40px;
+text-transform: uppercase;
+padding-left: 20px;
+}
+/* catogory box curve */
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 1px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
