@@ -1,0 +1,45 @@
+/*
+  $Id$ Twitter Typeahead Autocomplete Search v1.2 for oscommerce 2.3.4BS
+
+  osCommerce, Open Source E-Commerce Solutions
+  http://www.oscommerce.com
+
+  Copyright (c) 2015 osCommerce
+
+  Released under the GNU General Public License
+*/
+
+.twitter-typeahead .tt-menu {
+  opacity: 1.0;
+  overflow-y: auto;
+}
+.twitter-typeahead .tt-menu, .tt-menu .tt-suggestion {
+  background-color: #FEFEFE;
+}
+.twitter-typeahead .tt-menu .tt-suggestion:hover {
+  background-color: #F0F0F0;
+}
+.twitter-typeahead .tt-menu .tt-suggestion {
+  border-bottom: 1px solid #E9E7E7;
+}
+.twitter-typeahead .tt-menu .tt-suggestion:last-child {
+  border: none;
+}
+
+button#popoverclose {
+  margin-top: -2px;
+}
+@media screen and (max-width: 991px){
+     button#popoverclose, button.notfound, button.found {
+         font-size: 25px;
+     }
+     button#popoverclose {
+         margin-top: -7px;
+     }
+     button.notfound {
+         margin-top: -5px;
+     }
+     button.found {
+         margin-top: -3px;
+     }
+}
