@@ -33,7 +33,6 @@
     function execute() {
       global $PHP_SELF,$cart, $new_products_id_in_cart, $currencies, $oscTemplate;
 if (($PHP_SELF == 'login.php') 
-	 || ($PHP_SELF == 'shopping_cart.php')
      || ($PHP_SELF == 'account_pwa.php')
      || ($PHP_SELF == 'checkout_shipping_address.php')	
      || ($PHP_SELF == 'checkout_shipping.php')	

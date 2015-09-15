@@ -14,6 +14,7 @@ define('EMAIL_TEXT_SUBJECT', 'Order Process');
 define('EMAIL_TEXT_ORDER_NUMBER', 'Order Number:');
 define('EMAIL_TEXT_INVOICE_URL', 'Detailed Invoice:');
 define('EMAIL_TEXT_DATE_ORDERED', 'Date Ordered:');
+define('EMAIL_TEXT_DATE_DELIVERY', 'Delivery Date:');
 define('EMAIL_TEXT_PRODUCTS', 'Products');
 define('EMAIL_TEXT_SUBTOTAL', 'Sub-Total:');
 define('EMAIL_TEXT_TAX', 'Tax:        ');

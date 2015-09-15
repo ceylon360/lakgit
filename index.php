@@ -286,6 +286,7 @@ $listing_sql .= $hiddenlist;
 		</p>  
 		</header>
 		<!-- start sub categories buttons //-->	
+
 <?php
     if (isset($cPath) && strpos($cPath, '_')) {
 // check to see if there are deeper categories within the current category
@@ -303,9 +304,15 @@ $listing_sql .= $hiddenlist;
     } else {
       $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
     }
-
-   
-   
+//my query for name of main cat
+   $maincat_query = tep_db_query("select c.categories_id, cd.categories_name,c.categories_id, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+			  $maincat = tep_db_fetch_array($maincat_query);
+      $maincat = $maincat['parent_id'];
+	  
+	  $maincatname_query = tep_db_query("select categories_id, categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . $maincat . "' and language_id = '" . (int)$languages_id . "'");
+			  $maincatname = tep_db_fetch_array($maincatname_query);
+	  $maincatname = $maincatname['categories_name'];
+ 
  echo '  <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -316,7 +323,7 @@ $listing_sql .= $hiddenlist;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">Other '.$maincatname.' </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
