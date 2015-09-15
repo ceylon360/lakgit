@@ -55,30 +55,34 @@
     echo $messageStack->output('product_action');
   }
 ?>
-
-
-<div class="contentContainer">
-  <div class="contentText">
-    <div class="row">
-
-  <header class="jumbotron hero-spacer lowMargin">
-  <?php echo'<img class="img-responsive img-center" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">;' ?>
-  
-  <hr>
-  
-            <h1><?php echo $category['categories_name']; ?></h1>
-<p><?php
+	<div class="row panel">
+		<div class="col-md-4">
+			<img class="bg_blur" src="http://www3.hilton.com/resources/media/hi/COLHITW/en_US/img/shared/full_page_image_gallery/main/HL_exterior_675x359_FitToBoxSmallDimension_Center.jpg" alt="">
+    	</div>
+        <div class="col-md-8  col-xs-12">
+			<?php echo'<img class="img-thumbnail picture hidden-xs" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
+			<?php echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
+		   <div class="header">
+                <h1><?php echo $category['categories_name']; ?></h1>
+                
+                <span class="cat_des"><?php
 //cat description
 if (tep_not_null($category['categories_description'])) {
   echo '<div class="">' . $category['categories_description'] . '</div>';
 }  
 //cat description
-?>            </p>
-            <p><a class="btn btn-primary btn-large">Call to action!</a>
-            </p>
-        </header>
+?></span>
+			 <div class="notice notice-danger">
+        <strong>Notice</strong> Hilton Cakes are delivered only in Colombo and it's suburbs . 
+    </div>
+           </div>
+        </div>
+    </div> 
 
-        <hr>
+<div class="contentContainer">
+  <div class="contentText">
+    <div class="row">
+
 <?php
 //cat description
 //if (tep_not_null($category['categories_description'])) {
@@ -293,11 +297,7 @@ $listing_sql .= $hiddenlist;
            </div>
         </div>
     </div>   
-    
-	<div class="row nav">    
-        <div class="col-md-4"></div>
-        
-    </div>
+
 			<!-- start sub categories buttons //-->	
 
 <?php
@@ -336,7 +336,7 @@ $listing_sql .= $hiddenlist;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Other '.$maincatname.' </a>
+      <a class="navbar-brand hidden-md hidden-lg " href="#">Other '.$maincatname.' </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -350,7 +350,7 @@ $listing_sql .= $hiddenlist;
       
       $cPath_new = tep_get_path($categories['categories_id']);
 
-      echo '<li ><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> 
+      echo '<li class="notice notice-success"><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> 
 	 
 	  ' . $categories['categories_name'] . '
 	 
@@ -373,17 +373,7 @@ echo '
              
 
 <!-- end sub categories buttons //-->
-    
 
-
-	
-	
-	
-	
-        <hr>
-	<div class="page-header">
-	  <h1><?php echo $catname; ?></h1>
-	</div>
 <?php
 //cat description
 //if (tep_not_null($image['catdesc'])) {

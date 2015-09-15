@@ -678,13 +678,15 @@ line-height: 1.8;
 /* notise */
 .notice {
 	font-size: 13px;
-    padding: 10px;
+    padding: 7px;
     background-color: #fafafa;
-    border-left: 6px solid #7f7f84;
+    border-left: 5px solid #7f7f84;
     margin-bottom: 8px;
     -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
        -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
             box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+			
+	margin-top: 6px;
 }
 .notice-sm {
     padding: 10px;
@@ -717,4 +719,9 @@ line-height: 1.8;
 }
 .notice-danger>strong {
     color: #d73814;
+}
+/* padding correction for notice icon */
+li.notice.notice-success a {
+    color: dimgrey;
+    padding: 0px;
 }
