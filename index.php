@@ -55,6 +55,8 @@
     echo $messageStack->output('product_action');
   }
 ?>
+
+
 <div class="contentContainer">
   <div class="contentText">
     <div class="row">
@@ -268,24 +270,35 @@ $listing_sql .= $hiddenlist;
 	  
     }
 ?>
-
-	<header class="jumbotron lowMargin">
-	<!--	<img class="img-responsive img-center img-circle" src="http://placehold.it/200x200&text=Logo" alt=""> -->
-			<?php echo'<img class="img-responsive img-center img-circle" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">;' ?>
-			<div class="page-header text-center">
-				<h2><?php echo $catname; ?></h2>
-			</div>
-			<hr>
-		<p><?php
+	<div class="row panel">
+		<div class="col-md-4">
+			<img class="bg_blur" src="http://www3.hilton.com/resources/media/hi/COLHITW/en_US/img/shared/full_page_image_gallery/main/HL_exterior_675x359_FitToBoxSmallDimension_Center.jpg" alt="">
+    	</div>
+        <div class="col-md-8  col-xs-12">
+			<?php echo'<img class="img-thumbnail picture hidden-xs" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">' ?>
+			<?php echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">' ?>
+		   <div class="header">
+                <h1><?php echo $catname; ?></h1>
+                
+                <span class="cat_des"><?php
 			//cat description
 			if (tep_not_null($image['catdesc'])) {
 			  echo '<div class="">' . $image['catdesc'] . '</div>';
 			}
 			//cat description
-			?>  
-		</p>  
-		</header>
-		<!-- start sub categories buttons //-->	
+			?></span>
+			 <div class="notice notice-danger">
+        <strong>Notice</strong> Hilton Cakes are delivered only in Colombo and it's suburbs . 
+    </div>
+           </div>
+        </div>
+    </div>   
+    
+	<div class="row nav">    
+        <div class="col-md-4"></div>
+        
+    </div>
+			<!-- start sub categories buttons //-->	
 
 <?php
     if (isset($cPath) && strpos($cPath, '_')) {
