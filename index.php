@@ -40,7 +40,7 @@
   if ($category_depth == 'nested') {
    // $category_query = tep_db_query("select cd.categories_name, c.categories_image from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
     //cat state
-	$category_query = tep_db_query("select cd.categories_name, c.categories_image, cd.categories_description from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and status_categ = 1 and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
+	$category_query = tep_db_query("select cd.categories_name, c.categories_image, c.categories_banner, cd.categories_description from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and status_categ = 1 and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
 	//cat state
 	//, cd.categories_description // added above query for get categories description
 	$category = tep_db_fetch_array($category_query);
@@ -49,34 +49,43 @@
 <!--<div class="page-header">
   <h2><?php echo $category['categories_name']; ?></h2>
 </div> -->
-
+<div class="contentContainer">
+  <div class="contentText">
+    <div class="row">
 <?php
   if ($messageStack->size('product_action') > 0) {
     echo $messageStack->output('product_action');
   }
 ?>
-<div class="contentContainer">
-  <div class="contentText">
-    <div class="row">
 
-  <header class="jumbotron hero-spacer lowMargin">
-  <?php echo'<img class="img-responsive img-center" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">;' ?>
-  
-  <hr>
-  
-            <h1><?php echo $category['categories_name']; ?></h1>
-<p><?php
+	<div class="">
+		<div class="col-md-12">
+			<?php echo'<img class="bg_blur_lv" src="'.DIR_WS_IMAGES . $category['categories_banner'].'" height="200" width="200">' ?>
+    	</div>
+        <div class="col-md-12  col-xs-12">
+			<?php echo'<img class="img-thumbnail picture_lv hidden-xs" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
+			<?php echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
+		   <div class="header_lv">
+                <h1><?php echo $category['categories_name']; ?></h1>
+                
+                <span class="cat_des"><?php
 //cat description
 if (tep_not_null($category['categories_description'])) {
   echo '<div class="">' . $category['categories_description'] . '</div>';
 }  
 //cat description
-?>            </p>
-            <p><a class="btn btn-primary btn-large">Call to action!</a>
-            </p>
-        </header>
+?></span>
+	<div class="notice notice-danger">
+        <strong>Notice</strong> Hilton Cakes are delivered only in Colombo and it's suburbs . 
+    </div>
+           </div>
+		   <hr>
+        </div>
+    </div>
+</hr>	
 
-        <hr>
+
+
 <?php
 //cat description
 //if (tep_not_null($category['categories_description'])) {
@@ -261,31 +270,39 @@ $listing_sql .= $hiddenlist;
 	  $image = tep_db_fetch_array($image);
       $catname = $image['catname'];
     } elseif ($current_category_id) {
-      $image = tep_db_query("select c.categories_image, cd.categories_name as catname, cd.categories_description as catdesc from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
+      $image = tep_db_query("select c.categories_image, c.categories_banner, cd.categories_name as catname, cd.categories_description as catdesc from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
       //, cd.categories_description as catdesc added //above code for categories_description
 	  $image = tep_db_fetch_array($image);
       $catname = $image['catname'];
 	  
     }
 ?>
-
-	<header class="jumbotron lowMargin">
-	<!--	<img class="img-responsive img-center img-circle" src="http://placehold.it/200x200&text=Logo" alt=""> -->
-			<?php echo'<img class="img-responsive img-center img-circle" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">;' ?>
-			<div class="page-header text-center">
-				<h2><?php echo $catname; ?></h2>
+	<div class="row panel">
+		<div class="col-md-4">
+			<!--<img class="bg_blur" src="http://www3.hilton.com/resources/media/hi/COLHITW/en_US/img/shared/full_page_image_gallery/main/HL_exterior_675x359_FitToBoxSmallDimension_Center.jpg" alt="">-->
+			<?php echo'<img class="bg_blur" src="'.DIR_WS_IMAGES . $image['categories_banner'].'" height="200" width="200">' ?>
 			</div>
-			<hr>
-		<p><?php
+        <div class="col-md-8  col-xs-12">
+			<?php echo'<img class="img-thumbnail picture hidden-xs" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">' ?>
+			<?php echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">' ?>
+		   <div class="header">
+                <h1><?php echo $catname; ?></h1>
+                
+                <span class="cat_des"><?php
 			//cat description
 			if (tep_not_null($image['catdesc'])) {
 			  echo '<div class="">' . $image['catdesc'] . '</div>';
 			}
 			//cat description
-			?>  
-		</p>  
-		</header>
-		<!-- start sub categories buttons //-->	
+			?></span>
+			 <div class="notice notice-danger">
+        <strong>Notice</strong> Hilton Cakes are delivered only in Colombo and it's suburbs . 
+    </div>
+           </div>
+        </div>
+    </div>   
+
+			<!-- start sub categories buttons //-->	
 
 <?php
     if (isset($cPath) && strpos($cPath, '_')) {
@@ -323,7 +340,7 @@ $listing_sql .= $hiddenlist;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Other '.$maincatname.' </a>
+      <a class="navbar-brand hidden-md hidden-lg " href="#">Other '.$maincatname.' </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -337,7 +354,7 @@ $listing_sql .= $hiddenlist;
       
       $cPath_new = tep_get_path($categories['categories_id']);
 
-      echo '<li ><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> 
+      echo '<li class="notice notice-success"><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> 
 	 
 	  ' . $categories['categories_name'] . '
 	 
@@ -360,17 +377,7 @@ echo '
              
 
 <!-- end sub categories buttons //-->
-    
 
-
-	
-	
-	
-	
-        <hr>
-	<div class="page-header">
-	  <h1><?php echo $catname; ?></h1>
-	</div>
 <?php
 //cat description
 //if (tep_not_null($image['catdesc'])) {
