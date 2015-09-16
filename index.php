@@ -60,11 +60,10 @@
 
 	<div class="">
 		<div class="col-md-12">
-			<img class="bg_blur_lv" src="http://www3.hilton.com/resources/media/hi/COLHITW/en_US/img/shared/full_page_image_gallery/main/HL_exterior_675x359_FitToBoxSmallDimension_Center.jpg" alt="">
+			<?php echo'<img class="bg_blur_lv" src="'.DIR_WS_IMAGES . $category['categories_banner'].'" height="200" width="200">' ?>
     	</div>
         <div class="col-md-12  col-xs-12">
 			<?php echo'<img class="img-thumbnail picture_lv hidden-xs" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
->>>>>>> catogory-page
 			<?php echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
 		   <div class="header_lv">
                 <h1><?php echo $category['categories_name']; ?></h1>
