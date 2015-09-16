@@ -725,3 +725,32 @@ li.notice.notice-success a {
     color: dimgrey;
     padding: 0px;
 }
+
+/* test css for 1st level catogory header */
+
+.picture_lv {
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    top: -43px;
+    left: 25px;
+}
+
+.bg_blur_lv {
+    background-image: url('');
+    height: 100px;
+    background-size: cover;
+    width: 100%;
+}
+
+.header_lv {
+    color: #808080;
+    margin-left: 22%;
+    margin-top: -63px;
+	height:100%;
+	
+}
+
+.header_lv H1 {
+    color: #fff;
+}

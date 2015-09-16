@@ -49,20 +49,22 @@
 <!--<div class="page-header">
   <h2><?php echo $category['categories_name']; ?></h2>
 </div> -->
-
+<div class="contentContainer">
+  <div class="contentText">
+    <div class="row">
 <?php
   if ($messageStack->size('product_action') > 0) {
     echo $messageStack->output('product_action');
   }
 ?>
-	<div class="row panel">
-		<div class="col-md-4">
-			<img class="bg_blur" src="http://www3.hilton.com/resources/media/hi/COLHITW/en_US/img/shared/full_page_image_gallery/main/HL_exterior_675x359_FitToBoxSmallDimension_Center.jpg" alt="">
+	<div class="">
+		<div class="col-md-12">
+			<img class="bg_blur_lv" src="http://www3.hilton.com/resources/media/hi/COLHITW/en_US/img/shared/full_page_image_gallery/main/HL_exterior_675x359_FitToBoxSmallDimension_Center.jpg" alt="">
     	</div>
-        <div class="col-md-8  col-xs-12">
-			<?php echo'<img class="img-thumbnail picture hidden-xs" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
+        <div class="col-md-12  col-xs-12">
+			<?php echo'<img class="img-thumbnail picture_lv hidden-xs" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
 			<?php echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
-		   <div class="header">
+		   <div class="header_lv">
                 <h1><?php echo $category['categories_name']; ?></h1>
                 
                 <span class="cat_des"><?php
@@ -72,16 +74,16 @@ if (tep_not_null($category['categories_description'])) {
 }  
 //cat description
 ?></span>
-			 <div class="notice notice-danger">
+	<div class="notice notice-danger">
         <strong>Notice</strong> Hilton Cakes are delivered only in Colombo and it's suburbs . 
     </div>
            </div>
+		   <hr>
         </div>
-    </div> 
+    </div>
+</hr>	
 
-<div class="contentContainer">
-  <div class="contentText">
-    <div class="row">
+
 
 <?php
 //cat description
