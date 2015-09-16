@@ -40,7 +40,7 @@
   if ($category_depth == 'nested') {
    // $category_query = tep_db_query("select cd.categories_name, c.categories_image from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
     //cat state
-	$category_query = tep_db_query("select cd.categories_name, c.categories_image, cd.categories_description from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and status_categ = 1 and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
+	$category_query = tep_db_query("select cd.categories_name, c.categories_image, c.categories_banner, cd.categories_description from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and status_categ = 1 and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
 	//cat state
 	//, cd.categories_description // added above query for get categories description
 	$category = tep_db_fetch_array($category_query);
@@ -57,8 +57,9 @@
 ?>
 	<div class="row panel">
 		<div class="col-md-4">
-			<img class="bg_blur" src="http://www3.hilton.com/resources/media/hi/COLHITW/en_US/img/shared/full_page_image_gallery/main/HL_exterior_675x359_FitToBoxSmallDimension_Center.jpg" alt="">
-    	</div>
+			<!--<img class="bg_blur" src="http://www3.hilton.com/resources/media/hi/COLHITW/en_US/img/shared/full_page_image_gallery/main/HL_exterior_675x359_FitToBoxSmallDimension_Center.jpg" alt="">-->
+			<?php echo'<img class="bg_blur" src="'.DIR_WS_IMAGES . $category['categories_banner'].'" height="200" width="200">' ?>
+			</div>
         <div class="col-md-8  col-xs-12">
 			<?php echo'<img class="img-thumbnail picture hidden-xs" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
 			<?php echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>

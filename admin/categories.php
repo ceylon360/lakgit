@@ -120,6 +120,14 @@ require('includes/functions/categories.php');
         if ($categories_image->parse() && $categories_image->save()) {
           tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
         }
+		
+	//category image
+		$categories_banner = new upload('categories_banner');
+        $categories_banner->set_destination(DIR_FS_CATALOG_IMAGES);
+		
+        if ($categories_banner->parse() && $categories_banner->save()) {
+			tep_db_query("update " . TABLE_CATEGORIES . " set categories_banner = '" . tep_db_input($categories_banner->filename) . "' where categories_id = '" . (int)$categories_id . "'");
+        }
 
         if (USE_CACHE == 'true') {
           tep_reset_cache_block('categories');
@@ -1071,6 +1079,9 @@ $('#products_date_available').datepicker({
 		$contents[] = array('text' => '<br />' . TEXT_DISPLAY . '&nbsp;' . tep_draw_radio_field('status_categ', 1, true) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('status_categ', 0, false) . '&nbsp;' . TEXT_NO);
 		//cat state
         $contents[] = array('text' => '<br />' . TEXT_CATEGORIES_IMAGE . '<br />' . tep_draw_file_field('categories_image'));
+		//category banner
+		 $contents[] = array('text' => '<br />' . TEXT_CATEGORIES_BANNER . '<br />' . tep_draw_file_field('categories_banner'));
+		 
         $contents[] = array('text' => '<br />' . TEXT_SORT_ORDER . '<br />' . tep_draw_input_field('sort_order', '', 'size="2"'));
         $contents[] = array('align' => 'center', 'text' => '<br />' . tep_draw_button(IMAGE_SAVE, 'disk', null, 'primary') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath)));
         break;
@@ -1106,6 +1117,10 @@ $('#products_date_available').datepicker({
 		//cat state
         $contents[] = array('text' => '<br />' . tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $cInfo->categories_image, $cInfo->categories_name) . '<br />' . DIR_WS_CATALOG_IMAGES . '<br /><strong>' . $cInfo->categories_image . '</strong>');
         $contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_IMAGE . '<br />' . tep_draw_file_field('categories_image'));
+		//category banner
+		$contents[] = array('text' => '<br />' . tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $cInfo->categories_banner, $cInfo->categories_name) . '<br />' . DIR_WS_CATALOG_IMAGES . '<br /><strong>' . $cInfo->categories_banner . '</strong>');
+        $contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_BANNER . '<br />' . tep_draw_file_field('categories_banner'));
+		
         $contents[] = array('text' => '<br />' . TEXT_EDIT_SORT_ORDER . '<br />' . tep_draw_input_field('sort_order', $cInfo->sort_order, 'size="2"'));
         $contents[] = array('align' => 'center', 'text' => '<br />' . tep_draw_button(IMAGE_SAVE, 'disk', null, 'primary') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $cInfo->categories_id)));
         break;
@@ -1203,7 +1218,8 @@ $('#products_date_available').datepicker({
             $contents[] = array('text' => '<br />' . TEXT_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
             if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
             $contents[] = array('text' => '<br />' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br />' . $cInfo->categories_image);
-                        if ($parent_hidden) {
+            $contents[] = array('text' => '<br />' . tep_info_image($cInfo->categories_banner, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br />' . $cInfo->categories_banner);           
+					   if ($parent_hidden) {
               $display = TEXT_PARENT_HIDDEN;
             } elseif ($cInfo->status_categ == 0) {
               $display = TEXT_NO;
