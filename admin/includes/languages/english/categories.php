@@ -42,6 +42,8 @@ define('TEXT_EDIT_CATEGORIES_NAME', 'Category Name:');
 define('TEXT_EDIT_CATEGORIES_IMAGE', 'Category Image:');
 define('TEXT_EDIT_CATEGORIES_BANNER', 'Category Background Banner:');
 define('TEXT_EDIT_SORT_ORDER', 'Sort Order:');
+define('TEXT_EDIT_CATEGORIES_NOTE', 'Category special Note:');
+define('TEXT_EDIT_CATEGORIES_NOTE_SEL', 'Category special Note color:');
 
 define('TEXT_INFO_COPY_TO_INTRO', 'Please choose a new category you wish to copy this product to');
 define('TEXT_INFO_CURRENT_CATEGORIES', 'Current Categories:');
