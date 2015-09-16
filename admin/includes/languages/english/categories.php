@@ -40,6 +40,7 @@ define('TEXT_EDIT_INTRO', 'Please make any necessary changes');
 define('TEXT_EDIT_CATEGORIES_ID', 'Category ID:');
 define('TEXT_EDIT_CATEGORIES_NAME', 'Category Name:');
 define('TEXT_EDIT_CATEGORIES_IMAGE', 'Category Image:');
+define('TEXT_EDIT_CATEGORIES_BANNER', 'Category Background Banner:');
 define('TEXT_EDIT_SORT_ORDER', 'Sort Order:');
 
 define('TEXT_INFO_COPY_TO_INTRO', 'Please choose a new category you wish to copy this product to');
