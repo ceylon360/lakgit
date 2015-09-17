@@ -40,7 +40,7 @@
   if ($category_depth == 'nested') {
    // $category_query = tep_db_query("select cd.categories_name, c.categories_image from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
     //cat state
-	$category_query = tep_db_query("select cd.categories_name, c.categories_image, c.categories_banner, cd.categories_description from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and status_categ = 1 and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
+	$category_query = tep_db_query("select cd.categories_name, c.categories_image, c.categories_banner, cd.categories_description,cd.categories_note,cd.categories_note_sel from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and status_categ = 1 and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
 	//cat state
 	//, cd.categories_description // added above query for get categories description
 	$category = tep_db_fetch_array($category_query);
@@ -75,9 +75,10 @@ if (tep_not_null($category['categories_description'])) {
 }  
 //cat description
 ?></span>
-	<div class="notice notice-danger">
+
+	<!--<div class="notice notice-danger">
         <strong>Notice</strong> Hilton Cakes are delivered only in Colombo and it's suburbs . 
-    </div>
+    </div>-->
            </div>
 		   <hr>
         </div>
@@ -270,7 +271,7 @@ $listing_sql .= $hiddenlist;
 	  $image = tep_db_fetch_array($image);
       $catname = $image['catname'];
     } elseif ($current_category_id) {
-      $image = tep_db_query("select c.categories_image, c.categories_banner, cd.categories_name as catname, cd.categories_description as catdesc from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
+      $image = tep_db_query("select c.categories_image, c.categories_banner, cd.categories_name as catname, cd.categories_description as catdesc,cd.categories_note,cd.categories_note_sel from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
       //, cd.categories_description as catdesc added //above code for categories_description
 	  $image = tep_db_fetch_array($image);
       $catname = $image['catname'];
@@ -295,9 +296,36 @@ $listing_sql .= $hiddenlist;
 			}
 			//cat description
 			?></span>
-			 <div class="notice notice-danger">
-        <strong>Notice</strong> Hilton Cakes are delivered only in Colombo and it's suburbs . 
-    </div>
+			   <?php 
+			   $note_color='';
+			   if (tep_not_null($image['categories_note'])) {
+					
+					switch($image['categories_note_sel']){
+							
+							case '1':
+							$note_color='danger';
+							break;
+							
+							case '2':
+							$note_color='info';
+							break;
+							
+							case '3':
+							$note_color='success';
+							break;
+							
+							case '4':
+							$note_color='warning';
+							break;
+							
+							default:
+							$note_color='default';
+							break;
+					}
+					
+				   echo '<div class="notice notice-'.$note_color.'"><strong>Notice </strong>' . $image['categories_note'] . '</div>';
+			   }?>
+			 
            </div>
         </div>
     </div>   
@@ -321,6 +349,14 @@ $listing_sql .= $hiddenlist;
     } else {
       $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
     }
+	$category_name0 = '';
+	if ($catname = $categories['categories_name']){
+		$category_name0='<strong>'.$categories['categories_name'].'</strong>';
+		
+		}
+		else{
+			$category_name0=$categories['categories_name'];
+			}
 //my query for name of main cat
    $maincat_query = tep_db_query("select c.categories_id, cd.categories_name,c.categories_id, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
 			  $maincat = tep_db_fetch_array($maincat_query);
@@ -329,6 +365,7 @@ $listing_sql .= $hiddenlist;
 	  $maincatname_query = tep_db_query("select categories_id, categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . $maincat . "' and language_id = '" . (int)$languages_id . "'");
 			  $maincatname = tep_db_fetch_array($maincatname_query);
 	  $maincatname = $maincatname['categories_name'];
+	  
  
  echo '  <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -351,22 +388,21 @@ $listing_sql .= $hiddenlist;
  echo '<ul class="nav navbar-nav">';
  
     while ($categories = tep_db_fetch_array($categories_query)) {
-      
+      $category_name0 = '';
+	if ($image['catname'] == $categories['categories_name']){
+		
+		$category_name0='<li class="notice notice-info"><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> ' .$categories['categories_name']. '</a></li>' . "\n";
+		}
+		else{
+		$category_name0='<li class="notice notice-success"><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> ' .$categories['categories_name']. '</a></li>' . "\n";
+			}
       $cPath_new = tep_get_path($categories['categories_id']);
 
-      echo '<li class="notice notice-success"><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> 
-	 
-	  ' . $categories['categories_name'] . '
-	 
-	  
-	  </a></li>' . "\n";
-       
-    }
-	 
-	 
-	 
+      echo $category_name0;
+       }
 echo '</ul>';
 echo '
+
 </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav> ';
