@@ -389,6 +389,7 @@ $listing_sql .= $hiddenlist;
  
     while ($categories = tep_db_fetch_array($categories_query)) {
       $category_name0 = '';
+	  $cPath_new = tep_get_path($categories['categories_id']);
 	if ($image['catname'] == $categories['categories_name']){
 		
 		$category_name0='<li class="notice notice-info"><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> ' .$categories['categories_name']. '</a></li>' . "\n";
@@ -396,7 +397,7 @@ $listing_sql .= $hiddenlist;
 		else{
 		$category_name0='<li class="notice notice-success"><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> ' .$categories['categories_name']. '</a></li>' . "\n";
 			}
-      $cPath_new = tep_get_path($categories['categories_id']);
+      
 
       echo $category_name0;
        }
