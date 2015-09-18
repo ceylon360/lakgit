@@ -91,7 +91,8 @@
               $products_price .= '<span class="productSpecialPrice">' . $currencies->display_price($featured_products['specials_new_products_price'], tep_get_tax_rate($featured_products['products_tax_class_id'])) . '</span>';
             } else {
               $products_price = $currencies->display_price($featured_products['products_price'], tep_get_tax_rate($featured_products['products_tax_class_id']));
-            }
+              
+			}
 
             if ($col == 0) {
               $featured__content .= '    <tr>' . PHP_EOL;
@@ -106,6 +107,9 @@
             $featured__content .= '          <p class="text-center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $featured_products['products_id']) . '">' . $featured_products['products_name'] . '</a></p>' . PHP_EOL;
 			$featured__content .= '      	<hr>';
             $featured__content .= '      	<p class="text-center">' . $currencies->display_price($featured_products['products_price'], tep_get_tax_rate($featured_products['products_tax_class_id'])) . '</p>';
+			
+			$featured__content .= '      	<p class="text-center">' . $currencies->display_price_lk($featured_products['products_price'], tep_get_tax_rate($featured_products['products_tax_class_id'])) . '</p>';
+			
 			$featured__content .= '      	<div class="text-center">';
 			$featured__content .= '        	<div class="btn-group">';
 			$featured__content .= '          <a href="' . tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'products_id=' . $featured_products['products_id']) . '" class="btn btn-default" role="button">' . SMALL_IMAGE_BUTTON_VIEW . '</a>';
