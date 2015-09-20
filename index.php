@@ -128,7 +128,7 @@ if (tep_not_null($category['categories_description'])) {
 
     while ($categories = tep_db_fetch_array($categories_query)) {
       $cPath_new = tep_get_path($categories['categories_id']);
-      echo '<div class="col-sm-6 col-md-4 lowMargin animated fadeInLeft">';
+      echo '<div class="col-sm-6 col-md-2 lowMargin animated fadeInLeft">';
       echo '  <div class="text-center">';
       echo '    <a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a>';
       echo '    <div class="caption text-center">';
@@ -367,46 +367,31 @@ $listing_sql .= $hiddenlist;
 	  $maincatname = $maincatname['categories_name'];
 	  
  
- echo '  <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand hidden-md hidden-lg " href="#">Other '.$maincatname.' </a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> ';
-   
-   
-   
- echo '<ul class="nav navbar-nav">';
- 
-    while ($categories = tep_db_fetch_array($categories_query)) {
-      $category_name0 = '';
-	  $cPath_new = tep_get_path($categories['categories_id']);
-	if ($image['catname'] == $categories['categories_name']){
-		
-		$category_name0='<li class="notice notice-info"><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> ' .$categories['categories_name']. '</a></li>' . "\n";
+
+echo '<div class="contentContainer"><div class="row row-centered">';
+
+	while ($categories = tep_db_fetch_array($categories_query)) {
+		$category_name0 = '';
+		$cPath_new = tep_get_path($categories['categories_id']);
+		if ($image['catname'] == $categories['categories_name']){
+			
+			$category_name0='<div class="col-xs-2 col-sm-1 col-md-1 lowMargin col-centered" data-toggle="tooltip" title="'.$categories['categories_name'].'"><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a></div>' . "\n";
 		}
 		else{
-		$category_name0='<li class="notice notice-success"><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> ' .$categories['categories_name']. '</a></li>' . "\n";
-			}
-      
+			$category_name0='<div class="col-xs-2 col-sm-1 col-md-1 lowMargin col-centered" data-toggle="tooltip" title="'.$categories['categories_name'].'"><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a></div>' . "\n";
+		}
+		
+		
+		echo $category_name0;
+	}
 
-      echo $category_name0;
-       }
-echo '</ul>';
-echo '
 
-</div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav> ';
+echo '</div></div>';
+
+
+
+
 
 // needed for the new products module shown below
     $new_products_category_id = $current_category_id;
@@ -414,6 +399,12 @@ echo '
              
 
 <!-- end sub categories buttons //-->
+<script>
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip(); 
+	});
+</script>
+<a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>
 
 <?php
 //cat description
