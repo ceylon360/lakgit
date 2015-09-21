@@ -756,6 +756,7 @@ li.notice.notice-success a {
 }
 .row-centered {
     text-align:center;
+	border-bottom: 1px solid #DEDEDE;
 }
 .col-centered {
     display:inline-block;
@@ -764,4 +765,23 @@ li.notice.notice-success a {
     text-align:left;
     /* inline-block space fix */
     margin-right:-4px;
+}
+
+.caticon-selected{
+	border-right: solid 1px #DEDEDE;
+    border-left: solid 1px #DEDEDE;
+    border-top: solid 1px #DEDEDE;
+    top: 6px;
+	margin: 0px;
+    padding: 3px;
+	background-color: #fff;
+}
+
+.img-caticon {
+	  filter: opacity; /* IE6-9 */
+ -webkit-filter: opacity(0.4); /* Google Chrome, Safari 6+ & Opera 15+ */
+}
+.img-caticon:hover {
+	  filter: opacity; /* IE6-9 */
+  -webkit-filter: opacity(1); /* Google Chrome, Safari 6+ & Opera 15+ */
 }

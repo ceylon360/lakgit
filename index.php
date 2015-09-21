@@ -278,7 +278,7 @@ $listing_sql .= $hiddenlist;
 	  
     }
 ?>
-	<div class="row panel">
+	<div class="row">
 		<div class="col-md-4">
 			<!--<img class="bg_blur" src="http://www3.hilton.com/resources/media/hi/COLHITW/en_US/img/shared/full_page_image_gallery/main/HL_exterior_675x359_FitToBoxSmallDimension_Center.jpg" alt="">-->
 			<?php echo'<img class="bg_blur" src="'.DIR_WS_IMAGES . $image['categories_banner'].'" height="200" width="200">' ?>
@@ -369,17 +369,17 @@ $listing_sql .= $hiddenlist;
  
 
 
-echo '<div class="contentContainer"><div class="row row-centered">';
+echo '<div class="contentContainer"><div class="row-centered">';
 
 	while ($categories = tep_db_fetch_array($categories_query)) {
 		$category_name0 = '';
 		$cPath_new = tep_get_path($categories['categories_id']);
 		if ($image['catname'] == $categories['categories_name']){
 			
-			$category_name0='<div class="col-xs-2 col-sm-1 col-md-1 lowMargin col-centered" data-toggle="tooltip" title="'.$categories['categories_name'].'"><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a></div>' . "\n";
+			$category_name0='<div class="col-xs-2 col-sm-1 col-md-1 lowMargin col-centered animated fadeInLeft caticon-selected" data-toggle="tooltip" title="'.$categories['categories_name'].'"><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a></div>' . "\n";
 		}
 		else{
-			$category_name0='<div class="col-xs-2 col-sm-1 col-md-1 lowMargin col-centered" data-toggle="tooltip" title="'.$categories['categories_name'].'"><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a></div>' . "\n";
+			$category_name0='<div class="col-xs-2 col-sm-1 col-md-1 lowMargin col-centered animated fadeInLeft img-caticon" data-toggle="tooltip" title="'.$categories['categories_name'].'"><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a></div>' . "\n";
 		}
 		
 		
