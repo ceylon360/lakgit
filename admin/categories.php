@@ -26,7 +26,7 @@ require('includes/functions/categories.php');
       case 'setflag':
         if ( ($HTTP_GET_VARS['flag'] == '0') || ($HTTP_GET_VARS['flag'] == '1') ) {
           if (isset($HTTP_GET_VARS['pID'])) {
-            tep_set_product_status($HTTP_GET_VARS['pID'], $HTTP_GET_VARS['flag']);
+            tep_set_product_status($HTTP_GET_VARS['pID'], $HTTP_GET_VARS['flag']);	
 			//cat state
 			 if (SHOW_COUNTS == 'true') {
               if (!write_category_cache_file()) $messageStack->add_session(ERROR_CATEGORY_CACHE, 'error');
@@ -95,13 +95,20 @@ require('includes/functions/categories.php');
 		// cat description
 		$categories_description_array = $HTTP_POST_VARS['categories_description'];
 		// cat description
+		//categoty note
+		$categories_note_array = $HTTP_POST_VARS['categories_note'];
+		$categories_note_sel_array = $HTTP_POST_VARS['categories_note_sel'];
+		//category note
           $language_id = $languages[$i]['id'];
 
           $sql_data_array = array('categories_name' => tep_db_prepare_input($categories_name_array[$language_id]));
 		  //cat description
 		  $sql_data_array['categories_description'] = tep_db_prepare_input($categories_description_array[$language_id]);
 		  //cat description
-
+		//category note
+		$sql_data_array['categories_note'] = tep_db_prepare_input($categories_note_array[$language_id]);
+		$sql_data_array['categories_note_sel'] = tep_db_prepare_input($categories_note_sel_array[$language_id]);
+		//category note
           if ($action == 'insert_category') {
             $insert_sql_data = array('categories_id' => $categories_id,
                                      'language_id' => $languages[$i]['id']);
@@ -119,6 +126,14 @@ require('includes/functions/categories.php');
 
         if ($categories_image->parse() && $categories_image->save()) {
           tep_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . tep_db_input($categories_image->filename) . "' where categories_id = '" . (int)$categories_id . "'");
+        }
+		
+	//category image
+		$categories_banner = new upload('categories_banner');
+        $categories_banner->set_destination(DIR_FS_CATALOG_IMAGES);
+		
+        if ($categories_banner->parse() && $categories_banner->save()) {
+			tep_db_query("update " . TABLE_CATEGORIES . " set categories_banner = '" . tep_db_input($categories_banner->filename) . "' where categories_id = '" . (int)$categories_id . "'");
         }
 
         if (USE_CACHE == 'true') {
@@ -933,10 +948,10 @@ $('#products_date_available').datepicker({
     $rows = 0;
     if (isset($HTTP_GET_VARS['search'])) {
       $search = tep_db_prepare_input($HTTP_GET_VARS['search']);
-
-      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_description, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.status_categ from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and cd.categories_name like '%" . tep_db_input($search) . "%' order by c.sort_order, cd.categories_name");
+//edited for cat desc,note,note_sel
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_description,cd.categories_note,cd.categories_note_sel, c.categories_image, c.categories_banner, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.status_categ from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and cd.categories_name like '%" . tep_db_input($search) . "%' order by c.sort_order, cd.categories_name");
     } else {
-      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_description, c.categories_image, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.status_categ from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by c.sort_order, cd.categories_name");
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_description,cd.categories_note,cd.categories_note_sel, c.categories_image, c.categories_banner, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.status_categ from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by c.sort_order, cd.categories_name");
     }
     while ($categories = tep_db_fetch_array($categories_query)) {
       $categories_count++;
@@ -1055,22 +1070,37 @@ $('#products_date_available').datepicker({
 		//cat description
 		$category_inputs_string = $category_description_string = '';
 		//cat description
+		//category note
+		$category_inputs_string = $category_note_string = '';
+		$category_inputs_string = $category_note_sel_string = '';
+		//category note
         $languages = tep_get_languages();
         for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
           $category_inputs_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('categories_name[' . $languages[$i]['id'] . ']');
         //cat description
 		$category_description_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_textarea_field('categories_description[' . $languages[$i]['id'] . ']', 'soft', '80', '10');
 		//cat description
+		//category note
+		$category_note_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_textarea_field('categories_note[' . $languages[$i]['id'] . ']', 'soft', '80', '10');
+		$category_note_sel_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_input_field('categories_note_sel[' . $languages[$i]['id'] . ']');
+		//category note
 		}
 
         $contents[] = array('text' => '<br />' . TEXT_CATEGORIES_NAME . $category_inputs_string);
 		//cat description
 		$contents[] = array('text' => '<br />' . TEXT_CATEGORIES_DESCRIPTION . $category_description_string);
 		//cat description
+		//category note
+		$contents[] = array('text' => '<br />' . TEXT_CATEGORIES_NOTE . $category_note_string);
+		$contents[] = array('text' => '<br />' . TEXT_CATEGORIES_NOTE_SEL . $category_note_sel_string);
+		//category note
 		//cat state
 		$contents[] = array('text' => '<br />' . TEXT_DISPLAY . '&nbsp;' . tep_draw_radio_field('status_categ', 1, true) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('status_categ', 0, false) . '&nbsp;' . TEXT_NO);
 		//cat state
         $contents[] = array('text' => '<br />' . TEXT_CATEGORIES_IMAGE . '<br />' . tep_draw_file_field('categories_image'));
+		//category banner
+		 $contents[] = array('text' => '<br />' . TEXT_CATEGORIES_BANNER . '<br />' . tep_draw_file_field('categories_banner'));
+		 
         $contents[] = array('text' => '<br />' . TEXT_SORT_ORDER . '<br />' . tep_draw_input_field('sort_order', '', 'size="2"'));
         $contents[] = array('align' => 'center', 'text' => '<br />' . tep_draw_button(IMAGE_SAVE, 'disk', null, 'primary') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath)));
         break;
@@ -1084,18 +1114,32 @@ $('#products_date_available').datepicker({
 	  //cat description
 	  $category_inputs_string = $category_description_string = '';
 	  //cat description
+	  //category note
+	  $category_inputs_string = $category_note_string = '';
+	  $category_inputs_string = $category_note_sel_string = '';
+	  //category note
         $languages = tep_get_languages();
         for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
         $category_inputs_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('categories_name[' . $languages[$i]['id'] . ']', tep_get_category_name($cInfo->categories_id, $languages[$i]['id']));
         //cat description
 		$category_description_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_textarea_field('categories_description[' . $languages[$i]['id'] . ']', 'soft', '50', '10', tep_get_category_description($cInfo->categories_id, $languages[$i]['id']));
 		//cat description
+		//category note
+		$category_note_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_textarea_field('categories_note[' . $languages[$i]['id'] . ']', 'soft', '50', '10', tep_get_category_note($cInfo->categories_id, $languages[$i]['id']));
+		$category_note_sel_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_input_field('categories_note_sel[' . $languages[$i]['id'] . ']', tep_get_category_note_sel($cInfo->categories_id, $languages[$i]['id']));			
+		//category note
+		
 		}
 
         $contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_NAME . $category_inputs_string);
 		//cat description
 		$contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_DESCRIPTION . $category_description_string);
 		// cat description
+		//category note
+		$contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_NOTE . $category_note_string);
+		$contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_NOTE_SEL . $category_note_sel_string);
+		//category note
+		
 		//cat state
 		switch ($cInfo->status_categ) {
           case '0': $displayed = false; $hidden = true; break;
@@ -1106,6 +1150,10 @@ $('#products_date_available').datepicker({
 		//cat state
         $contents[] = array('text' => '<br />' . tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $cInfo->categories_image, $cInfo->categories_name) . '<br />' . DIR_WS_CATALOG_IMAGES . '<br /><strong>' . $cInfo->categories_image . '</strong>');
         $contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_IMAGE . '<br />' . tep_draw_file_field('categories_image'));
+		//category banner
+		$contents[] = array('text' => '<br />' . tep_image(HTTP_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $cInfo->categories_banner, $cInfo->categories_name) . '<br />' . DIR_WS_CATALOG_IMAGES . '<br /><strong>' . $cInfo->categories_banner . '</strong>');
+        $contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_BANNER . '<br />' . tep_draw_file_field('categories_banner'));
+		
         $contents[] = array('text' => '<br />' . TEXT_EDIT_SORT_ORDER . '<br />' . tep_draw_input_field('sort_order', $cInfo->sort_order, 'size="2"'));
         $contents[] = array('align' => 'center', 'text' => '<br />' . tep_draw_button(IMAGE_SAVE, 'disk', null, 'primary') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $cInfo->categories_id)));
         break;
@@ -1203,7 +1251,10 @@ $('#products_date_available').datepicker({
             $contents[] = array('text' => '<br />' . TEXT_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
             if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
             $contents[] = array('text' => '<br />' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br />' . $cInfo->categories_image);
-                        if ($parent_hidden) {
+            ///category banner
+			$contents[] = array('text' => '<br />' . tep_info_image($cInfo->categories_banner, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br />' . $cInfo->categories_banner);           
+					  
+					  if ($parent_hidden) {
               $display = TEXT_PARENT_HIDDEN;
             } elseif ($cInfo->status_categ == 0) {
               $display = TEXT_NO;

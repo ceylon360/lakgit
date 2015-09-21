@@ -151,9 +151,11 @@
 	  $prod_list_contents .= '      <div class="row">';
     if (tep_not_null($listing['specials_new_products_price'])) {
       $prod_list_contents .= '      <div class="col-xs-6"><div class="btn-group" role="group"><button type="button" class="btn btn-default"><del>' .  $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</del></span>&nbsp;&nbsp;<span class="productSpecialPrice">' . $currencies->display_price($listing['specials_new_products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</button></div></div>';
-    } else {
+	$prod_list_contents .= '     </br> <div class="col-xs-6">' . $currencies->display_price_lk($listing['specials_new_products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</div>';
+	} else {
       $prod_list_contents .= '      <div class="col-xs-6"><div class="btn-group" role="group"><button type="button" class="btn btn-default">' . $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</button></div></div>';
-    }
+		 $prod_list_contents .= '      </br><div class="col-xs-6">' . $currencies->display_price_lk($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</div>';
+	}
     $prod_list_contents .= '       <div class="col-xs-6 text-right">' . tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'sort', 'cPath')) . 'action=buy_now&products_id=' . $listing['products_id']), NULL, NULL, 'btn-success btn-sm') . '</div>';
     $prod_list_contents .= '      </div>';
 

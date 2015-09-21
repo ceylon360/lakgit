@@ -1480,6 +1480,18 @@
     return $category['categories_description'];
   //cat description
  }
+ //category note
+function tep_get_category_note($category_id, $language_id) {
+    $category_query = tep_db_query("select categories_note from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . $category_id . "' and language_id = '" . $language_id . "'");
+    $category = tep_db_fetch_array($category_query);
+    return $category['categories_note'];
+}
+function tep_get_category_note_sel($category_id, $language_id) {
+    $category_query = tep_db_query("select categories_note_sel from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . $category_id . "' and language_id = '" . $language_id . "'");
+    $category = tep_db_fetch_array($category_query);
+    return $category['categories_note_sel'];
+}
+//category note
   //man description
   function tep_get_manufacturer_description($manufacturer_id, $language_id) {
     $manufacturer_query = tep_db_query("select manufacturers_description from manufacturers_info where manufacturers_id = '" . (int)$manufacturer_id . "' and languages_id = '" . (int)$language_id . "'");

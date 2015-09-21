@@ -40,7 +40,7 @@
   </div> <!-- bodyWrapper //-->
 
   <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
-
+<script src="ext/bootstrap/js/tooltip.js"></script>
 <script src="ext/bootstrap/js/bootstrap.min.js"></script>
 <?php echo $oscTemplate->getBlocks('footer_scripts'); ?>
 
