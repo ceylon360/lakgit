@@ -28,7 +28,15 @@
   //cat state
  $product_check = tep_db_fetch_array($product_check_query);
 
+ $product_catid_query = tep_db_query("select categories_id from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "'");
+ $product_catid = tep_db_fetch_array($product_catid_query);
+ 
+ $category_name_query = tep_db_query("select cd.categories_name, c.categories_image, c.categories_banner, cd.categories_description,cd.categories_note,cd.categories_note_sel from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$product_catid['categories_id'] . "' and status_categ = 1 and cd.categories_id = '" . (int)$product_catid['categories_id'] . "' and cd.language_id = '" . (int)$languages_id . "'");
+ $categories_name = tep_db_fetch_array($category_name_query);
   require(DIR_WS_INCLUDES . 'template_top.php');
+  
+  
+  
 
   if ($product_check['total'] < 1) {
 ?>
@@ -90,6 +98,8 @@ $stock_check .='';
 <div itemscope itemtype="http://schema.org/Product">
 
 <div class="page-header">
+<h2><?php echo $categories_name['categories_name']; ?></h2>
+<?php echo'<img class="" src="'.DIR_WS_IMAGES . $categories_name['categories_image'].'" height="100" width="100">' ?>
   <h1 class="pull-right" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><?php echo $products_price; ?></h1>
   <h1><?php echo $products_name; ?></h1>
   <div><?php echo $stock_check; ?></div>

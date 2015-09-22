@@ -128,11 +128,10 @@ if (tep_not_null($category['categories_description'])) {
 
     while ($categories = tep_db_fetch_array($categories_query)) {
       $cPath_new = tep_get_path($categories['categories_id']);
-<<<<<<< HEAD
-      echo '<div class="col-sm-6 col-md-3 lowMargin animated fadeInLeft">';
-=======
+
+
       echo '<div class="col-sm-6 col-md-2 lowMargin animated fadeInLeft">';
->>>>>>> category-banner-&-info
+
       echo '  <div class="text-center">';
       echo '    <a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a>';
       echo '    <div class="caption text-center">';
