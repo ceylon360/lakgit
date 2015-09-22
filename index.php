@@ -40,7 +40,7 @@
   if ($category_depth == 'nested') {
    // $category_query = tep_db_query("select cd.categories_name, c.categories_image from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
     //cat state
-	$category_query = tep_db_query("select cd.categories_name, c.categories_image, c.categories_banner, cd.categories_description from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and status_categ = 1 and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
+	$category_query = tep_db_query("select cd.categories_name, c.categories_image, c.categories_banner, cd.categories_description,cd.categories_note,cd.categories_note_sel from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and status_categ = 1 and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "'");
 	//cat state
 	//, cd.categories_description // added above query for get categories description
 	$category = tep_db_fetch_array($category_query);
@@ -75,9 +75,10 @@ if (tep_not_null($category['categories_description'])) {
 }  
 //cat description
 ?></span>
-	<div class="notice notice-danger">
+
+	<!--<div class="notice notice-danger">
         <strong>Notice</strong> Hilton Cakes are delivered only in Colombo and it's suburbs . 
-    </div>
+    </div>-->
            </div>
 		   <hr>
         </div>
@@ -127,7 +128,11 @@ if (tep_not_null($category['categories_description'])) {
 
     while ($categories = tep_db_fetch_array($categories_query)) {
       $cPath_new = tep_get_path($categories['categories_id']);
+<<<<<<< HEAD
       echo '<div class="col-sm-6 col-md-3 lowMargin animated fadeInLeft">';
+=======
+      echo '<div class="col-sm-6 col-md-2 lowMargin animated fadeInLeft">';
+>>>>>>> category-banner-&-info
       echo '  <div class="text-center">';
       echo '    <a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a>';
       echo '    <div class="caption text-center">';
@@ -270,14 +275,14 @@ $listing_sql .= $hiddenlist;
 	  $image = tep_db_fetch_array($image);
       $catname = $image['catname'];
     } elseif ($current_category_id) {
-      $image = tep_db_query("select c.categories_image, c.categories_banner, cd.categories_name as catname, cd.categories_description as catdesc from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
+      $image = tep_db_query("select c.categories_image, c.categories_banner, cd.categories_name as catname, cd.categories_description as catdesc,cd.categories_note,cd.categories_note_sel from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
       //, cd.categories_description as catdesc added //above code for categories_description
 	  $image = tep_db_fetch_array($image);
       $catname = $image['catname'];
 	  
     }
 ?>
-	<div class="row panel">
+	<div class="row">
 		<div class="col-md-4">
 			<!--<img class="bg_blur" src="http://www3.hilton.com/resources/media/hi/COLHITW/en_US/img/shared/full_page_image_gallery/main/HL_exterior_675x359_FitToBoxSmallDimension_Center.jpg" alt="">-->
 			<?php echo'<img class="bg_blur" src="'.DIR_WS_IMAGES . $image['categories_banner'].'" height="200" width="200">' ?>
@@ -295,9 +300,36 @@ $listing_sql .= $hiddenlist;
 			}
 			//cat description
 			?></span>
-			 <div class="notice notice-danger">
-        <strong>Notice</strong> Hilton Cakes are delivered only in Colombo and it's suburbs . 
-    </div>
+			   <?php 
+			   $note_color='';
+			   if (tep_not_null($image['categories_note'])) {
+					
+					switch($image['categories_note_sel']){
+							
+							case '1':
+							$note_color='danger';
+							break;
+							
+							case '2':
+							$note_color='info';
+							break;
+							
+							case '3':
+							$note_color='success';
+							break;
+							
+							case '4':
+							$note_color='warning';
+							break;
+							
+							default:
+							$note_color='default';
+							break;
+					}
+					
+				   echo '<div class="notice notice-'.$note_color.'"><strong>Notice </strong>' . $image['categories_note'] . '</div>';
+			   }?>
+			 
            </div>
         </div>
     </div>   
@@ -321,6 +353,14 @@ $listing_sql .= $hiddenlist;
     } else {
       $categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
     }
+	$category_name0 = '';
+	if ($catname = $categories['categories_name']){
+		$category_name0='<strong>'.$categories['categories_name'].'</strong>';
+		
+		}
+		else{
+			$category_name0=$categories['categories_name'];
+			}
 //my query for name of main cat
    $maincat_query = tep_db_query("select c.categories_id, cd.categories_name,c.categories_id, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
 			  $maincat = tep_db_fetch_array($maincat_query);
@@ -329,47 +369,33 @@ $listing_sql .= $hiddenlist;
 	  $maincatname_query = tep_db_query("select categories_id, categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . $maincat . "' and language_id = '" . (int)$languages_id . "'");
 			  $maincatname = tep_db_fetch_array($maincatname_query);
 	  $maincatname = $maincatname['categories_name'];
- 
- echo '  <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand hidden-md hidden-lg " href="#">Other '.$maincatname.' </a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> ';
-   
-   
-   
- echo '<ul class="nav navbar-nav">';
- 
-    while ($categories = tep_db_fetch_array($categories_query)) {
-      
-      $cPath_new = tep_get_path($categories['categories_id']);
-
-      echo '<li class="notice notice-success"><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> 
-	 
-	  ' . $categories['categories_name'] . '
-	 
 	  
-	  </a></li>' . "\n";
-       
-    }
-	 
-	 
-	 
-echo '</ul>';
-echo '
-</div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav> ';
+ 
+
+
+echo '<div class="contentContainer"><div class="row-centered">';
+
+	while ($categories = tep_db_fetch_array($categories_query)) {
+		$category_name0 = '';
+		$cPath_new = tep_get_path($categories['categories_id']);
+		if ($image['catname'] == $categories['categories_name']){
+			
+			$category_name0='<div class="col-xs-2 col-sm-1 col-md-1 lowMargin col-centered animated fadeInLeft caticon-selected" data-toggle="tooltip" title="'.$categories['categories_name'].'"><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a></div>' . "\n";
+		}
+		else{
+			$category_name0='<div class="col-xs-2 col-sm-1 col-md-1 lowMargin col-centered animated fadeInLeft img-caticon" data-toggle="tooltip" title="'.$categories['categories_name'].'"><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a></div>' . "\n";
+		}
+		
+		
+		echo $category_name0;
+	}
+
+
+echo '</div></div>';
+
+
+
+
 
 // needed for the new products module shown below
     $new_products_category_id = $current_category_id;
@@ -377,6 +403,12 @@ echo '
              
 
 <!-- end sub categories buttons //-->
+<script>
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip(); 
+	});
+</script>
+<a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>
 
 <?php
 //cat description

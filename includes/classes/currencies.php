@@ -69,12 +69,18 @@
       return $this->currencies[$code]['decimal_places'];
     }
 
-   /* function display_price($products_price, $products_tax, $quantity = 1) {
+    function display_price($products_price, $products_tax, $quantity = 1) {
       return $this->format($this->calculate_price($products_price, $products_tax, $quantity));
-    }*/
-	function display_price($products_price, $products_tax, $quantity = 1) {
-return $this->format(tep_add_tax($products_price, $products_tax) * $quantity).'</br>'.
-$this->format(tep_add_tax($products_price, $products_tax) * $quantity,true,'LKR');
+    }
+	
+	
+	function display_price_lk($products_price, $products_tax, $quantity = 1) {
+return $this->format(tep_add_tax($products_price, $products_tax) * $quantity,true,'LKR');
 }
+
+
+
+
+
   }
 ?>

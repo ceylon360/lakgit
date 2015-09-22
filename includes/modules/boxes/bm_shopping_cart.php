@@ -50,15 +50,24 @@ if (($PHP_SELF == 'login.php')
             $cart_contents_string .= ' class="newItemInCart"';
           }
           $cart_contents_string .= '>';
+		  $cart_contents_string .= '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '">' . tep_image(DIR_WS_IMAGES . $products[$i]['image'], $products[$i]['name'], $width = '50px', $height = '50px') . '</a>';
 
           $cart_contents_string .= $products[$i]['quantity'] . '&nbsp;x&nbsp;';
+		  
 
           $cart_contents_string .= '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '">';
 
           $cart_contents_string .= $products[$i]['name'];
 
-          $cart_contents_string .= '</a></li>';
-
+          $cart_contents_string .= '</a>';
+			$cart_contents_string .='</li>';
+			
+			$products_tax = tep_get_tax_rate($products[$i]['tax_class_id']);
+            $popup_price = $currencies->calculate_price($products[$i]['final_price'], $products_tax, $products[$i]['quantity']);
+            $cart_contents_string .= $currencies->format($popup_price) . '</td></tr>';
+		 
+		 $cart_contents_string .='</li>';
+		 
           if ((tep_session_is_registered('new_products_id_in_cart')) && ($new_products_id_in_cart == $products[$i]['id'])) {
             tep_session_unregister('new_products_id_in_cart');
           }
