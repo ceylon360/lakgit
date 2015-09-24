@@ -57,4 +57,13 @@
   define('TABLE_ZONES_TO_GEO_ZONES', 'zones_to_geo_zones');
   define('TABLE_WHOS_ONLINE', 'whos_online');
   define('TABLE_ZONES', 'zones');
+  
+//Extra Product Fields
+define('TABLE_EPF', 'extra_product_fields');
+define('TABLE_EPF_LABELS', 'extra_field_labels');
+define('TABLE_EPF_VALUES', 'extra_field_values');
+define('TABLE_EPF_EXCLUDE', 'extra_value_exclude');
+define('TABLE_PTYPES', 'product_types');
+define('TABLE_PTYPE_DESC', 'product_type_descriptions');
+
 ?>

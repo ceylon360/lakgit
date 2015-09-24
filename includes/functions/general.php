@@ -1410,4 +1410,104 @@
       return str_replace($from, $to, $string);
     }
   }
+  
+  
+  
+//for Extra Product Fields
+function tep_get_extra_field_list_value($value_id, $show_chain = false, $display_type = 0) {
+    $sql = tep_db_query("select epf_value, value_image, parent_id from " . TABLE_EPF_VALUES . " where value_id = " . (int)$value_id);
+    $value = tep_db_fetch_array($sql);
+    $display = $value['epf_value'];
+    if (tep_not_null($value['value_image'])) {
+		if ($display_type == 2) {
+			$browser = (isset($_SERVER['HTTP_USER_AGENT']) ? strtolower($_SERVER['HTTP_USER_AGENT']) : '');
+			$pos = strpos($browser, 'msie');
+			if ($pos !== false) { // using Internet Explorer requires different display type for inline tables
+				$vpos = strpos($browser, ';', $pos);
+				$version = substr($browser, $pos + 5, $vpos - $pos - 5);
+				if ($version < 9) {
+					$tt = 'inline';
+				} else {
+					$tt = 'inline-table';
+				}
+			} else {
+				$tt = 'inline-table';
+			}
+			$display = '<table style="display: ' . $tt . '; vertical-align: middle; text-align: center"><tr><td>' . tep_image(DIR_WS_IMAGES . 'epf/' . $value['value_image'], $value['epf_value']) . '<br />' . $value['epf_value'] . '</td></tr></table>';
+		} elseif ($display_type == 1) {
+			$display = tep_image(DIR_WS_IMAGES . 'epf/' . $value['value_image'], $value['epf_value']);
+		}
+    }
+    if ($show_chain && ($value['parent_id'] > 0)) {
+		return tep_get_extra_field_list_value($value['parent_id'], true, $display_type) . ' &rarr; ' . $display;
+    } else {
+		return $display;
+    }
+}
+
+function tep_list_epf_children($parent_id) {
+    $sql = tep_db_query("select value_id from " . TABLE_EPF_VALUES . " where parent_id = " . (int)$parent_id);
+    $list = '';
+    while ($i = tep_db_fetch_array($sql)) {
+		$list .= ',' . $i['value_id'] . tep_list_epf_children($i['value_id']);
+    }
+    return $list;
+}
+
+function tep_build_epf_pulldown($epf_id, $languages_id, $value_array = '', $parent_id = 0, $indent = '') {
+    if (!is_array($value_array)) $value_array = array();
+    $sql = tep_db_query("select epf_value, value_id from " . TABLE_EPF_VALUES . " where epf_id = " . (int)$epf_id . " and languages_id = " . (int)$languages_id . " and parent_id = " . (int)$parent_id . " order by sort_order, epf_value");
+    while ($v = tep_db_fetch_array($sql)) {
+		$value_array[] = array('id' => $v['value_id'], 'text' => $indent . $v['epf_value']);
+		$value_array = tep_build_epf_pulldown($epf_id, $languages_id, $value_array, $v['value_id'], $indent . '&rarr;');
+    }
+    return $value_array;
+}
+
+function epf_get_ptype_children($ptype_id) {
+    $list = array($ptype_id);
+    $query = tep_db_query("select ptype_id from " . TABLE_PTYPES . " where parent_id = " . (int)$ptype_id);
+    while ($val = tep_db_fetch_array($query)) {
+		$clist = epf_get_ptype_children($val['ptype_id']);
+		$list = array_merge($list, $clist);
+    }
+    return $list;
+}
+
+function epf_get_ptype_desc($ptype_id, $language = '') {
+    global $languages_id;
+    $lang =  (($language == '') ? $languages_id : $language);
+    $query = tep_db_query("select ptype_description from " . TABLE_PTYPE_DESC . " where ptype_id = " . (int)$ptype_id . " and languages_id = " . (int)$lang);
+    $val = tep_db_fetch_array($query);
+    return $val['ptype_description'];
+}
+
+function epf_get_ptype_desc_extended($ptype_id, $language = '') {
+    global $languages_id;
+    $lang =  (($language == '') ? $languages_id : $language);
+    $val = epf_get_ptype_desc($ptype_id, $lang);
+    $query = tep_db_query("select parent_id from " . TABLE_PTYPES . " where ptype_id = " . (int)$ptype_id);
+    $check = tep_db_fetch_array($query);
+    $parent_id = $check['parent_id'];
+    while ($parent_id > 0) {
+		$val = epf_get_ptype_desc($parent_id, $lang) . ' &rarr; ' . $val;
+		$query = tep_db_query("select parent_id from " . TABLE_PTYPES . " where ptype_id = " . (int)$parent_id);
+		$check = tep_db_fetch_array($query);
+		$parent_id = $check['parent_id'];
+    }
+    return $val;
+}
+
+function epf_build_ptype_pulldown($parent_id = 0, $value_array = '', $indent = '') {
+    global $languages_id;
+    if (!is_array($value_array)) $value_array = array();
+    $sql = tep_db_query("select d.ptype_id, ptype_description from " . TABLE_PTYPES . " t, " . TABLE_PTYPE_DESC . " d where t.ptype_id = d.ptype_id and languages_id = " . (int)$languages_id . " and parent_id = " . (int)$parent_id . " order by sort_order, ptype_description");
+    while ($v = tep_db_fetch_array($sql)) {
+		$value_array[] = array('id' => $v['ptype_id'], 'text' => $indent . $v['ptype_description']);
+		$value_array = epf_build_ptype_pulldown($v['ptype_id'], $value_array, $indent . '&rarr;');
+    }
+    return $value_array;
+}
+//end extra product field
 ?>
+

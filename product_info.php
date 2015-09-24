@@ -27,7 +27,43 @@
   }
   //cat state
  $product_check = tep_db_fetch_array($product_check_query);
-
+// begin Extra Product Fields
+  $epf = array();
+  if ($product_check['total'] > 0) {
+    $epf_query = tep_db_query("select * from " . TABLE_EPF . " e join " . TABLE_EPF_LABELS . " l where e.epf_status and (e.epf_id = l.epf_id) and (l.languages_id = " . (int)$languages_id . ") and l.epf_active_for_language order by epf_order");
+    while ($e = tep_db_fetch_array($epf_query)) {  // retrieve all active extra fields
+      $field = 'extra_value';
+      if ($e['epf_uses_value_list']) {
+        if ($e['epf_multi_select']) {
+          $field .= '_ms';
+        } else {
+          $field .= '_id';
+        }
+      }
+      $field .= $e['epf_id'];
+      $epf[] = array('id' => $e['epf_id'],
+                     'label' => $e['epf_label'],
+                     'uses_list' => $e['epf_uses_value_list'],
+                     'multi_select' => $e['epf_multi_select'],
+                     'columns' => $e['epf_num_columns'],
+                     'display_type' => $e['epf_value_display_type'],
+                     'show_chain' => $e['epf_show_parent_chain'],
+                     'search' => $e['epf_advanced_search'],
+                     'keyword' => $e['epf_use_as_meta_keyword'],
+                     'field' => $field);
+    }
+    $query = "select p.products_date_added, p.products_last_modified, pd.products_name";
+    foreach ($epf as $e) {
+      if ($e['keyword']) $query .= ", pd." . $e['field'];
+    }
+    $query .= " from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'";
+    $pname = tep_db_fetch_array(tep_db_query($query));
+    $datemod = substr((tep_not_null($pname['products_last_modified']) ? $pname['products_last_modified'] : $pname['products_date_added']), 0, 10);
+  } else {
+    $pname = TEXT_PRODUCT_NOT_FOUND;
+    $datemod = date('Y-m-d');
+  }
+// end Extra Product Fields
   require(DIR_WS_INCLUDES . 'template_top.php');
 
   if ($product_check['total'] < 1) {
@@ -45,8 +81,17 @@
 
 <?php
   } else {
-    $product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
-    $product_info = tep_db_fetch_array($product_info_query);
+   // $product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
+   // $product_info = tep_db_fetch_array($product_info_query);
+	  // begin Product Extra Fields
+    $query = "select p.products_id, pd.products_name, pd.products_description, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id, p.products_type";
+    foreach ($epf as $e) {
+      $query .= ", pd." . $e['field'];
+    }
+    $query .= " from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'";
+    $product_info_query = tep_db_query($query);
+    // end Product Extra Fields
+	
 
     tep_db_query("update " . TABLE_PRODUCTS_DESCRIPTION . " set products_viewed = products_viewed+1 where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and language_id = '" . (int)$languages_id . "'");
 
@@ -88,7 +133,33 @@ $stock_check .='';
 
 
 <div itemscope itemtype="http://schema.org/Product">
-
+	<!-- begin Extra Product Fields //-->
+	<meta name="DCTERMS.modified" content ="<?php echo $datemod;?>">
+	<title><?php echo TITLE . ': ' . tep_output_string_protected($pname['products_name']); ?></title>
+	<meta name="Description" content="<?php echo tep_output_string($pname['products_name']); ?>">
+	<?php
+		$keywords = array();
+		foreach ($epf as $e) {
+			$mt = ($e['uses_list'] && !$e['multi_select'] ? ($pname[$e['field']] == 0) : !tep_not_null($pname[$e['field']]));
+			if ($e['keyword'] && !$mt) {
+				if ($e['uses_list']) {
+					if ($e['multi_select']) {
+						$values = explode('|', trim($pname[$e['field']], '|'));
+						foreach ($values as $val) {
+							$keywords[] = tep_output_string(tep_get_extra_field_list_value($val));
+						}
+					} else {
+						$keywords[] = tep_output_string(str_replace(' | ', ', ', tep_get_extra_field_list_value($pname[$e['field']], $e['show_chain'])));
+					}
+				} else {
+					$keywords[] = tep_output_string($pname[$e['field']]);
+				}
+			}
+		}
+		if (!empty($keywords))
+		echo '<meta name ="Keywords" content="' .  implode(', ', $keywords) . '">' . "\n";
+	?>
+	<!-- end Extra Product Fields //-->
 <div class="page-header">
   <h1 class="pull-right" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><?php echo $products_price; ?></h1>
   <h1><?php echo $products_name; ?></h1>
@@ -106,10 +177,45 @@ $stock_check .='';
 
 
 <div itemprop="description">
+
   <?php echo stripslashes($product_info['products_description']); ?>
 </div>
 
 <?php
+// begin Extra Product Fields
+  if ((PTYPE_ON_INFO_PAGE != 'off') && ($product_info['products_type'] > 0)) {
+    echo '<b>' . TEXT_PTYPE . ': </b>';
+    if (PTYPE_ON_INFO_PAGE == 'basic') { 
+      echo epf_get_ptype_desc($product_info['products_type']);
+    } else {
+      echo epf_get_ptype_desc_extended($product_info['products_type']);
+    }
+    echo "<br>\n";
+  }
+  $extra = '';
+  foreach ($epf as $e) {
+    $mt = ($e['uses_list'] && !$e['multi_select'] ? ($product_info[$e['field']] == 0) : !tep_not_null($product_info[$e['field']]));
+    if (!$mt) { // only display if information is set for product
+      $extra .= '<tr><td class="main"><b>' . $e['label'] . ': </b>';
+      if ($e['uses_list']) {
+        if ($e['multi_select']) {
+          $values = explode('|', trim($product_info[$e['field']], '|'));
+          $listing = array();
+          foreach ($values as $val) {
+            $listing[] = tep_get_extra_field_list_value($val, $e['show_chain'], $e['display_type']);
+          }
+          $extra .= implode(', ', $listing);
+        } else {
+          $extra .= tep_get_extra_field_list_value($product_info[$e['field']], $e['show_chain'], $e['display_type']);
+        }
+      } else {
+        $extra .= $product_info[$e['field']];
+      }
+      $extra .= "</td></tr>\n";
+    }
+  }
+  if (tep_not_null($extra)) echo '<table>' . $extra . "</table>\n";
+  // end Extra Product Fields
     $products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$HTTP_GET_VARS['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");
     $products_attributes = tep_db_fetch_array($products_attributes_query);
     if ($products_attributes['total'] > 0) {

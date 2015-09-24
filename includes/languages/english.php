@@ -280,3 +280,11 @@ define('PRODUCT_REMOVED', '%s has been removed from your Cart');
 
 // bootstrap helper
 define('MODULE_CONTENT_BOOTSTRAP_ROW_DESCRIPTION', '');
+
+//Extra Product Fields
+define('TABLE_EPF', 'extra_product_fields');
+define('TABLE_EPF_LABELS', 'extra_field_labels');
+define('TABLE_EPF_VALUES', 'extra_field_values');
+define('TABLE_EPF_EXCLUDE', 'extra_value_exclude');
+define('TABLE_PTYPES', 'product_types');
+define('TABLE_PTYPE_DESC', 'product_type_descriptions');

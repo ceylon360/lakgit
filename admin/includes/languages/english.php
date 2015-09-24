@@ -304,3 +304,9 @@ define('BOX_CATALOG_CATEGORIES_RELATED_PRODUCTS', 'Related Products');
 // bootstrap helper
 define('MODULE_CONTENT_BOOTSTRAP_ROW_DESCRIPTION', '<p>Content Width can be 12 or less per column per row.</p><p>12/12 = 100% width, 6/12 = 50% width, 4/12 = 33% width.</p><p>Total of all columns in any one row must equal 12 (eg:  3 boxes of 4 columns each, 1 box of 12 columns and so on).</p>');
 
+// Extra Product Fields
+define('TEXT_NOT_APPLY', 'Does Not Apply');
+define('BOX_CATALOG_PRODUCTS_EXTRA_FIELDS', 'Extra Product Fields');
+define('BOX_CATALOG_PRODUCTS_EXTRA_VALUES', 'Extra Field Values');
+define('BOX_CATALOG_PRODUCTS_PTYPES', 'Product Types');
+define('TEXT_PTYPE', 'Product Type:');
