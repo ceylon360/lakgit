@@ -369,7 +369,7 @@ $listing_sql .= $hiddenlist;
  
 
 
-echo '<div class="contentContainer"><div class="row-centered">';
+echo '<div class="contentContainer  hidden-xs"><div class="row-centered">';
 
 	while ($categories = tep_db_fetch_array($categories_query)) {
 		$category_name0 = '';
@@ -389,7 +389,63 @@ echo '<div class="contentContainer"><div class="row-centered">';
 
 echo '</div></div>';
 
+////////////////////////for mobile
 
+	if (isset($cPath) && strpos($cPath, '_')) {
+		// check to see if there are deeper categories within the current category
+		$category_links = array_reverse($cPath_array);
+		for($i=0, $n=sizeof($category_links); $i<$n; $i++) {
+			$categories_query = tep_db_query("select count(*) as total from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$category_links[$i] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "'");
+			$categories = tep_db_fetch_array($categories_query);
+			if ($categories['total'] < 1) {
+				// do nothing, go through the loop
+			} else {
+				$categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$category_links[$i] . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+				break; // we've found the deepest category the customer is in
+			}
+		}
+    } else {
+		$categories_query = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+    }
+	
+	 echo '  <nav class="navbar navbar-default visible-xs">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand hidden-md hidden-lg " href="#">Other '.$maincatname.' </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> ';
+   
+   
+   
+ echo '<ul class="nav navbar-nav">';
+ 
+    while ($categories = tep_db_fetch_array($categories_query)) {
+      $category_name0 = '';
+	  $cPath_new = tep_get_path($categories['categories_id']);
+	if ($image['catname'] == $categories['categories_name']){
+		
+		$category_name0='<li><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> ' .$categories['categories_name']. '</a></li>' . "\n";
+		}
+		else{
+		$category_name0='<li><a class=""href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '"> ' .$categories['categories_name']. '</a></li>' . "\n";
+			}
+      
+      echo $category_name0;
+       }
+echo '</ul>';
+echo '
+</div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav> ';
+//////////////////////
 
 
 
@@ -404,7 +460,8 @@ echo '</div></div>';
 		$('[data-toggle="tooltip"]').tooltip(); 
 	});
 </script>
-<a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>
+</br>
+<!-- end sub categories buttons //-->
 
 <?php
 //cat description
