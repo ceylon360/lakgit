@@ -94,7 +94,24 @@
 ?>
 
 <?php echo $payment_modules->javascript_validation(); ?>
-
+  <div class="contentText">
+    <div class="stepwizard">
+      <div class="stepwizard-row">
+        <div class="stepwizard-step">
+          <a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>"><button type="button" class="btn btn-default btn-circle">1</button></a>
+          <p><a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>"><?php echo CHECKOUT_BAR_DELIVERY; ?></a></p>
+        </div>
+        <div class="stepwizard-step">
+          <button type="button" class="btn btn-primary btn-circle">2</button>
+          <p><?php echo CHECKOUT_BAR_PAYMENT; ?></p>
+        </div>
+        <div class="stepwizard-step">
+          <button type="button" class="btn btn-default btn-circle" disabled="disabled">3</button>
+          <p><?php echo CHECKOUT_BAR_CONFIRMATION; ?></p>
+        </div>
+      </div>
+    </div>
+  </div>
 <div class="page-header">
   <h1><?php echo HEADING_TITLE; ?></h1>
 </div>
@@ -120,8 +137,8 @@
   <h2><?php// echo TABLE_HEADING_BILLING_ADDRESS; ?></h2>
 
   <div class="contentText row">
-    <div class="col-sm-8">
-      <div class="alert alert-info">
+    <div class="col-sm-12">
+      <div class="notice notice-info">
         <?php echo TEXT_PAYMENT_RULES; ?>
         <div class="clearfix"></div>
         <div class="pull-right">
