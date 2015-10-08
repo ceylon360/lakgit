@@ -788,6 +788,9 @@ li.notice.notice-success a {
 .cartbx_tmb{
     float: left;
     margin-right: 10px;
+    width: 50px;
+    height: 50px;
+
 }
 .mini-product{
 margin-bottom: 12px;
