@@ -186,7 +186,7 @@
 
                 <div class="order-status-timeline">
                     <!-- class names: c0 c1 c2 c3 and c4 -->
-                    <div class="order-status-timeline-completion c3"></div>
+                    <div class="order-status-timeline-completion c0"></div>
                 </div>
 <a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
                 <div class="image-order-status image-order-status-new active img-circle">
@@ -450,7 +450,7 @@
 			
 			<div class="order-status-timeline">
 				<!-- class names: c0 c1 c2 c3 and c4 -->
-				<div class="order-status-timeline-completion c3"></div>
+				<div class="order-status-timeline-completion c0"></div>
 			</div>
 			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
                 <div class="image-order-status image-order-status-new active img-circle">

@@ -208,7 +208,34 @@
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
-
+<!--  step -->
+    <div class="row shop-tracking-status">
+		<div class="order-status">
+			
+			<div class="order-status-timeline">
+				<!-- class names: c0 c1 c2 c3 and c4 -->
+				<div class="order-status-timeline-completion c0"></div>
+			</div>
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
+                <div class="image-order-status image-order-status-new active img-circle">
+                    <span class="status">Delivery Information</span>
+                    <div class="icon"></div>
+                </div>
+			</a>
+			
+                <div class="image-order-status image-order-status-active active img-circle">
+                    <span class="status">Payment Information</span>
+                    <div class="icon"></div>
+                </div>
+			
+			<div class="image-order-status image-order-status-completed active img-circle">
+				<span class="status">Confirmation</span>
+				<div class="icon"></div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- end step -->
 <div class="page-header">
   <h1><?php echo HEADING_TITLE; ?></h1>
 </div>
@@ -301,24 +328,34 @@
   
   <div class="clearfix"></div>
 
-  <div class="contentText">
-    <div class="stepwizard">
-      <div class="stepwizard-row">
-        <div class="stepwizard-step">
-          <button type="button" class="btn btn-primary btn-circle">1</button>
-          <p><?php echo CHECKOUT_BAR_DELIVERY; ?></p>
-        </div>
-        <div class="stepwizard-step">
-          <button type="button" class="btn btn-default btn-circle" disabled="disabled">2</button>
-          <p><?php echo CHECKOUT_BAR_PAYMENT; ?></p>
-        </div>
-        <div class="stepwizard-step">
-          <button type="button" class="btn btn-default btn-circle" disabled="disabled">3</button>
-          <p><?php echo CHECKOUT_BAR_CONFIRMATION; ?></p>
-        </div>
-      </div>
-    </div>
-  </div>
+<!--  step -->
+    <div class="row shop-tracking-status">
+		<div class="order-status">
+			
+			<div class="order-status-timeline">
+				<!-- class names: c0 c1 c2 c3 and c4 -->
+				<div class="order-status-timeline-completion c0"></div>
+			</div>
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
+                <div class="image-order-status image-order-status-new active img-circle">
+                    <span class="status">Delivery Information</span>
+                    <div class="icon"></div>
+                </div>
+			</a>
+			
+                <div class="image-order-status image-order-status-active active img-circle">
+                    <span class="status">Payment Information</span>
+                    <div class="icon"></div>
+                </div>
+			
+			<div class="image-order-status image-order-status-completed active img-circle">
+				<span class="status">Confirmation</span>
+				<div class="icon"></div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- end step -->
   
 
 <?php
