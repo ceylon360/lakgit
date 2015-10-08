@@ -45,36 +45,40 @@ if (($PHP_SELF == 'login.php')
         $products = $cart->get_products();
         for ($i=0, $n=sizeof($products); $i<$n; $i++) {
 
-          $cart_contents_string .= '<li';
+		
+          $cart_contents_string .= '<div class="mini-product"';
           if ((tep_session_is_registered('new_products_id_in_cart')) && ($new_products_id_in_cart == $products[$i]['id'])) {
             $cart_contents_string .= ' class="newItemInCart"';
           }
           $cart_contents_string .= '>';
-		  $cart_contents_string .= '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '">' . tep_image(DIR_WS_IMAGES . $products[$i]['image'], $products[$i]['name'], $width = '50px', $height = '50px') . '</a>';
-
-          $cart_contents_string .= $products[$i]['quantity'] . '&nbsp;x&nbsp;';
 		  
+		  $cart_contents_string .= '<div class="cartbx_tmb">'. tep_image(DIR_WS_IMAGES . $products[$i]['image'], $products[$i]['name'], $width = '50px', $height = '50px') . '</div>';
 
+          
+		  
+			$cart_contents_string .='<div>';
           $cart_contents_string .= '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '">';
 
           $cart_contents_string .= $products[$i]['name'];
 
-          $cart_contents_string .= '</a>';
-			$cart_contents_string .='</li>';
+          $cart_contents_string .= '</a></br><span class="cartbx_price">';
+		  $cart_contents_string .= $products[$i]['quantity'];
+		  $cart_contents_string .= ' x $'.$products[$i]['final_price'].'</span>';
+			$cart_contents_string .='<span class="cartbx_qprice">';
 			
 			$products_tax = tep_get_tax_rate($products[$i]['tax_class_id']);
             $popup_price = $currencies->calculate_price($products[$i]['final_price'], $products_tax, $products[$i]['quantity']);
-            $cart_contents_string .= $currencies->format($popup_price) . '</td></tr>';
+            $cart_contents_string .= $currencies->format($popup_price) . '</span></div>';
 		 
-		 $cart_contents_string .='</li>';
+		 $cart_contents_string .='</div><hr>';
 		 
           if ((tep_session_is_registered('new_products_id_in_cart')) && ($new_products_id_in_cart == $products[$i]['id'])) {
             tep_session_unregister('new_products_id_in_cart');
           }
         }
-
-        $cart_contents_string .= '<li class="text-right"><hr>' . $currencies->format($cart->show_total()) . '</li>';
-
+$cart_contents_string .='<div>';
+        $cart_contents_string .= '<p class="pull-left"><b>SUBTOTAL</b></p><div class="pull-right"><p class="cartbx_total">' . $currencies->format($cart->show_total()) . '</p></div>';
+$cart_contents_string .='</div><br><hr>';
       } else {
         $cart_contents_string .= '<p>' . MODULE_BOXES_SHOPPING_CART_BOX_CART_EMPTY . '</p>';
       }
