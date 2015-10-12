@@ -66,12 +66,13 @@
 			<?php echo'<img class="img-thumbnail picture_lv hidden-xs" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
 			<?php echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
 		   <div class="header_lv">
-                <h1><?php echo $category['categories_name']; ?></h1>
-                
+                <h1 class="hidden-xs cat_txt"><?php echo $category['categories_name']; ?></h1>
+                <h1 class="visible-xs cat_txt2"><?php echo $category['categories_name']; ?></h1>
                 <span class="cat_des"><?php
 //cat description
 if (tep_not_null($category['categories_description'])) {
-  echo '<div class="">' . $category['categories_description'] . '</div>';
+  echo '<div class="hidden-xs cat_des">' . $category['categories_description'] . '</div>';
+  echo '<div class="visible-xs cat_des2">' . $category['categories_description'] . '</div>';
 }  
 //cat description
 ?></span>
@@ -284,8 +285,8 @@ $listing_sql .= $hiddenlist;
 			<?php echo'<img class="bg_blur" src="'.DIR_WS_IMAGES . $image['categories_banner'].'" height="200" width="200">' ?>
 			</div>
         <div class="col-md-8  col-xs-12">
-			<?php echo'<img class="img-thumbnail picture hidden-xs" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">' ?>
-			<?php echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">' ?>
+			<?php echo'<img class="img-thumbnail picture hidden-xs hidden-sm" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">' ?>
+			<?php echo'<img class="img-thumbnail visible-xs visible-sm picture_mob" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">' ?>
 		   <div class="header">
                 <h1><?php echo $catname; ?></h1>
                 
