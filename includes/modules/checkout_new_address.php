@@ -11,6 +11,50 @@
 */
 
   if (!isset($process)) $process = false;
+  
+  
+  
+  //////////////////
+$any_rest = 0;
+if (STOCK_CHECK == 'true') {
+    for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
+		if (tep_get_products_catrest($order->products[$i]['id'])==1) {
+				if($any_rest < 1){
+						$any_rest = 1;
+				}
+			
+		}
+		if (tep_get_products_catrest($order->products[$i]['id'])==2) {
+			if($any_rest < 2){
+						$any_rest = 2;
+				}
+		}
+		if (tep_get_products_catrest($order->products[$i]['id'])==3) {
+			if($any_rest < 3){
+						$any_rest = 3;
+				}
+		}
+    }
+    // Out of Stock
+
+}
+$rest_msg='';
+
+switch ($any_rest)
+{
+	case 1:
+	$rest_msg='all';
+	break;
+	
+	case 2:
+	$rest_msg='selected town';
+	break;
+	
+	case 3:
+	$rest_msg='colombo only';
+	break;
+}
+//////////////////
 ?>
 
   <div class="contentText">
@@ -141,6 +185,10 @@
     </div>
 
 <?php
+
+	
+	
+	echo '<div class="alert alert-warning">'.$rest_msg.'</div>';
   if (ACCOUNT_STATE == 'true') {
 ?>
     <div class="form-group has-feedback">

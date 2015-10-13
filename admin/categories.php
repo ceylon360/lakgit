@@ -99,6 +99,11 @@ require('includes/functions/categories.php');
 		$categories_note_array = $HTTP_POST_VARS['categories_note'];
 		$categories_note_sel_array = $HTTP_POST_VARS['categories_note_sel'];
 		//category note
+		
+		// cat restriction
+		$categories_restrict_array = $HTTP_POST_VARS['categories_restrict'];
+		//cat restriction
+		
           $language_id = $languages[$i]['id'];
 
           $sql_data_array = array('categories_name' => tep_db_prepare_input($categories_name_array[$language_id]));
@@ -109,6 +114,9 @@ require('includes/functions/categories.php');
 		$sql_data_array['categories_note'] = tep_db_prepare_input($categories_note_array[$language_id]);
 		$sql_data_array['categories_note_sel'] = tep_db_prepare_input($categories_note_sel_array[$language_id]);
 		//category note
+		//cat restriction
+		$sql_data_array['categories_restrict'] = tep_db_prepare_input($categories_restrict_array[$language_id]);
+		//cat restriction
           if ($action == 'insert_category') {
             $insert_sql_data = array('categories_id' => $categories_id,
                                      'language_id' => $languages[$i]['id']);
@@ -949,9 +957,9 @@ $('#products_date_available').datepicker({
     if (isset($HTTP_GET_VARS['search'])) {
       $search = tep_db_prepare_input($HTTP_GET_VARS['search']);
 //edited for cat desc,note,note_sel
-      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_description,cd.categories_note,cd.categories_note_sel, c.categories_image, c.categories_banner, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.status_categ from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and cd.categories_name like '%" . tep_db_input($search) . "%' order by c.sort_order, cd.categories_name");
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_description,cd.categories_note,cd.categories_note_sel,cd.categories_restrict, c.categories_image, c.categories_banner, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.status_categ from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and cd.categories_name like '%" . tep_db_input($search) . "%' order by c.sort_order, cd.categories_name");
     } else {
-      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_description,cd.categories_note,cd.categories_note_sel, c.categories_image, c.categories_banner, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.status_categ from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by c.sort_order, cd.categories_name");
+      $categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_description,cd.categories_note,cd.categories_note_sel,cd.categories_restrict, c.categories_image, c.categories_banner, c.parent_id, c.sort_order, c.date_added, c.last_modified, c.status_categ from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by c.sort_order, cd.categories_name");
     }
     while ($categories = tep_db_fetch_array($categories_query)) {
       $categories_count++;
@@ -1074,6 +1082,9 @@ $('#products_date_available').datepicker({
 		$category_inputs_string = $category_note_string = '';
 		$category_inputs_string = $category_note_sel_string = '';
 		//category note
+		//cat restrict
+		$category_inputs_string = $category_restrict_string = '';
+		//cat restrict
         $languages = tep_get_languages();
         for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
           $category_inputs_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('categories_name[' . $languages[$i]['id'] . ']');
@@ -1084,6 +1095,9 @@ $('#products_date_available').datepicker({
 		$category_note_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_textarea_field('categories_note[' . $languages[$i]['id'] . ']', 'soft', '80', '10');
 		$category_note_sel_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_input_field('categories_note_sel[' . $languages[$i]['id'] . ']');
 		//category note
+		//cat restriction
+		$category_restrict_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_input_field('categories_restrict[' . $languages[$i]['id'] . ']');
+		//cat restriction
 		}
 
         $contents[] = array('text' => '<br />' . TEXT_CATEGORIES_NAME . $category_inputs_string);
@@ -1094,6 +1108,9 @@ $('#products_date_available').datepicker({
 		$contents[] = array('text' => '<br />' . TEXT_CATEGORIES_NOTE . $category_note_string);
 		$contents[] = array('text' => '<br />' . TEXT_CATEGORIES_NOTE_SEL . $category_note_sel_string);
 		//category note
+		//cat restriction
+		$contents[] = array('text' => '<br />' . TEXT_CATEGORIES_RESTRICT . $category_restrict_string);
+		//cat restriction
 		//cat state
 		$contents[] = array('text' => '<br />' . TEXT_DISPLAY . '&nbsp;' . tep_draw_radio_field('status_categ', 1, true) . '&nbsp;' . TEXT_YES . '&nbsp;' . tep_draw_radio_field('status_categ', 0, false) . '&nbsp;' . TEXT_NO);
 		//cat state
@@ -1118,6 +1135,9 @@ $('#products_date_available').datepicker({
 	  $category_inputs_string = $category_note_string = '';
 	  $category_inputs_string = $category_note_sel_string = '';
 	  //category note
+	  //cat restrict
+	  	  $category_inputs_string = $category_restrict_string = '';
+	// cat restriction
         $languages = tep_get_languages();
         for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
         $category_inputs_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('categories_name[' . $languages[$i]['id'] . ']', tep_get_category_name($cInfo->categories_id, $languages[$i]['id']));
@@ -1128,7 +1148,10 @@ $('#products_date_available').datepicker({
 		$category_note_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_textarea_field('categories_note[' . $languages[$i]['id'] . ']', 'soft', '50', '10', tep_get_category_note($cInfo->categories_id, $languages[$i]['id']));
 		$category_note_sel_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_input_field('categories_note_sel[' . $languages[$i]['id'] . ']', tep_get_category_note_sel($cInfo->categories_id, $languages[$i]['id']));			
 		//category note
-		
+		//cat restriction
+		$category_restrict_string .= '<br />' . tep_image(tep_catalog_href_link(DIR_WS_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name'], '', '', 'style="vertical-align: top;"') . '&nbsp;' . tep_draw_input_field('categories_restrict[' . $languages[$i]['id'] . ']', tep_get_category_restrict($cInfo->categories_id, $languages[$i]['id']));
+			
+		//cat restriction
 		}
 
         $contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_NAME . $category_inputs_string);
@@ -1139,6 +1162,9 @@ $('#products_date_available').datepicker({
 		$contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_NOTE . $category_note_string);
 		$contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_NOTE_SEL . $category_note_sel_string);
 		//category note
+		//cat restrict
+		$contents[] = array('text' => '<br />' . TEXT_EDIT_CATEGORIES_RESTRICT . $category_restrict_string);
+		//cat restrict
 		
 		//cat state
 		switch ($cInfo->status_categ) {
