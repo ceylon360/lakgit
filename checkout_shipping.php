@@ -183,29 +183,26 @@
     <!--  step -->
     <div class="row shop-tracking-status">
 		<div class="order-status">
-
-                <div class="order-status-timeline">
-                    <!-- class names: c0 c1 c2 c3 and c4 -->
-                    <div class="order-status-timeline-completion c0"></div>
-                </div>
-<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
+			
+			<div class="order-status-timeline">
+				<!-- class names: c0 c1 c2 c3 and c4 -->
+				<div class="order-status-timeline-completion c2"></div>
+			</div>
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
                 <div class="image-order-status image-order-status-new active img-circle">
-                    <span class="status">Delivery Information</span>
-                    <div class="icon"></div>
+                    <div class="icon fa fa-truck fa-flip-horizontal fa-2x"></div>
                 </div>
-				</a>
-				
+			</a>
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'); ?>">
                 <div class="image-order-status image-order-status-active active img-circle">
-                    <span class="status">Payment Information</span>
-                    <div class="icon"></div>
+                     <div class="icon fa fa-calendar fa-2x"></div>
                 </div>
-				
-                <div class="image-order-status image-order-status-completed active img-circle">
-                    <span class="status">Confirmation</span>
-                    <div class="icon"></div>
-                </div>
-
-            </div>
+			</a>
+			<div class="image-order-status image-order-status-completed img-circle">
+				<div class="icon fa fa-thumbs-up fa-2x"></div>
+			</div>
+			
+		</div>
 	</div>
 	<!-- end step -->
 <div class="page-header">
@@ -444,29 +441,26 @@
   
   <div class="clearfix"></div>
 
-	<!--  step -->
+  <!--  step -->
     <div class="row shop-tracking-status">
 		<div class="order-status">
 			
 			<div class="order-status-timeline">
 				<!-- class names: c0 c1 c2 c3 and c4 -->
-				<div class="order-status-timeline-completion c0"></div>
+				<div class="order-status-timeline-completion c2"></div>
 			</div>
 			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
                 <div class="image-order-status image-order-status-new active img-circle">
-                    <span class="status">Delivery Information</span>
-                    <div class="icon"></div>
+                    <div class="icon fa fa-truck fa-flip-horizontal fa-2x"></div>
                 </div>
 			</a>
-			
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'); ?>">
                 <div class="image-order-status image-order-status-active active img-circle">
-                    <span class="status">Payment Information</span>
-                    <div class="icon"></div>
+                     <div class="icon fa fa-calendar fa-2x"></div>
                 </div>
-			
-			<div class="image-order-status image-order-status-completed active img-circle">
-				<span class="status">Confirmation</span>
-				<div class="icon"></div>
+			</a>
+			<div class="image-order-status image-order-status-completed img-circle">
+				<div class="icon fa fa-thumbs-up fa-2x"></div>
 			</div>
 			
 		</div>
