@@ -153,27 +153,26 @@
  $categories_name = tep_db_fetch_array($category_name_query);
  
  
- $catrest2 = $categories_name['categories_restrict'];
- 
- /*
-	  if (is_array($address_id) && !empty($address_id)) {
-		  return tep_address_format($address_id['address_format_id'], $address_id, $html, $boln, $eoln);
-	  }
-	  
-	  $address_query = tep_db_query("select entry_state as state, entry_zone_id as zone_id, entry_country_id as country_id from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customers_id . "' and address_book_id = '" . (int)$address_id . "'");
-	  $address = tep_db_fetch_array($address_query);
-	  $statesel= $address['state'];
-	  
- */
- 
- 
- 
- 
- 
- 
- return $catrest2;
+ $catrest_res = $categories_name['categories_restrict'];
+//return category restriction value
+ return $catrest_res;
   }
-
+///
+  ///get higher piority category name
+function tep_get_products_catrest_p($products_id,$any_rest) {
+	$product_catid_query = tep_db_query("select categories_id from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$products_id . "'");
+	$product_catid = tep_db_fetch_array($product_catid_query);
+	$catrest = $product_catid['categories_id'];
+	$category_name_query = tep_db_query("select cd.categories_name,cd.categories_restrict from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . $catrest . "' and status_categ = 1 and cd.categories_id = '" . $catrest . "'");
+	$categories_name = tep_db_fetch_array($category_name_query);
+	
+//check priority level
+		if (tep_get_products_catrest($products_id)==$any_rest) {
+			$catname = $categories_name['categories_name'];
+		}
+	
+	return $catname;
+}
 ///////
 
 // Break a word in a string if it is longer than a specified length ($len)

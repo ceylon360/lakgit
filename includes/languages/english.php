@@ -66,6 +66,11 @@ define('FEMALE', 'F<span class="hidden-xs">emale</span>');
 define('MALE_ADDRESS', 'Mr.');
 define('FEMALE_ADDRESS', 'Ms.');
 
+// text for gift
+define('1MALE', 'M<span class="hidden-xs">ale</span>');
+define('1FEMALE', 'F<span class="hidden-xs">emale</span>');
+define('ENRY_GIFT_DELIVER', 'Suprise gift');
+
 // text for date of birth example
 define('DOB_FORMAT_STRING', 'mm/dd/yyyy');
 
@@ -280,3 +285,10 @@ define('PRODUCT_REMOVED', '%s has been removed from your Cart');
 
 // bootstrap helper
 define('MODULE_CONTENT_BOOTSTRAP_ROW_DESCRIPTION', '');
+
+//category restriction msg
+define('TEXT_RESTRICTION_P_MSG', 'Your order contains products from');
+define('TEXT_RESTRICTION_D_MSG', 'They can only be delivered to');
+define('TEXT_RESTRICTION_ALL', 'All island');
+define('TEXT_RESTRICTION_CITIES', 'Colombo and some cities');
+define('TEXT_RESTRICTION_COLOMBO_ONLY', 'Colombo and suburb');
