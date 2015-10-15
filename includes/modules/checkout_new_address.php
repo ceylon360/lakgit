@@ -49,17 +49,17 @@ switch ($any_rest)
 {
 	case 1:
 	$rest_msg=TEXT_RESTRICTION_ALL;
-	$restrict_gzone=5;
+	$restrict_gzone=110;
 	break;
 	
 	case 2:
 	$rest_msg=TEXT_RESTRICTION_CITIES;
-	$restrict_gzone=3;
+	$restrict_gzone=102;
 	break;
 	
 	case 3:
 	$rest_msg=TEXT_RESTRICTION_COLOMBO_ONLY;
-	$restrict_gzone=4;
+	$restrict_gzone=103;
 	break;
 }
 //////////////////
