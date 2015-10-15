@@ -193,12 +193,10 @@ switch ($any_rest)
     </div>
 
 <?php
-
-	
-	
-if($any_rest!=1){
+if($any_rest==3 || $any_rest==2){
 	echo '<div class="alert alert-warning">'.TEXT_RESTRICTION_P_MSG.'  <strong>'.$catrname.'</strong>. '.TEXT_RESTRICTION_D_MSG.' <strong>'.$rest_msg.'</strong></div>';
 }
+
   if (ACCOUNT_STATE == 'true') {
 ?>
     <div class="form-group has-feedback">
