@@ -524,6 +524,13 @@ echo '
  <!-- <div class="alert alert-info">
     <?php // echo tep_customer_greeting(); ?>
   </div> -->
+<!--recently product-->
+
+<div class="row">
+    <?php echo $oscTemplate->getContent('index'); ?>
+  </div>
+
+<!--recently product-->
 
 <?php
     if (tep_not_null(TEXT_MAIN)) {
