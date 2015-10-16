@@ -58,6 +58,23 @@
     $delivery_date = tep_db_prepare_input($HTTP_POST_VARS['delivery_date']);
   }
   // eof ship date
+
+// suprise gift
+if (!tep_session_is_registered('surprise')) tep_session_register('surprise');
+if (isset($HTTP_POST_VARS['surprise']) && tep_not_null($HTTP_POST_VARS['surprise'])) {
+    $surprise = tep_db_prepare_input($HTTP_POST_VARS['surprise']);
+}
+// eof suprise gift
+// Sender Anonymous
+if (!tep_session_is_registered('anonymous')) tep_session_register('anonymous');
+if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymous'])) {
+    $anonymous = tep_db_prepare_input($HTTP_POST_VARS['anonymous']);
+}
+// eof Sender Anonymous
+
+
+
+
   $cartID = $cart->cartID = $cart->generate_cart_id();
 
 // if the order contains only virtual products, forward the customer to the billing page as
@@ -434,6 +451,66 @@
     </div>
   </div>
 -->
+
+	<?php
+	$surprise_sely='';
+	$surprise_seln='';
+if($surprise=='yes'){
+		$surprise_sely=true;
+}
+else{
+		$surprise_seln=true;
+	}
+	
+	$anonymous_sely='';
+	$anonymous_seln='';
+if($anonymous=='yes'){
+		$anonymous_sely=true;
+}
+else{
+		$anonymous_seln=true;
+	}
+
+
+
+	<!-- surprise -->
+
+	<div class="form-group has-feedback">
+      <label class="control-label col-sm-3"><?php echo ENTRY_SURPRISE; ?></label>
+      <div class="col-sm-9">
+        <label class="radio-inline">
+          <?php echo tep_draw_radio_field('surprise', 'yes', $surprise_sely, 'required aria-required="true" id="surprisey"') . ' ' .'Yes'; ?>
+        </label>
+        <label class="radio-inline">
+          <?php echo tep_draw_radio_field('surprise', 'no',$surprise_seln,'id="surprisen"') . ' ' . 'No'; ?>
+        </label>
+        <?php echo FORM_REQUIRED_INPUT; ?>
+        <?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_SURPRISE_TEXT . '</span>'; ?>
+      </div>
+    </div>
+	<!-- eof surprise -->
+	
+	<!-- anonymous -->
+	<div class="form-group has-feedback">
+		<label class="control-label col-sm-3"><?php echo ENTRY_ANONYMOUS; ?></label>
+		<div class="col-sm-9">
+			<label class="radio-inline">
+				<?php echo tep_draw_radio_field('anonymous', 'yes', $anonymous_sely, 'required aria-required="true" id="anonymousy"') . ' ' .'Yes'; ?>
+			</label>
+			<label class="radio-inline">
+				<?php echo tep_draw_radio_field('anonymous', 'no',$anonymous_seln,'id="anonymousn"') . ' ' . 'No'; ?>
+			</label>
+			<?php echo FORM_REQUIRED_INPUT; ?>
+			<?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_ANONYMOUS_TEXT . '</span>'; ?>
+		</div>
+    </div>
+	<!-- eof anonymous -->
+	
+	
+	
+	
+	
+<!-- ////////////////////////////////////// -->
   <div class="buttonSet">
   
     <div class="text-right"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'glyphicon glyphicon-chevron-right', null, 'primary', null, 'btn-success'); ?></div>

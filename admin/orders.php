@@ -165,6 +165,24 @@
             <td class="main"><?php echo tep_date_long($order->info['delivery_date']); ?></td>
           </tr>
 <!-- ship date -->
+<!-- surprise -->          
+			<tr>
+				<td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+			</tr>
+			<tr>
+				<td class="main"><b><?php echo SURPRISE_TEXT; ?></b></td>
+				<td class="main"><?php echo $order->info['surprise']; ?></td>
+			</tr>
+<!-- surprise -->
+<!-- anonymous -->          
+			<tr>
+				<td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+			</tr>
+			<tr>
+				<td class="main"><b><?php echo ANONYMOUS_TEXT; ?></b></td>
+				<td class="main"><?php echo $order->info['anonymous']; ?></td>
+			</tr>
+<!-- anonymous -->
 <?php
     if (tep_not_null($order->info['cc_type']) || tep_not_null($order->info['cc_owner']) || tep_not_null($order->info['cc_number'])) {
 ?>

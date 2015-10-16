@@ -22,7 +22,12 @@
   //  for go to delivery info page
 	if(tep_session_is_registered('customer_id')) tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
   
-
+// Sender Anonymous
+if (!tep_session_is_registered('anonymous')) tep_session_register('anonymous');
+if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
+    $anonymous = tep_db_prepare_input($HTTP_POST_VARS['anonymous']);
+}
+// eof Sender Anonymous
     
     $process = false;
   if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
@@ -445,6 +450,21 @@
       </div>
     </div>
 <?php } ?>
+	<!-- anonymous -->
+	<div class="form-group has-feedback">
+		<label class="control-label col-sm-3"><?php echo ENTRY_ANONYMOUS; ?></label>
+		<div class="col-sm-9">
+			<label class="radio-inline">
+				<?php echo tep_draw_radio_field('anonymous', 'yes', '', 'required aria-required="true" id="anonymousy"') . ' ' .'Yes'; ?>
+			</label>
+			<label class="radio-inline">
+				<?php echo tep_draw_radio_field('anonymous', 'no',true,'id="anonymousn"') . ' ' . 'No'; ?>
+			</label>
+			<?php echo FORM_REQUIRED_INPUT; ?>
+			<?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_ANONYMOUS_TEXT . '</span>'; ?>
+		</div>
+    </div>
+	<!-- eof anonymous -->
 
 
   <div class="buttonSet">

@@ -67,7 +67,7 @@ switch ($any_rest)
 
   <div class="contentText">
 
-<?php
+<?php /*
   if (ACCOUNT_GENDER == 'true') {
     if (isset($gender)) {
       $male = ($gender == 'm') ? true : false;
@@ -92,7 +92,7 @@ switch ($any_rest)
     </div>
 
 <?php
-  }
+  }*/
 ?>
 
     <div class="form-group">

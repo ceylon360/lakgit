@@ -33,7 +33,7 @@
       $order_id = tep_db_prepare_input($order_id);
 
 // ship date
-      $order_query = tep_db_query("select customers_id, customers_name, customers_company, customers_street_address, customers_suburb, customers_city, customers_postcode, customers_state, customers_country, customers_telephone, customers_email_address, customers_address_format_id, delivery_name, delivery_company, delivery_street_address, delivery_suburb, delivery_city, delivery_postcode, delivery_state, delivery_country, delivery_address_format_id, delivery_date, billing_name, billing_company, billing_street_address, billing_suburb, billing_city, billing_postcode, billing_state, billing_country, billing_address_format_id, payment_method, cc_type, cc_owner, cc_number, cc_expires, currency, currency_value, date_purchased, orders_status, last_modified from " . TABLE_ORDERS . " where orders_id = '" . (int)$order_id . "'");
+      $order_query = tep_db_query("select customers_id, customers_name, customers_company, customers_street_address, customers_suburb, customers_city, customers_postcode, customers_state, customers_country, customers_telephone, customers_email_address, customers_address_format_id, delivery_name, delivery_company, delivery_street_address, delivery_suburb, delivery_city, delivery_postcode, delivery_state, delivery_country, delivery_address_format_id, delivery_date,surprise,anonymous, billing_name, billing_company, billing_street_address, billing_suburb, billing_city, billing_postcode, billing_state, billing_country, billing_address_format_id, payment_method, cc_type, cc_owner, cc_number, cc_expires, currency, currency_value, date_purchased, orders_status, last_modified from " . TABLE_ORDERS . " where orders_id = '" . (int)$order_id . "'");
       $order = tep_db_fetch_array($order_query);
 
       $totals_query = tep_db_query("select title, text from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . (int)$order_id . "' order by sort_order");
@@ -62,6 +62,10 @@
                           'orders_status' => $order_status['orders_status_name'],
 						// ship date
                           'delivery_date' => $order['delivery_date'],
+						// surprise gift
+							'surprise' => $order['surprise'],
+						// Sender Anonymous
+							'anonymous' => $order['anonymous'],
                           'last_modified' => $order['last_modified'],
                           'total' => strip_tags($order_total['text']),
                           'shipping_method' => ((substr($shipping_method['title'], -1) == ':') ? substr(strip_tags($shipping_method['title']), 0, -1) : strip_tags($shipping_method['title'])));
@@ -228,8 +232,10 @@
                           'tax' => 0,
                           'tax_groups' => array(),
                           'comments' => (tep_session_is_registered('comments') && !empty($comments) ? $comments : ''),
- 						// ship date
+ 						// ship date,surprise ,anonymous
                           'delivery_date' => (isset($GLOBALS['delivery_date']) ? $GLOBALS['delivery_date'] : ''),
+						  'surprise' => (isset($GLOBALS['surprise']) ? $GLOBALS['surprise'] : ''),
+						  'anonymous' => (isset($GLOBALS['anonymous']) ? $GLOBALS['anonymous'] : ''),
                           );
 
       if (isset($GLOBALS[$payment]) && is_object($GLOBALS[$payment])) {

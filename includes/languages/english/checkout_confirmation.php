@@ -30,4 +30,7 @@ define('HEADING_ORDER_COMMENTS', 'Comments About Your Order');
 define('TEXT_EDIT', 'Edit');
 // ship date
 define('HEADING_SHIPPING_DATE', 'Preferred Delivery Date');
+//surprise,anonymous
+define('ANONYMOUS_TEXT', 'Gift sent Anonymous');
+define('SURPRISE_TEXT', 'Gift sent Surprise');
 ?>

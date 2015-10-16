@@ -104,6 +104,15 @@
 						  // ship date
                           'delivery_date' => $order->info['delivery_date'],
                           // eof ship date
+						  
+						  // surprise
+						  'surprise' => $order->info['surprise'],
+						  // eof surprise
+						  
+						  // anonymous
+						  'anonymous' => $order->info['anonymous'],
+						  // eof anonymous
+						  
                           'billing_name' => $order->billing['firstname'] . ' ' . $order->billing['lastname'], 
                           'billing_company' => $order->billing['company'],
                           'billing_street_address' => $order->billing['street_address'], 
