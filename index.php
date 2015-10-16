@@ -57,9 +57,14 @@
     echo $messageStack->output('product_action');
   }
 ?>
-
-	<div class="">
-		<div class="col-md-12">
+<?php 
+    
+    $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+    $color = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
+    
+?>
+	<div class="col-md-12 ">
+		<div style="background: <?php echo $color; ?>;">
 			<?php echo'<img class="bg_blur_lv" src="'.DIR_WS_IMAGES . $category['categories_banner'].'" height="200" width="200">' ?>
     	</div>
         <div class="col-md-12  col-xs-12">
@@ -520,7 +525,7 @@ echo '
 ?>
 
 <div class="contentContainer">
-<div class="row"><?php echo $oscTemplate->getBlocks('front_page'); ?></div>
+<div class=""><?php echo $oscTemplate->getBlocks('front_page'); ?></div>
  <!-- <div class="alert alert-info">
     <?php // echo tep_customer_greeting(); ?>
   </div> -->
