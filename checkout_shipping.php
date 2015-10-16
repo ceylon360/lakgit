@@ -472,7 +472,8 @@ else{
 	}
 
 
-
+	?>
+	
 	<!-- surprise -->
 
 	<div class="form-group has-feedback">
