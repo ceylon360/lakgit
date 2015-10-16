@@ -37,7 +37,7 @@ $speed = MODULE_HEADER_TAGS_FAB_BTN_SCROLL_SPEED;
 $output = <<<EOD
     <script>
 $(document).ready(function(){
-      $('body').append('<div class="floatingContainer"><div class="subActionButton person"><p class="floatingText"><span class="floatingTextBG">Add Contact</span></p></div><div class="subActionButton mapMarker"><p class="floatingText"><span class="floatingTextBG">Add Address</span></p></div><div class="subActionButton note"><p class="floatingText"><span class="floatingTextBG">Add Note</span></p></div><div class="actionButton"><p class="floatingText"><span class="floatingTextBG">Add Customer</span></p></div></div><div class="toasts"><p class="floatingText">Added Note</p></div>');
+      $('body').append('<div class="floatingContainer"><div class="subActionButton skype"><p class="floatingText"><span class="floatingTextBG">Skype Call </span></p></div><div class="subActionButton mapMarker"><p class="floatingText"><span class="floatingTextBG">Add Address</span></p></div><div class="subActionButton note"><p class="floatingText"><span class="floatingTextBG">Add Note</span></p></div><div class="actionButton"><p class="floatingText"><span class="floatingTextBG">Add Customer</span></p></div></div><div class="toasts"><p class="floatingText">Added Note</p></div>');
   $('.floatingContainer').hover(function(){
   //$('.subActionButton').addClass('display');
 }, function(){

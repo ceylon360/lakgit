@@ -60,8 +60,7 @@
 
 
 ////////////FAB BTN
-@import url(http://fonts.googleapis.com/css?family=Roboto:300,400);
-@import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+
 .toasts {
   position: fixed;
   bottom: 1em;
@@ -204,11 +203,17 @@
   position: absolute;
   color: #FFF;
 }
-.subActionButton.person:before {
-  content: '\f0c0';
+.subActionButton.skype:before {
+  content: '\f17e';
   margin-top: .3em;
   margin-left: .5em;
 }
+
+.subActionButton.subActionButton.skype {
+
+  background-color:#5BC0DE;
+}
+
 .subActionButton.mapMarker:before {
   content: '\f041';
   margin-top: .35em;
