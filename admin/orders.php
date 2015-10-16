@@ -93,6 +93,14 @@
   include(DIR_WS_CLASSES . 'order.php');
 
   require(DIR_WS_INCLUDES . 'template_top.php');
+  
+  
+if ($order->info['surprise']='yes'){
+	$surprise_text=ENTRY_SURPRISEY;
+}
+else{
+	$surprise_text=ENTRY_SURPRISEN;
+}
 ?>
 
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -171,7 +179,7 @@
 			</tr>
 			<tr>
 				<td class="main"><b><?php echo SURPRISE_TEXT; ?></b></td>
-				<td class="main"><?php echo $order->info['surprise']; ?></td>
+				<td class="main"><?php echo $surprise_text; ?></td>
 			</tr>
 <!-- surprise -->
 <!-- anonymous -->          

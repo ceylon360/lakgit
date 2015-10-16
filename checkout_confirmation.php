@@ -231,6 +231,12 @@
 	<?php
           }
 		  //ship date
+		  if ($order->info['surprise']='yes'){
+				$surprise_text=ENTRY_SURPRISEY;
+		  }
+		  else{
+				$surprise_text=ENTRY_SURPRISEN;
+		  }
 		//surprise
 		if (tep_not_null($order->info['surprise'])) {
 		?>
@@ -242,7 +248,7 @@
 				</div>
 				<div class="panel-body">
 					
-					<?php echo $order->info['surprise']; ?>
+					<?php echo $surprise_text ?>
 				</div>
 			</div>
 		</div>

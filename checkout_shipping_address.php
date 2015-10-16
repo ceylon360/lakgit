@@ -330,12 +330,13 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 	<div class="form-group has-feedback">
       <label class="control-label col-sm-3"><?php echo ENTRY_SURPRISE; ?></label>
       <div class="col-sm-9">
-        <label class="radio-inline">
-          <?php echo tep_draw_radio_field('surprise', 'yes', '', 'required aria-required="true" id="surprisey"') . ' ' .'Yes'; ?>
+	  <label class="radio-inline">
+          <?php echo tep_draw_radio_field('surprise', 'no',true,'id="surprisen"') . ' ' . ENTRY_SURPRISEN; ?>
         </label>
         <label class="radio-inline">
-          <?php echo tep_draw_radio_field('surprise', 'no',true,'id="surprisen"') . ' ' . 'No'; ?>
+          <?php echo tep_draw_radio_field('surprise', 'yes', '', 'required aria-required="true" id="surprisey"') . ' ' .ENTRY_SURPRISEY; ?>
         </label>
+        
         <?php echo FORM_REQUIRED_INPUT; ?>
         <?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_SURPRISE_TEXT . '</span>'; ?>
       </div>

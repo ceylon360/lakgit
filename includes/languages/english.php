@@ -291,4 +291,6 @@ define('TEXT_RESTRICTION_COLOMBO_ONLY', 'Colombo and suburb');
 
 //surprse gift and anonymous
 define('ENTRY_ANONYMOUS', 'Send gift anonymous');
-define('ENTRY_SURPRISE', 'Send gift as surprise');
+define('ENTRY_SURPRISE', 'Special Instruction');
+define('ENTRY_SURPRISEN', 'Call before Deliver');
+define('ENTRY_SURPRISEY', 'Surprise Gift');

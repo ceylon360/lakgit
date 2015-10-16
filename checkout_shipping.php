@@ -479,12 +479,13 @@ else{
 	<div class="form-group has-feedback">
       <label class="control-label col-sm-3"><?php echo ENTRY_SURPRISE; ?></label>
       <div class="col-sm-9">
-        <label class="radio-inline">
-          <?php echo tep_draw_radio_field('surprise', 'yes', $surprise_sely, 'required aria-required="true" id="surprisey"') . ' ' .'Yes'; ?>
+	  <label class="radio-inline">
+          <?php echo tep_draw_radio_field('surprise', 'no',$surprise_seln,'id="surprisen"') . ' ' . ENTRY_SURPRISEN; ?>
         </label>
         <label class="radio-inline">
-          <?php echo tep_draw_radio_field('surprise', 'no',$surprise_seln,'id="surprisen"') . ' ' . 'No'; ?>
+          <?php echo tep_draw_radio_field('surprise', 'yes', $surprise_sely, 'required aria-required="true" id="surprisey"') . ' ' .ENTRY_SURPRISEY; ?>
         </label>
+        
         <?php echo FORM_REQUIRED_INPUT; ?>
         <?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_SURPRISE_TEXT . '</span>'; ?>
       </div>
