@@ -337,6 +337,9 @@
                               for ($i=0; $i<$n; $i++) {
                                 if (in_array($HTTP_POST_VARS['products_id'][$i], (is_array($HTTP_POST_VARS['cart_delete']) ? $HTTP_POST_VARS['cart_delete'] : array()))) {
                                   $cart->remove($HTTP_POST_VARS['products_id'][$i]);
+								  //denuz text attr
+								  tep_db_query("delete from customers_basket_text_attributes where products_id = " . tep_get_prid($HTTP_POST_VARS['products_id'][$i]) . " and session_id = '" . $osCsid . "'");
+								  //denuz text attr
                                   $messageStack->add_session('product_action', sprintf(PRODUCT_REMOVED, tep_get_products_name($HTTP_POST_VARS['products_id'][$i])), 'warning');
                                 } else {
                                   $attributes = ($HTTP_POST_VARS['id'][$HTTP_POST_VARS['products_id'][$i]]) ? $HTTP_POST_VARS['id'][$HTTP_POST_VARS['products_id'][$i]] : '';
@@ -349,6 +352,13 @@
       case 'add_product' :    if (isset($HTTP_POST_VARS['products_id']) && is_numeric($HTTP_POST_VARS['products_id'])) {
                                 $attributes = isset($HTTP_POST_VARS['id']) ? $HTTP_POST_VARS['id'] : '';
                                 $cart->add_cart($HTTP_POST_VARS['products_id'], $cart->get_quantity(tep_get_uprid($HTTP_POST_VARS['products_id'], $attributes))+1, $attributes);
+								// denuz text attr
+								tep_db_query("delete from customers_basket_text_attributes where products_id = " . $HTTP_POST_VARS['products_id'] . " and session_id = '" . $osCsid . "'");
+								$attr_query = tep_db_query("select * from products_text_attributes_enabled where products_id = " . $HTTP_POST_VARS['products_id']);
+								while ($attr = tep_db_fetch_array($attr_query)) {
+								tep_db_query("insert into customers_basket_text_attributes values ('$osCsid', " . $HTTP_POST_VARS['products_id'] . ", " . $attr['products_text_attributes_id'] . ", '" . addslashes($HTTP_POST_VARS['products_text_attributes_' . $attr['products_text_attributes_id']]) . "');");
+										}
+								// eof denuz text attr
                               }
                               $messageStack->add_session('product_action', sprintf(PRODUCT_ADDED, tep_get_products_name((int)$HTTP_POST_VARS['products_id'])), 'success');
                               tep_redirect(tep_href_link($goto, tep_get_all_get_params($parameters)));

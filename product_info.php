@@ -146,6 +146,31 @@ $stock_check .='';
     }
 ?>
 
+	  <!-- denuz products text attributes -->
+	  
+      <tr>
+		  <td><table border="0" cellspacing="0" cellpadding="2">
+			  
+			  <?php
+				  $text_attributes_query = tep_db_query("select pta.*, cbta.products_text_attributes_text from products_text_attributes as pta, products_text_attributes_enabled as ptae, customers_basket_text_attributes as cbta where ptae.products_text_attributes_id = pta.products_text_attributes_id and ptae.products_id = " . tep_get_prid($HTTP_GET_VARS['products_id']) . " and cbta.products_text_attributes_id = pta.products_text_attributes_id and cbta.session_id = '" . tep_session_id() . "'");
+				  if (tep_db_num_rows($text_attributes_query) == 0)  
+				  $text_attributes_query = tep_db_query("select pta.* from products_text_attributes as pta, products_text_attributes_enabled as ptae where ptae.products_text_attributes_id = pta.products_text_attributes_id and ptae.products_id = " . tep_get_prid($HTTP_GET_VARS['products_id']));
+				  
+				  while ($text_attributes = tep_db_fetch_array($text_attributes_query)) {
+				  ?>
+				  <tr>
+					  <td class=main><?php echo $text_attributes['products_text_attributes_name'] . ': </td><td>' . tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], tep_not_null($text_attributes['products_text_attributes_text']) ? $text_attributes['products_text_attributes_text'] : ''); ?></td>
+				  </tr>
+				  <?php
+				  }
+			  ?>
+			  
+		  </table></td>
+      </tr>
+	  
+	  <!-- eof denuz products text attributes -->
+	  
+
     <div class="clearfix"></div>
 
 <?php

@@ -354,6 +354,19 @@ require('includes/functions/categories.php');
           tep_db_perform(TABLE_PRODUCTS, $sql_data_array, 'update', "products_id = '" . (int)$products_id . "'");
 		 
         }
+		
+		// denuz products text attributes
+
+          tep_db_query("delete from products_text_attributes_enabled where products_id = " . $products_id);
+          $text_attributes_query = tep_db_query("select * from products_text_attributes");
+          while ($text_attributes = tep_db_fetch_array($text_attributes_query)) {
+             if ($HTTP_POST_VARS['products_text_attributes_' . $text_attributes['products_text_attributes_id']] == 'on') {
+                tep_db_query("insert into products_text_attributes_enabled values($products_id, " . $text_attributes['products_text_attributes_id'] . ")");
+             }
+          }
+
+// eof denuz products text attributes
+		
 /** AJAX Attribute Manager  **/ 
   require_once('attributeManager/includes/attributeManagerUpdateAtomic.inc.php'); 
 /** AJAX Attribute Manager  end **/
@@ -648,6 +661,30 @@ function updateNet() {
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+		  
+		  <!-- denuz products text attributes -->
+
+          <tr>
+            <td class="main">Available Text Options:</td>
+            <td class="main">
+
+<?php
+  $text_attributes_query = tep_db_query("select * from products_text_attributes");
+  while ($text_attributes = tep_db_fetch_array($text_attributes_query)) {
+    $attr_checked = false;
+    if ($HTTP_GET_VARS['pID'] > 0) {
+        $check_attr_query = tep_db_query("select * from products_text_attributes_enabled where products_id=" . (int)$HTTP_GET_VARS['pID'] . " and products_text_attributes_id = " . $text_attributes['products_text_attributes_id']);
+        if ($check_attr = tep_db_fetch_array($check_attr_query)) $attr_checked = true;
+    }
+    echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_checkbox_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], '', $attr_checked) . ' - ' . $text_attributes['products_text_attributes_name'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+  }
+?>
+
+            </td>
+          </tr>
+
+<!-- eof denuz products attributes -->
+		  
 <?php
     for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
 ?>

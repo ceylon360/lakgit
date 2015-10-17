@@ -55,4 +55,6 @@
   define('FILENAME_ZONES', 'zones.php');
   // category cache
   define('FILENAME_CATEGORY_CACHE', 'category_cache.php');
+  //IMPRINT
+  define('FILENAME_TEXT_ATTRIBUTES', 'text_attributes.php');
 ?>

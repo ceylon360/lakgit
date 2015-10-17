@@ -12,7 +12,7 @@
   Released under the GNU General Public License
 */
 require('includes/application_top.php');
-
+tep_redirect(tep_href_link('account_pwa.php', '', 'SSL'));
 
 $state = ($_GET['st']);
      $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$state . "'");

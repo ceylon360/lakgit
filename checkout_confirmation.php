@@ -165,6 +165,21 @@
         echo '<br /><nobr><small>&nbsp;<i> - ' . $order->products[$i]['attributes'][$j]['option'] . ': ' . $order->products[$i]['attributes'][$j]['value'] . '</i></small></nobr>';
       }
     }
+// denuz text attr
+
+     $b = strpos($order->products[$i]['id'], '{');
+     if ($b === false) {
+       $pid = $order->products[$i]['id'];
+     } else {
+       $pid = substr($order->products[$i]['id'], 0, $b);
+     }
+
+     $attr_q = tep_db_query("select cbta.*, pta.products_text_attributes_name from customers_basket_text_attributes as cbta, products_text_attributes as pta where cbta.products_text_attributes_id = pta.products_text_attributes_id and cbta.products_id = " . $pid . " and cbta.session_id = '" . $osCsid . "'");
+     while ($attr = tep_db_fetch_array($attr_q)) {
+          echo '<br><small>&nbsp;<i> - ' . $attr['products_text_attributes_name'] . ': ' . stripslashes($attr['products_text_attributes_text'])  . '</i></small>';       
+     }
+
+// eof denuz text attr
 
     echo '</td>' . "\n";
 

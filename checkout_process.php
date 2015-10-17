@@ -206,6 +206,16 @@
                             'products_quantity' => $order->products[$i]['qty']);
     tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
     $order_products_id = tep_db_insert_id();
+	
+// denuz text attr
+
+    $attr_q = tep_db_query("select * from customers_basket_text_attributes where session_id = '$osCsid' and products_id = " . tep_get_prid($order->products[$i]['id']));
+    while ($attr = tep_db_fetch_array($attr_q)) {
+       tep_db_query("insert into orders_text_attributes values ($insert_id, " . tep_get_prid($order->products[$i]['id']) . ", " . $attr['products_text_attributes_id'] . ", '" .  $attr['products_text_attributes_text'] . "')");
+    }
+    tep_db_query("delete from customers_basket_text_attributes where products_id = " . tep_get_prid($order->products[$i]['id']) . " and session_id = '" . $osCsid . "'");
+
+// eof denuz text attr
 
 //------insert customer choosen option to order--------
     $attributes_exist = '0';
@@ -250,6 +260,23 @@
         $products_ordered_attributes .= "\n\t" . $attributes_values['products_options_name'] . ' ' . $attributes_values['products_options_values_name'];
       }
     }
+	// denuz_arun text attr
+
+      $pid_query = tep_db_query("select products_id from " . TABLE_PRODUCTS . " where products_model LIKE '" . tep_db_input($order->products[$i]['model']) . "'");
+      $pid = tep_db_fetch_array($pid_query);
+      
+	    $denux_arunQry = "select ota.*, pta.products_text_attributes_name from orders_text_attributes as ota, products_text_attributes as pta where ota.orders_id = " . 	$insert_id.
+	  						//$HTTP_GET_VARS['oID'] . 
+							" and ota.products_id = " . $pid['products_id'] . " and pta.products_text_attributes_id = ota.products_text_attributes_id";
+	  //echo ;
+      $attr_q = tep_db_query($denux_arunQry); 
+      $denux_arun_ ='';
+      while ($attr = tep_db_fetch_array($attr_q)) {
+        $denux_arun_ .=  $attr['products_text_attributes_name'] . ': ' . stripslashes($attr['products_text_attributes_text'])."\n";
+    }
+
+// eof denuz_arun text attr
+
 //------insert customer choosen option eof ----
     $products_ordered .= $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . ' (' . $order->products[$i]['model'] . ') = ' . $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']) . $products_ordered_attributes . "\n";
   }
