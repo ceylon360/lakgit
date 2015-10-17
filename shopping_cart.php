@@ -70,21 +70,7 @@
         }
       }
 	  
-	  // denuz text attr
 
-     $b = strpos($products[$i]['id'], '{');
-     if ($b === false) {
-       $pid = $products[$i]['id'];
-     } else {
-       $pid = substr($products[$i]['id'], 0, $b);
-     }
-
-     $attr_q = tep_db_query("select cbta.*, pta.products_text_attributes_name from customers_basket_text_attributes as cbta, products_text_attributes as pta where cbta.products_text_attributes_id = pta.products_text_attributes_id and cbta.products_id = " . $pid . " and cbta.session_id = '" . $osCsid . "'");
-     while ($attr = tep_db_fetch_array($attr_q)) {
-          $products_name .= '<br><small><i> - ' . $attr['products_text_attributes_name'] . ' ' . stripslashes($attr['products_text_attributes_text'])  . '</i></small>';       
-     }
-
-// eof denuz text attr
 	  
     }
 ?>
@@ -114,7 +100,21 @@
           $products_name .= '<br /><small><i> - ' . $products[$i][$option]['products_options_name'] . ' ' . $products[$i][$option]['products_options_values_name'] . '</i></small>';
         }
       }
+	  // denuz text attr
 
+     $b = strpos($products[$i]['id'], '{');
+     if ($b === false) {
+       $pid = $products[$i]['id'];
+     } else {
+       $pid = substr($products[$i]['id'], 0, $b);
+     }
+
+     $attr_q = tep_db_query("select cbta.*, pta.products_text_attributes_name from customers_basket_text_attributes as cbta, products_text_attributes as pta where cbta.products_text_attributes_id = pta.products_text_attributes_id and cbta.products_id = " . $pid . " and cbta.session_id = '" . $osCsid . "'");
+     while ($attr = tep_db_fetch_array($attr_q)) {
+          $products_name .= '<br><small><i> - ' . $attr['products_text_attributes_name'] . ' ' . stripslashes($attr['products_text_attributes_text'])  . '</i></small>';       
+     }
+
+// eof denuz text attr
       $products_name .= '<br>' . tep_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'style="width: 65px;" min="0"', 'number') . tep_draw_hidden_field('products_id[]', $products[$i]['id']) . ' ' . tep_draw_button(NULL, 'glyphicon glyphicon-refresh', NULL, NULL, NULL, 'btn-info btn-xs') . ' ' . tep_draw_button(NULL, 'glyphicon glyphicon-remove', tep_href_link(FILENAME_SHOPPING_CART, 'products_id=' . $products[$i]['id'] . '&action=remove_product'), NULL, NULL, 'btn-danger btn-xs');
 
       $products_name .= '</td>';
@@ -124,6 +124,7 @@
                         '</tr>';
     }
     echo $products_name;
+	
 ?>
 
       </tbody>
