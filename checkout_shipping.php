@@ -486,7 +486,7 @@ else{
           <?php echo tep_draw_radio_field('surprise', 'yes', $surprise_sely, 'required aria-required="true" id="surprisey"') . ' ' .ENTRY_SURPRISEY; ?>
         </label>
         
-        <?php echo FORM_REQUIRED_INPUT; ?>
+        <?php //echo FORM_REQUIRED_INPUT; ?>
         <?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_SURPRISE_TEXT . '</span>'; ?>
       </div>
     </div>
@@ -495,17 +495,39 @@ else{
 	<!-- anonymous -->
 	<div class="form-group has-feedback">
 		<label class="control-label col-sm-3"><?php echo ENTRY_ANONYMOUS; ?></label>
-		<div class="col-sm-9">
-			<label class="radio-inline">
-				<?php echo tep_draw_radio_field('anonymous', 'yes', $anonymous_sely, 'required aria-required="true" id="anonymousy"') . ' ' .'Yes'; ?>
-			</label>
+		<div class="col-sm-3">
 			<label class="radio-inline">
 				<?php echo tep_draw_radio_field('anonymous', 'no',$anonymous_seln,'id="anonymousn"') . ' ' . 'No'; ?>
 			</label>
-			<?php echo FORM_REQUIRED_INPUT; ?>
+			<label class="radio-inline">
+				<?php echo tep_draw_radio_field('anonymous', 'yes', $anonymous_sely, 'required aria-required="true" id="anonymousy"') . ' ' .'Yes'; ?>
+			</label>
+
+					
+			<?php// echo FORM_REQUIRED_INPUT; ?>
 			<?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_ANONYMOUS_TEXT . '</span>'; ?>
 		</div>
+		<div class="col-sm-6">
+			<div class="animated fadeIn alert alert-warning surprise_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
+		<div class="animated fadeIn alert alert-warning surprise_no" ><?php echo ANONYMOUSN_INFO?></div>
+			</div>
     </div>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('input[type="radio"]').click(function(){
+				if($(this).attr("value")=="yes"){
+					$(".surprise_no").hide();
+					$(".surprise_yes").show();
+				}
+				if($(this).attr("value")=="no"){
+					$(".surprise_yes").hide();
+					$(".surprise_no").show();
+				}
+				
+			});
+		});
+	</script>
 	<!-- eof anonymous -->
 	
 	

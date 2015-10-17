@@ -453,20 +453,41 @@ if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
 	<!-- anonymous -->
 	<div class="form-group has-feedback">
 		<label class="control-label col-sm-3"><?php echo ENTRY_ANONYMOUS; ?></label>
-		<div class="col-sm-9">
-			<label class="radio-inline">
-				<?php echo tep_draw_radio_field('anonymous', 'yes', '', 'required aria-required="true" id="anonymousy"') . ' ' .'Yes'; ?>
-			</label>
+		<div class="col-sm-3">
 			<label class="radio-inline">
 				<?php echo tep_draw_radio_field('anonymous', 'no',true,'id="anonymousn"') . ' ' . 'No'; ?>
 			</label>
-			<?php echo FORM_REQUIRED_INPUT; ?>
+			<label class="radio-inline">
+				<?php echo tep_draw_radio_field('anonymous', 'yes', '', 'required aria-required="true" id="anonymousy"') . ' ' .'Yes'; ?>
+			</label>
+
+			
 			<?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_ANONYMOUS_TEXT . '</span>'; ?>
 		</div>
+		<div class="col-sm-6">
+			<div class="animated fadeIn alert alert-warning surprise_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
+		<div class="animated fadeIn alert alert-warning surprise_no" ><?php echo ANONYMOUSN_INFO?></div>
+			</div>
     </div>
-	<!-- eof anonymous -->
+	
 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('input[type="radio"]').click(function(){
+				if($(this).attr("value")=="yes"){
+					$(".surprise_no").hide();
+					$(".surprise_yes").show();
+				}
+				if($(this).attr("value")=="no"){
+					$(".surprise_yes").hide();
+					$(".surprise_no").show();
+				}
 
+			});
+		});
+	</script>
+
+<!-- eof anonymous -->
   <div class="buttonSet">
     <div class="text-right"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'glyphicon glyphicon-user', null, 'primary', null, 'btn-default'); ?></div>
   </div>

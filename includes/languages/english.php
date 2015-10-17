@@ -294,3 +294,6 @@ define('ENTRY_ANONYMOUS', 'Send gift anonymous');
 define('ENTRY_SURPRISE', 'Special Instruction');
 define('ENTRY_SURPRISEN', 'Call before Deliver');
 define('ENTRY_SURPRISEY', 'Surprise Gift');
+
+define('ANONYMOUSY_INFO', 'ANONYMOUSY Gift');
+define('ANONYMOUSN_INFO', 'ANONYMOUSN Gift');
