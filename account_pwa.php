@@ -465,9 +465,9 @@ if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
 			<?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_ANONYMOUS_TEXT . '</span>'; ?>
 		</div>
 		<div class="col-sm-6">
-			<div class="animated fadeIn alert alert-warning surprise_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
-		<div class="animated fadeIn alert alert-warning surprise_no" ><?php echo ANONYMOUSN_INFO?></div>
-			</div>
+			<div class="animated fadeInUp notice notice-success surprise_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
+		    <div class="animated fadeInUp notice notice-warning surprise_no" ><?php echo ANONYMOUSN_INFO?></div>
+		</div>
     </div>
 	
 
