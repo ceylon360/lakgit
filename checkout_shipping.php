@@ -508,21 +508,34 @@ else{
 			<?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_ANONYMOUS_TEXT . '</span>'; ?>
 		</div>
 		<div class="col-sm-6">
-			<div class="animated fadeIn alert alert-warning surprise_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
-		<div class="animated fadeIn alert alert-warning surprise_no" ><?php echo ANONYMOUSN_INFO?></div>
+			<div class="animated fadeIn alert alert-warning anonymous_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
+		<div class="animated fadeIn alert alert-warning anonymous_no" style="display:none"><?php echo ANONYMOUSN_INFO?></div>
 			</div>
     </div>
 	
 	<script type="text/javascript">
+	function anno(){
+				if (document.getElementById('anonymousy').checked){
+					$(".anonymous_no").hide();
+					$(".anonymous_yes").show();
+				}
+				if(document.getElementById('anonymousn').checked){
+					$(".anonymous_yes").hide();
+					$(".anonymous_no").show();
+				}
+				
+			};
+			window.onload = anno;
 		$(document).ready(function(){
+			
 			$('input[type="radio"]').click(function(){
 				if($(this).attr("value")=="yes"){
-					$(".surprise_no").hide();
-					$(".surprise_yes").show();
+					$(".anonymous_no").hide();
+					$(".anonymous_yes").show();
 				}
 				if($(this).attr("value")=="no"){
-					$(".surprise_yes").hide();
-					$(".surprise_no").show();
+					$(".anonymous_yes").hide();
+					$(".anonymous_no").show();
 				}
 				
 			});
