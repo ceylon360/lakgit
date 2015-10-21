@@ -190,13 +190,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
-<!-- ship date -->
-<!--<script type="text/javascript" src="ext/datepicker/js/bootstrap-datepicker3.js"></script>
-<script type="text/javascript" src="includes/javascript/ui.datepicker.js"></script>
-<style type="text/css">@import url('includes/javascript/ui.datepicker.css');</style>-->
 
-
-<!-- eof ship date -->
     <!--  step -->
     <div class="row shop-tracking-status">
 		<div class="order-status">
@@ -231,29 +225,8 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 <div class="contentContainer">
   
 
-  <div class="contentText row">
-  
-      <div class="col-sm-4">
-	  <h4><?php echo TABLE_HEADING_SHIPPING_ADDRESS; ?></h4>
-      <div class="panel panel-primary">
-        <div class="panel-heading"><?php echo TITLE_SHIPPING_ADDRESS; ?></div>
-        <div class="panel-body">
-          <?php echo tep_address_label($customer_id, $sendto, true, ' ', '<br />'); ?>
-        </div>
-      </div>
-	  	  <div class="alert alert-warning">
-        <?php echo TEXT_CHOOSE_SHIPPING_DESTINATION; ?>
-        <div class="clearfix"></div>
-        <div class="pull-right">
-          <?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'glyphicon glyphicon-home', tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL')); ?>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-	 <!-- ship date -->
-  
-
-        <div class='col-sm-4'>
+  <div class="contentText">
+         <div class='col-sm-4 bg-gray'>
 		<h4><?php echo TABLE_HEADING_SHIPPING_DATE; ?></h4>
 		<div id="datepicker" ></div> 
 		<input type="hidden" name="my_hidden_input"id="my_hidden_input" />
@@ -273,10 +246,127 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
   <div class="contentText">
     <?php echo TEXT_CHOOSE_SHIPPING_DATE . '<br /><br />' . tep_draw_input_field('delivery_date','', 'id="delivery_date" readonly="readonly"'); ?>
   </div>
+        </div> 
+      <div class="col-sm-8">
+	  <h4 ><?php echo TABLE_HEADING_SHIPPING_ADDRESS; ?></h4>
+      <div class="notice notice-success">
+        <div class="panel-heading hide"><?php echo TITLE_SHIPPING_ADDRESS; ?></div>
+        <div class="panel-body">
+          <?php echo tep_address_label($customer_id, $sendto, true, ' ', ''); ?>
+		  <div class="pull-right">
+          <?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'glyphicon glyphicon-home', tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL')); ?>
         </div>
+        </div>
+      </div>
+	  
+	  	  <!--<div class="alert alert-warning">
+        <?php /** echo TEXT_CHOOSE_SHIPPING_DESTINATION;**/ ?>
+        <div class="clearfix"></div>
+        
+        <div class="clearfix"></div>
+      </div> -->
+    </div>
+	 <!-- ship date -->
+  
+<div class="col-sm-8">
+  <hr>
+	<?php
+	$surprise_sely='';
+	$surprise_seln='';
+if($surprise=='yes'){
+		$surprise_sely=true;
+}
+else{
+		$surprise_seln=true;
+	}
+	
+	$anonymous_sely='';
+	$anonymous_seln='';
+if($anonymous=='yes'){
+		$anonymous_sely=true;
+}
+else{
+		$anonymous_seln=true;
+	}
+
+
+	?>
+	
+	<!-- surprise -->
+
+	<div class="form-group has-feedback">
+      <label class="control-label col-sm-4 text-left"><?php echo ENTRY_SURPRISE; ?></label>
+      <div class="col-sm-8">
+	  <label class="radio-inline">
+          <?php echo tep_draw_radio_field('surprise', 'no',$surprise_seln,'id="surprisen"') . ' ' . ENTRY_SURPRISEN; ?>
+        </label>
+        <label class="radio-inline">
+          <?php echo tep_draw_radio_field('surprise', 'yes', $surprise_sely, 'required aria-required="true" id="surprisey"') . ' ' .ENTRY_SURPRISEY; ?>
+        </label>
+        
+        <?php //echo FORM_REQUIRED_INPUT; ?>
+        <?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_SURPRISE_TEXT . '</span>'; ?>
+      </div>
+    </div>
+	<!-- eof surprise -->
+	
+	<!-- anonymous -->
+	<div class="form-group has-feedback">
+		<label class="control-label col-sm-4 text-left"><?php echo ENTRY_ANONYMOUS; ?></label>
+		<div class="col-sm-8">
+			<label class="radio-inline">
+				<?php echo tep_draw_radio_field('anonymous', 'no',$anonymous_seln,'id="anonymousn"') . ' ' . 'No'; ?>
+			</label>
+			<label class="radio-inline">
+				<?php echo tep_draw_radio_field('anonymous', 'yes', $anonymous_sely, 'required aria-required="true" id="anonymousy"') . ' ' .'Yes'; ?>
+			</label>
+
+					
+			<?php// echo FORM_REQUIRED_INPUT; ?>
+			<?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_ANONYMOUS_TEXT . '</span>'; ?>
+		</div>
+		<div class="col-sm-12">
+			<div class="animated fadeInUp notice notice-success anonymous_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
+		<div class="animated fadeInUp notice notice-warning anonymous_no" style="display:none"><?php echo ANONYMOUSN_INFO?></div>
+			</div>
+    </div>
+	
+	<script type="text/javascript">
+	function anno(){
+				if (document.getElementById('anonymousy').checked){
+					$(".anonymous_no").hide();
+					$(".anonymous_yes").show();
+				}
+				if(document.getElementById('anonymousn').checked){
+					$(".anonymous_yes").hide();
+					$(".anonymous_no").show();
+				}
+				
+			};
+			window.onload = anno;
+		$(document).ready(function(){
+			
+			$('input[type="radio"]').click(function(){
+				if($(this).attr("value")=="yes"){
+					$(".anonymous_no").hide();
+					$(".anonymous_yes").show();
+				}
+				if($(this).attr("value")=="no"){
+					$(".anonymous_yes").hide();
+					$(".anonymous_no").show();
+				}
+				
+			});
+		});
+	</script>
+	<!-- eof anonymous -->
+
+</div>
+
+
 
 <!-- eof ship date -->
-	<div class="col-sm-4">
+	<div class="col-sm-4 hide">
       <!--<label for="inputComments" class="control-label"><?php echo TABLE_HEADING_COMMENTS; ?></label>-->
 	  <h4><?php echo TABLE_HEADING_COMMENTS; ?></h4>
       <div class="">
@@ -410,143 +500,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
   }
 ?>
 
-  <hr>
-<!-- ship date 
-  <h2><?php echo TABLE_HEADING_SHIPPING_DATE; ?></h2>
-<div class="container">
-    <div class="row">
-        <div class='col-sm-6'>
-		<div id="datepicker" ></div> 
-		<input type="hidden" name="my_hidden_input"id="my_hidden_input" />
-		<link rel="stylesheet" href="ext/datepicker2/css/bootstrap-datepicker.css" />
-           <script src="ext/datepicker2/js/bootstrap-datepicker.js"></script>
-		   <script> var date = new Date();
-		   date.setDate(date.getDate()+1);
-		   $('#datepicker').datepicker({
-    startDate: date,
-	datesDisabled: ['09/06/2015', '09/21/2015'],
-    
-    }).on('changeDate', function(e){
-      $('#delivery_date').val(e.format('yyyy-mm-dd'))
-    });
 
-</script>
-        </div>
-		
-        
-    </div>
-</div> 
-  <div class="contentText">
-    <?php echo TEXT_CHOOSE_SHIPPING_DATE . '<br /><br />' . tep_draw_input_field('delivery_date','', 'id="delivery_date" readonly="readonly"'); ?>
-  </div>
- eof ship date -->
-  <!--<div class="contentText">
-    <div class="form-group">
-      <label for="inputComments" class="control-label col-sm-4"><?php echo TABLE_HEADING_COMMENTS; ?></label>
-      <div class="col-sm-8">
-        <?php
-        echo tep_draw_textarea_field('comments', 'soft', 60, 5, $comments, 'id="inputComments" placeholder="' . TABLE_HEADING_COMMENTS . '"');
-        ?>
-      </div>
-    </div>
-  </div>
--->
-
-	<?php
-	$surprise_sely='';
-	$surprise_seln='';
-if($surprise=='yes'){
-		$surprise_sely=true;
-}
-else{
-		$surprise_seln=true;
-	}
-	
-	$anonymous_sely='';
-	$anonymous_seln='';
-if($anonymous=='yes'){
-		$anonymous_sely=true;
-}
-else{
-		$anonymous_seln=true;
-	}
-
-
-	?>
-	
-	<!-- surprise -->
-
-	<div class="form-group has-feedback">
-      <label class="control-label col-sm-3"><?php echo ENTRY_SURPRISE; ?></label>
-      <div class="col-sm-9">
-	  <label class="radio-inline">
-          <?php echo tep_draw_radio_field('surprise', 'no',$surprise_seln,'id="surprisen"') . ' ' . ENTRY_SURPRISEN; ?>
-        </label>
-        <label class="radio-inline">
-          <?php echo tep_draw_radio_field('surprise', 'yes', $surprise_sely, 'required aria-required="true" id="surprisey"') . ' ' .ENTRY_SURPRISEY; ?>
-        </label>
-        
-        <?php //echo FORM_REQUIRED_INPUT; ?>
-        <?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_SURPRISE_TEXT . '</span>'; ?>
-      </div>
-    </div>
-	<!-- eof surprise -->
-	
-	<!-- anonymous -->
-	<div class="form-group has-feedback">
-		<label class="control-label col-sm-3"><?php echo ENTRY_ANONYMOUS; ?></label>
-		<div class="col-sm-3">
-			<label class="radio-inline">
-				<?php echo tep_draw_radio_field('anonymous', 'no',$anonymous_seln,'id="anonymousn"') . ' ' . 'No'; ?>
-			</label>
-			<label class="radio-inline">
-				<?php echo tep_draw_radio_field('anonymous', 'yes', $anonymous_sely, 'required aria-required="true" id="anonymousy"') . ' ' .'Yes'; ?>
-			</label>
-
-					
-			<?php// echo FORM_REQUIRED_INPUT; ?>
-			<?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_ANONYMOUS_TEXT . '</span>'; ?>
-		</div>
-		<div class="col-sm-6">
-			<div class="animated fadeInUp notice notice-success anonymous_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
-		<div class="animated fadeInUp notice notice-warning anonymous_no" style="display:none"><?php echo ANONYMOUSN_INFO?></div>
-			</div>
-    </div>
-	
-	<script type="text/javascript">
-	function anno(){
-				if (document.getElementById('anonymousy').checked){
-					$(".anonymous_no").hide();
-					$(".anonymous_yes").show();
-				}
-				if(document.getElementById('anonymousn').checked){
-					$(".anonymous_yes").hide();
-					$(".anonymous_no").show();
-				}
-				
-			};
-			window.onload = anno;
-		$(document).ready(function(){
-			
-			$('input[type="radio"]').click(function(){
-				if($(this).attr("value")=="yes"){
-					$(".anonymous_no").hide();
-					$(".anonymous_yes").show();
-				}
-				if($(this).attr("value")=="no"){
-					$(".anonymous_yes").hide();
-					$(".anonymous_no").show();
-				}
-				
-			});
-		});
-	</script>
-	<!-- eof anonymous -->
-	
-	
-	
-	
-	
 <!-- ////////////////////////////////////// -->
   <div class="buttonSet">
   

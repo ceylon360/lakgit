@@ -843,3 +843,14 @@ float:right;
     color: white;
     font-size: 16px;
 }
+
+.datepicker-inline {
+    width: auto !important;
+}
+
+.bg-white{
+	background-color:#fff
+}
+.bg-gray2{
+	background-color:#F5F5F5
+}
