@@ -508,8 +508,8 @@ else{
 			<?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_ANONYMOUS_TEXT . '</span>'; ?>
 		</div>
 		<div class="col-sm-6">
-			<div class="animated fadeIn alert alert-warning anonymous_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
-		<div class="animated fadeIn alert alert-warning anonymous_no" style="display:none"><?php echo ANONYMOUSN_INFO?></div>
+			<div class="animated fadeInUp notice notice-success anonymous_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
+		<div class="animated fadeInUp notice notice-warning anonymous_no" style="display:none"><?php echo ANONYMOUSN_INFO?></div>
 			</div>
     </div>
 	
