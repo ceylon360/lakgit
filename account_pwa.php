@@ -287,17 +287,14 @@ if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
 ?>
     <div class="form-group has-feedback">
       <label for="inputFirstName" class="control-label col-xs-3"><?php echo ENTRY_FIRST_NAME; ?></label>
-      <div class="col-xs-9">
+      <div class="col-xs-4">
         <?php
         echo tep_draw_input_field('firstname', NULL, 'required aria-required="true" id="inputFirstName" placeholder="' . ENTRY_FIRST_NAME . '"');
         echo FORM_REQUIRED_INPUT;
         if (tep_not_null(ENTRY_FIRST_NAME_TEXT)) echo '<span class="help-block">' . ENTRY_FIRST_NAME_TEXT . '</span>';
         ?>
       </div>
-    </div>
-    <div class="form-group has-feedback">
-      <label for="inputLastName" class="control-label col-xs-3"><?php echo ENTRY_LAST_NAME; ?></label>
-      <div class="col-xs-9">
+	   <div class="col-xs-5">
         <?php
         echo tep_draw_input_field('lastname', NULL, 'required aria-required="true" id="inputLastName" placeholder="' . ENTRY_LAST_NAME . '"');
         echo FORM_REQUIRED_INPUT;
@@ -305,6 +302,10 @@ if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
         ?>
       </div>
     </div>
+    <!--<div class="form-group has-feedback">
+      <label for="inputLastName" class="control-label col-xs-3"><?php echo ENTRY_LAST_NAME; ?></label>
+
+    </div>-->
 <?php
 /*  if (ACCOUNT_DOB == 'true') {
 ?>
@@ -486,14 +487,14 @@ if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
 			window.onload = anno;
 		$(document).ready(function(){
 			
-			$('input[type="radio"]').click(function(){
+			$('input[name="anonymous"]').click(function(){
 				if($(this).attr("value")=="yes"){
-					$(".anonymous_no").hide();
-					$(".anonymous_yes").show();
+					$(".anonymous_no").hide('slow');
+					$(".anonymous_yes").show('slow');
 				}
 				if($(this).attr("value")=="no"){
-					$(".anonymous_yes").hide();
-					$(".anonymous_no").show();
+					$(".anonymous_yes").hide('slow');
+					$(".anonymous_no").show('slow');
 				}
 				
 			});

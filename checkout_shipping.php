@@ -346,14 +346,14 @@ else{
 			window.onload = anno;
 		$(document).ready(function(){
 			
-			$('input[type="radio"]').click(function(){
+			$('input[name="anonymous"]').click(function(){
 				if($(this).attr("value")=="yes"){
-					$(".anonymous_no").hide();
-					$(".anonymous_yes").show();
+					$(".anonymous_no").hide('slow');
+					$(".anonymous_yes").show('slow');
 				}
 				if($(this).attr("value")=="no"){
-					$(".anonymous_yes").hide();
-					$(".anonymous_no").show();
+					$(".anonymous_yes").hide('slow');
+					$(".anonymous_no").show('slow');
 				}
 				
 			});
