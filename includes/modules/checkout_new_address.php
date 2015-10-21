@@ -11,12 +11,64 @@
 */
 
   if (!isset($process)) $process = false;
+  
+  
+  
+  //////////////////
+$any_rest = 0;
+if (STOCK_CHECK == 'true') {
+    for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
+		if (tep_get_products_catrest($order->products[$i]['id'])==1) {
+				if($any_rest < 1){
+						$any_rest = 1;
+				}
+			
+		}
+		if (tep_get_products_catrest($order->products[$i]['id'])==2) {
+			if($any_rest < 2){
+						$any_rest = 2;
+				}
+		}
+		if (tep_get_products_catrest($order->products[$i]['id'])==3) {
+			if($any_rest < 3){
+						$any_rest = 3;
+				}
+		}
+		$catn= tep_get_products_catrest_p($order->products[$i]['id'],$any_rest);
+		if(tep_not_null($catn)){
+		$catrname=$catn;		
+		}
+    }
+    // Out of Stocks
+ 
+}
+//for alert box
+$rest_msg='';
+
+switch ($any_rest)
+{
+	case 1:
+	$rest_msg=TEXT_RESTRICTION_ALL;
+	$restrict_gzone=110;
+	break;
+	
+	case 2:
+	$rest_msg=TEXT_RESTRICTION_CITIES;
+	$restrict_gzone=102;
+	break;
+	
+	case 3:
+	$rest_msg=TEXT_RESTRICTION_COLOMBO_ONLY;
+	$restrict_gzone=103;
+	break;
+}
+//////////////////
 ?>
 
   <div class="contentText">
 
-<?php
-  /*if (ACCOUNT_GENDER == 'true') {
+<?php /*
+  if (ACCOUNT_GENDER == 'true') {
     if (isset($gender)) {
       $male = ($gender == 'm') ? true : false;
       $female = ($gender == 'f') ? true : false;
@@ -27,13 +79,13 @@
 ?>
 
     <div class="form-group">
-      <label class="control-label col-sm-3"><?php echo ENTRY_GENDER; ?></label>
+      <label class="control-label col-sm-3"><?php echo ENRY_GIFT_DELIVER; ?></label>
       <div class="col-sm-9">
         <label class="radio-inline">
-          <?php echo tep_draw_radio_field('gender', 'm', $male, 'required aria-required="true" aria-describedby="atGender"') . ' ' . MALE; ?>
+          <?php echo tep_draw_radio_field('gender', 'm', $male, 'required aria-required="true" aria-describedby="atGender"') . ' ' .'Yes'; ?>
         </label>
         <label class="radio-inline">
-          <?php echo tep_draw_radio_field('gender', 'f', $female) . ' ' . FEMALE; ?>
+          <?php echo tep_draw_radio_field('gender', 'f', $female) . ' '. 'No'; ?>
         </label>
         <?php if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span id="atGender" class="help-block">' . ENTRY_GENDER_TEXT . '</span>'; ?>
       </div>
@@ -141,13 +193,39 @@
     </div>
 
 <?php
+if($any_rest==3 || $any_rest==2){
+	echo '<div class="alert alert-warning">'.TEXT_RESTRICTION_P_MSG.'  <strong>'.$catrname.'</strong>. '.TEXT_RESTRICTION_D_MSG.' <strong>'.$rest_msg.'</strong></div>';
+}
+
   if (ACCOUNT_STATE == 'true') {
 ?>
     <div class="form-group has-feedback">
       <label for="inputState" class="control-label col-sm-3"><?php echo ENTRY_STATE; ?></label>
       <div id="results" class="col-sm-9">
         <?php
-        $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "'");
+		
+		
+
+		
+		
+		////
+		$bzones_array = array();
+        $bzones_array[0] = array('id' => '', 'text' => PULL_DOWN_DEFAULT);  
+		$bzone_query = tep_db_query("select p.zone_id, pd.zone_name from " . TABLE_ZONES_TO_GEO_ZONES . " p, " . TABLE_ZONES . " pd where p.geo_zone_id = '" . $restrict_gzone . "' and p.zone_id = pd.zone_id    ");
+			while ($bzones_values = tep_db_fetch_array($bzone_query)) {
+            	$bzones_array[] = array('id' => $bzones_values['zone_name'], 'text' => $bzones_values['zone_name']);
+            }
+		
+ 
+		
+		
+		echo tep_draw_pull_down_menu('state', $bzones_array, '', 'id="inputState"');
+		///////////////////////////////////////
+		
+		
+		
+		
+   /*    $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "'");
         $check = tep_db_fetch_array($check_query);
         $entry_state_has_zones = ($check['total'] > 0);
       
@@ -163,7 +241,7 @@
           echo tep_draw_input_field('state', NULL, 'id="inputState" class="form-control" placeholder="' . ENTRY_STATE . '"');
         }
         if (tep_not_null(ENTRY_STATE_TEXT)) echo '<span class="help-block">' . ENTRY_STATE_TEXT . '</span>';
-        ?>
+      */  ?>
       </div>
     </div>
 <?php

@@ -23,6 +23,12 @@
         'title' => BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES,
         'link' => tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES)
       ),
+	 // recent view product
+	  array(
+		'code' => 'text_attributes.php',
+		'title' => 'Text Attributes',
+		'link' => tep_href_link('text_attributes.php')
+	  ),
 	  array(
         'code' => 'easypopulate.php',
         'title' => 'Easy Populate',

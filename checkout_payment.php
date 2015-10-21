@@ -77,6 +77,18 @@
     $delivery_date = tep_db_prepare_input($HTTP_POST_VARS['delivery_date']);
   }
   // eof ship date
+// suprise gift
+if (!tep_session_is_registered('surprise')) tep_session_register('surprise');
+if (isset($HTTP_POST_VARS['surprise']) && tep_not_null($HTTP_POST_VARS['surprise'])) {
+    $surprise = tep_db_prepare_input($HTTP_POST_VARS['surprise']);
+}
+// eof suprise gift
+// Sender Anonymous
+if (!tep_session_is_registered('anonymous')) tep_session_register('anonymous');
+if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymous'])) {
+    $anonymous = tep_db_prepare_input($HTTP_POST_VARS['anonymous']);
+}
+// eof Sender Anonymous
 
   $total_weight = $cart->show_weight();
   $total_count = $cart->count_contents();

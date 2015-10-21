@@ -106,6 +106,18 @@
         }
       }
 
+	  // denuz text attr
+
+      $pid_query = tep_db_query("select products_id from " . TABLE_PRODUCTS . " where products_model LIKE '" . tep_db_input($order->products[$i]['model']) . "'");
+      $pid = tep_db_fetch_array($pid_query);
+      $attr_q = tep_db_query("select ota.*, pta.products_text_attributes_name from orders_text_attributes as ota, products_text_attributes as pta where ota.orders_id = " . $HTTP_GET_VARS['oID'] . " and ota.products_id = " . $pid['products_id'] . " and pta.products_text_attributes_id = ota.products_text_attributes_id");
+      while ($attr = tep_db_fetch_array($attr_q)) {
+        echo '<br><nobr><small>&nbsp;<i> - ' . $attr['products_text_attributes_name'] . ': ' . stripslashes($attr['products_text_attributes_text']);
+        echo '</i></small></nobr>';
+      }
+
+// eof denuz text attr
+	  
       echo '        </td>' . "\n" .
            '        <td class="dataTableContent" valign="top">' . $order->products[$i]['model'] . '</td>' . "\n" .
            '      </tr>' . "\n";

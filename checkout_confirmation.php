@@ -48,6 +48,7 @@
     $delivery_date = tep_db_prepare_input($HTTP_POST_VARS['datum']);
   }
   // eof ship date
+  
 
 // load the selected payment module
   require(DIR_WS_CLASSES . 'payment.php');
@@ -164,6 +165,21 @@
         echo '<br /><nobr><small>&nbsp;<i> - ' . $order->products[$i]['attributes'][$j]['option'] . ': ' . $order->products[$i]['attributes'][$j]['value'] . '</i></small></nobr>';
       }
     }
+// denuz text attr
+
+     $b = strpos($order->products[$i]['id'], '{');
+     if ($b === false) {
+       $pid = $order->products[$i]['id'];
+     } else {
+       $pid = substr($order->products[$i]['id'], 0, $b);
+     }
+
+     $attr_q = tep_db_query("select cbta.*, pta.products_text_attributes_name from customers_basket_text_attributes as cbta, products_text_attributes as pta where cbta.products_text_attributes_id = pta.products_text_attributes_id and cbta.products_id = " . $pid . " and cbta.session_id = '" . $osCsid . "'");
+     while ($attr = tep_db_fetch_array($attr_q)) {
+          echo '<br><small>&nbsp;<i> - ' . $attr['products_text_attributes_name'] . ': ' . stripslashes($attr['products_text_attributes_text'])  . '</i></small>';       
+     }
+
+// eof denuz text attr
 
     echo '</td>' . "\n";
 
@@ -230,7 +246,50 @@
 	<?php
           }
 		  //ship date
+		  if ($order->info['surprise']='yes'){
+				$surprise_text=ENTRY_SURPRISEY;
+		  }
+		  else{
+				$surprise_text=ENTRY_SURPRISEN;
+		  }
+		//surprise
+		if (tep_not_null($order->info['surprise'])) {
+		?>
+		<div class="col-sm-4">
+			<div class="panel panel-warning">
+				<div class="panel-heading">
+					
+					<?php echo '<strong>' . SURPRISE_TEXT . '</strong>' . tep_draw_button(TEXT_EDIT, 'glyphicon glyphicon-edit', tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs' ); ?>
+				</div>
+				<div class="panel-body">
+					
+					<?php echo $surprise_text ?>
+				</div>
+			</div>
+		</div>
+		<?php
+		}
+		//surprise
+		//anonymous
+		if (tep_not_null($order->info['anonymous'])) {
+		?>
+		<div class="col-sm-4">
+			<div class="panel panel-warning">
+				<div class="panel-heading">
+					
+					<?php echo '<strong>' . ANONYMOUS_TEXT . '</strong>' . tep_draw_button(TEXT_EDIT, 'glyphicon glyphicon-edit', tep_href_link('account_pwa.php', '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs' ); ?>
+				</div>
+				<div class="panel-body">
+					
+					<?php echo $order->info['anonymous']; ?>
+				</div>
+			</div>
+		</div>
+		<?php
+		}
+		//anonymous
           ?>
+		  
   <!--  <div class="col-sm-4">
       <div class="panel panel-warning">
         <div class="panel-heading"><?php// echo '<strong>' . HEADING_BILLING_ADDRESS . '</strong>' . tep_draw_button(TEXT_EDIT, 'glyphicon glyphicon-edit', tep_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs' ); ?></div>

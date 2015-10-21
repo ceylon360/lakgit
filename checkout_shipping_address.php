@@ -38,7 +38,18 @@
     $sendto = false;
     tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
   }
-
+// suprise gift
+if (!tep_session_is_registered('surprise')) tep_session_register('surprise');
+if (tep_not_null($HTTP_POST_VARS['surprise'])) {
+    $surprise = tep_db_prepare_input($HTTP_POST_VARS['surprise']);
+}
+// eof surprise gift
+// Sender Anonymous
+if (!tep_session_is_registered('anonymous')) tep_session_register('anonymous');
+if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymous'])) {
+    $anonymous = tep_db_prepare_input($HTTP_POST_VARS['anonymous']);
+}
+// eof Sender Anonymous
   $error = false;
   $process = false;
   if (isset($HTTP_POST_VARS['action']) && ($HTTP_POST_VARS['action'] == 'submit') && isset($HTTP_POST_VARS['formid']) && ($HTTP_POST_VARS['formid'] == $sessiontoken)) {
@@ -314,6 +325,23 @@
   <div class="alert alert-info"><?php echo TEXT_CREATE_NEW_SHIPPING_ADDRESS; ?></div>
 
   <?php require(DIR_WS_MODULES . 'checkout_new_address.php'); ?>
+  	<!-- surprise -->
+	
+	<div class="form-group has-feedback">
+      <label class="control-label col-sm-3"><?php echo ENTRY_SURPRISE; ?></label>
+      <div class="col-sm-9">
+	  <label class="radio-inline">
+          <?php echo tep_draw_radio_field('surprise', 'no',true,'id="surprisen"') . ' ' . ENTRY_SURPRISEN; ?>
+        </label>
+        <label class="radio-inline">
+          <?php echo tep_draw_radio_field('surprise', 'yes', '', 'required aria-required="true" id="surprisey"') . ' ' .ENTRY_SURPRISEY; ?>
+        </label>
+        
+        <?php echo FORM_REQUIRED_INPUT; ?>
+        <?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_SURPRISE_TEXT . '</span>'; ?>
+      </div>
+    </div>
+	<!-- eof surprise -->
 
 <?php
   }

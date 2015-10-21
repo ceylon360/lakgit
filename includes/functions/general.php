@@ -144,6 +144,37 @@
   }
 
 ////
+// check product categories restriction
+  function tep_get_products_catrest($products_id) {
+ $product_catid_query = tep_db_query("select categories_id from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$products_id . "'");
+ $product_catid = tep_db_fetch_array($product_catid_query);
+ $catrest = $product_catid['categories_id'];
+ $category_name_query = tep_db_query("select cd.categories_name,cd.categories_restrict from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . $catrest . "' and status_categ = 1 and cd.categories_id = '" . $catrest . "'");
+ $categories_name = tep_db_fetch_array($category_name_query);
+ 
+ 
+ $catrest_res = $categories_name['categories_restrict'];
+//return category restriction value
+ return $catrest_res;
+  }
+///
+  ///get higher piority category name
+function tep_get_products_catrest_p($products_id,$any_rest) {
+	$product_catid_query = tep_db_query("select categories_id from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . (int)$products_id . "'");
+	$product_catid = tep_db_fetch_array($product_catid_query);
+	$catrest = $product_catid['categories_id'];
+	$category_name_query = tep_db_query("select cd.categories_name,cd.categories_restrict from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . $catrest . "' and status_categ = 1 and cd.categories_id = '" . $catrest . "'");
+	$categories_name = tep_db_fetch_array($category_name_query);
+	
+//check priority level
+		if (tep_get_products_catrest($products_id)==$any_rest) {
+			$catname = $categories_name['categories_name'];
+		}
+	
+	return $catname;
+}
+///////
+
 // Break a word in a string if it is longer than a specified length ($len)
   function tep_break_string($string, $len, $break_char = '-') {
     $l = 0;

@@ -93,6 +93,14 @@
   include(DIR_WS_CLASSES . 'order.php');
 
   require(DIR_WS_INCLUDES . 'template_top.php');
+  
+  
+if ($order->info['surprise']='yes'){
+	$surprise_text=ENTRY_SURPRISEY;
+}
+else{
+	$surprise_text=ENTRY_SURPRISEN;
+}
 ?>
 
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -165,6 +173,24 @@
             <td class="main"><?php echo tep_date_long($order->info['delivery_date']); ?></td>
           </tr>
 <!-- ship date -->
+<!-- surprise -->          
+			<tr>
+				<td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+			</tr>
+			<tr>
+				<td class="main"><b><?php echo SURPRISE_TEXT; ?></b></td>
+				<td class="main"><?php echo $surprise_text; ?></td>
+			</tr>
+<!-- surprise -->
+<!-- anonymous -->          
+			<tr>
+				<td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+			</tr>
+			<tr>
+				<td class="main"><b><?php echo ANONYMOUS_TEXT; ?></b></td>
+				<td class="main"><?php echo $order->info['anonymous']; ?></td>
+			</tr>
+<!-- anonymous -->
 <?php
     if (tep_not_null($order->info['cc_type']) || tep_not_null($order->info['cc_owner']) || tep_not_null($order->info['cc_number'])) {
 ?>
@@ -220,6 +246,19 @@
         }
       }
 
+	  // denuz text attr
+
+//      $pid = @mysql_result(tep_db_query("select products_id from products_description where products_name='" . tep_db_input($order->products[$i]['name']) . "'"), 0, "products_id");
+      $pid_query = tep_db_query("select products_id from " . TABLE_PRODUCTS . " where products_model LIKE '" . tep_db_input($order->products[$i]['model']) . "'");
+      $pid = tep_db_fetch_array($pid_query);
+      $attr_q = tep_db_query("select ota.*, pta.products_text_attributes_name from orders_text_attributes as ota, products_text_attributes as pta where ota.orders_id = " . $HTTP_GET_VARS['oID'] . " and ota.products_id = " . $pid['products_id'] . " and pta.products_text_attributes_id = ota.products_text_attributes_id");
+      while ($attr = tep_db_fetch_array($attr_q)) {
+        echo '<br><nobr><small>&nbsp;<i> - ' . $attr['products_text_attributes_name'] . ': ' . stripslashes($attr['products_text_attributes_text']);
+        echo '</i></small></nobr>';
+      }
+
+// eof denuz text attr
+	  
       echo '            </td>' . "\n" .
            '            <td class="dataTableContent" valign="top">' . $order->products[$i]['model'] . '</td>' . "\n" .
            '            <td class="dataTableContent" align="right" valign="top">' . tep_display_tax_value($order->products[$i]['tax']) . '%</td>' . "\n" .

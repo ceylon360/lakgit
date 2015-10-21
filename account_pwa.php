@@ -22,7 +22,12 @@
   //  for go to delivery info page
 	if(tep_session_is_registered('customer_id')) tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
   
-
+// Sender Anonymous
+if (!tep_session_is_registered('anonymous')) tep_session_register('anonymous');
+if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
+    $anonymous = tep_db_prepare_input($HTTP_POST_VARS['anonymous']);
+}
+// eof Sender Anonymous
     
     $process = false;
   if (isset($_POST['action']) && ($_POST['action'] == 'process') && isset($_POST['formid']) && ($_POST['formid'] == $sessiontoken)) {
@@ -445,8 +450,57 @@
       </div>
     </div>
 <?php } ?>
+	<!-- anonymous -->
+	<div class="form-group has-feedback">
+		<label class="control-label col-sm-3"><?php echo ENTRY_ANONYMOUS; ?></label>
+		<div class="col-sm-3">
+			<label class="radio-inline">
+				<?php echo tep_draw_radio_field('anonymous', 'no',true,'id="anonymousn"') . ' ' . 'No'; ?>
+			</label>
+			<label class="radio-inline">
+				<?php echo tep_draw_radio_field('anonymous', 'yes', '', 'required aria-required="true" id="anonymousy"') . ' ' .'Yes'; ?>
+			</label>
 
+			
+			<?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_ANONYMOUS_TEXT . '</span>'; ?>
+		</div>
+		<div class="col-sm-6">
+			<div class="animated fadeInUp notice notice-success anonymous_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
+		    <div class="animated fadeInUp notice notice-warning anonymous_no" ><?php echo ANONYMOUSN_INFO?></div>
+		</div>
+    </div>
+	
 
+	<script type="text/javascript">
+	function anno(){
+				if (document.getElementById('anonymousy').checked){
+					$(".anonymous_no").hide();
+					$(".anonymous_yes").show();
+				}
+				if(document.getElementById('anonymousn').checked){
+					$(".anonymous_yes").hide();
+					$(".anonymous_no").show();
+				}
+				
+			};
+			window.onload = anno;
+		$(document).ready(function(){
+			
+			$('input[type="radio"]').click(function(){
+				if($(this).attr("value")=="yes"){
+					$(".anonymous_no").hide();
+					$(".anonymous_yes").show();
+				}
+				if($(this).attr("value")=="no"){
+					$(".anonymous_yes").hide();
+					$(".anonymous_no").show();
+				}
+				
+			});
+		});
+	</script>
+
+<!-- eof anonymous -->
   <div class="buttonSet">
     <div class="text-right"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'glyphicon glyphicon-user', null, 'primary', null, 'btn-default'); ?></div>
   </div>

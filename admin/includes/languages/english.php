@@ -301,6 +301,10 @@ define('WARNING_NO_FILE_UPLOADED', 'Warning: No file uploaded.');
 
 /* Optional Related Products (ORP) */
 define('BOX_CATALOG_CATEGORIES_RELATED_PRODUCTS', 'Related Products');
+
+define('TEXT_DISPLAY_NUMBER_OF_TEXT_ATTRIBUTES', 'Text Attributes Total: ');
 // bootstrap helper
 define('MODULE_CONTENT_BOOTSTRAP_ROW_DESCRIPTION', '<p>Content Width can be 12 or less per column per row.</p><p>12/12 = 100% width, 6/12 = 50% width, 4/12 = 33% width.</p><p>Total of all columns in any one row must equal 12 (eg:  3 boxes of 4 columns each, 1 box of 12 columns and so on).</p>');
-
+//new pages
+define('BOX_TOOLS_PAGE_MANAGER', 'Extra info Pages Manager');
+define('TEXT_DISPLAY_NUMBER_OF_PAGES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Pages)');

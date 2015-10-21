@@ -59,4 +59,9 @@
   define('TABLE_ZONES_TO_GEO_ZONES', 'zones_to_geo_zones');
   define('TABLE_WHOS_ONLINE', 'whos_online');
   define('TABLE_ZONES', 'zones');
+// denuz
+define('TABLE_TEXT_ATTRIBUTES', 'products_text_attributes');
+//new pages
+define('TABLE_PAGES', 'pages');
+define('TABLE_PAGES_DESCRIPTION', 'pages_description');
 ?>
