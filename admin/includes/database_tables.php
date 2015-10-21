@@ -61,4 +61,7 @@
   define('TABLE_ZONES', 'zones');
 // denuz
 define('TABLE_TEXT_ATTRIBUTES', 'products_text_attributes');
+//new pages
+define('TABLE_PAGES', 'pages');
+define('TABLE_PAGES_DESCRIPTION', 'pages_description');
 ?>

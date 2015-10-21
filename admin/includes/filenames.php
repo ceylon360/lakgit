@@ -57,4 +57,7 @@
   define('FILENAME_CATEGORY_CACHE', 'category_cache.php');
   //IMPRINT
   define('FILENAME_TEXT_ATTRIBUTES', 'text_attributes.php');
+  //new pages
+  define('FILENAME_PAGE_MANAGER', 'extra_info_pages.php');
+    define('FILENAME_PAGES', '/../extra_info_pages.php');
 ?>
