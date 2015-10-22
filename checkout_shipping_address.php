@@ -105,13 +105,13 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
         $error = true;
 
         $messageStack->add('checkout_address', ENTRY_POST_CODE_ERROR);
-      }*/
+      }
 
       if (strlen($city) < ENTRY_CITY_MIN_LENGTH) {
         $error = true;
 
         $messageStack->add('checkout_address', ENTRY_CITY_ERROR);
-      }
+      }*/
 
       if (ACCOUNT_STATE == 'true') {
         $zone_id = 0;
@@ -329,7 +329,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 	
 	<div class="form-group has-feedback">
       <label class="control-label col-sm-3"><?php echo ENTRY_SURPRISE; ?></label>
-      <div class="col-sm-9">
+      <div class="col-sm-4">
 	  <label class="radio-inline">
           <?php echo tep_draw_radio_field('surprise', 'no',true,'id="surprisen"') . ' ' . ENTRY_SURPRISEN; ?>
         </label>
@@ -337,10 +337,42 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
           <?php echo tep_draw_radio_field('surprise', 'yes', '', 'required aria-required="true" id="surprisey"') . ' ' .ENTRY_SURPRISEY; ?>
         </label>
         
-        <?php echo FORM_REQUIRED_INPUT; ?>
+        <?php// echo FORM_REQUIRED_INPUT; ?>
         <?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_SURPRISE_TEXT . '</span>'; ?>
       </div>
+		<div class="col-sm-5">
+			<div class="animated fadeInUp notice notice-success surprise_yes" style="display:none"><?php echo SURPRISEY_INFO?></div>
+		    <div class="animated fadeInUp notice notice-warning surprise_no" ><?php echo SURPRISEN_INFO?></div>
+		</div>
     </div>
+	<script type="text/javascript">
+		function surp(){
+			if (document.getElementById('surprisey').checked){
+				$(".surprise_no").hide();
+				$(".surprise_yes").show();
+			}
+			if(document.getElementById('surprisen').checked){
+				$(".surprise_yes").hide();
+				$(".surprise_no").show();
+			}
+			
+		};
+		window.onload = surp;
+		$(document).ready(function(){
+			
+			$('input[name="surprise"]').click(function(){
+				if($(this).attr("value")=="yes"){
+					$(".surprise_no").hide('slow');
+					$(".surprise_yes").show('slow');
+				}
+				if($(this).attr("value")=="no"){
+					$(".surprise_yes").hide('slow');
+					$(".surprise_no").show('slow');
+				}
+				
+			});
+		});
+	</script>
 	<!-- eof surprise -->
 
 <?php

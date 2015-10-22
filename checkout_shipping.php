@@ -307,6 +307,10 @@ else{
         <?php //echo FORM_REQUIRED_INPUT; ?>
         <?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_SURPRISE_TEXT . '</span>'; ?>
       </div>
+	  <div class="col-sm-12">
+			<div class="animated fadeInUp notice notice-success surprise_yes" style="display:none"><?php echo SURPRISEY_INFO?></div>
+		    <div class="animated fadeInUp notice notice-warning surprise_no" style="display:none" ><?php echo SURPRISEN_INFO?></div>
+		</div>
     </div>
 	<!-- eof surprise -->
 	
@@ -332,7 +336,32 @@ else{
     </div>
 	
 	<script type="text/javascript">
+
+		
+		$(document).ready(function(){
+			
+			$('input[name="surprise"]').click(function(){
+				if($(this).attr("value")=="yes"){
+					$(".surprise_no").hide('slow');
+					$(".surprise_yes").show('slow');
+				}
+				if($(this).attr("value")=="no"){
+					$(".surprise_yes").hide('slow');
+					$(".surprise_no").show('slow');
+				}
+				
+			});
+		});
+	
 	function anno(){
+		if (document.getElementById('surprisey').checked){
+			$(".surprise_no").hide();
+			$(".surprise_yes").show();
+		}
+		if(document.getElementById('surprisen').checked){
+			$(".surprise_yes").hide();
+			$(".surprise_no").show();
+		}
 				if (document.getElementById('anonymousy').checked){
 					$(".anonymous_no").hide();
 					$(".anonymous_yes").show();
