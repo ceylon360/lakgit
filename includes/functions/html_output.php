@@ -144,7 +144,7 @@
                                       'default_missing_image' => DIR_WS_IMAGES . 'no_image_available_150_150.gif',
                                       'isXhtml'               => true,
                                       'thumbs_dir_path'       => $thumbs_dir_path,
-                                      'thumb_quality'         => 75,
+                                      'thumb_quality'         => 90,
                                       'thumb_background_rgb' => array( 'red'   => 255,
                                                                        'green' => 255,
                                                                        'blue'  => 255 ) ) );
