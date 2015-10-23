@@ -209,7 +209,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 
 // if no shipping destination address was selected, use their own address as default
   if (!tep_session_is_registered('sendto')) {
-    $sendto = $customer_default_address_id;
+  //  $sendto = $customer_default_address_id;
   }
 
   $breadcrumb->add(NAVBAR_TITLE_1, tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
