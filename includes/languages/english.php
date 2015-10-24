@@ -297,3 +297,6 @@ define('ENTRY_SURPRISEY', 'Surprise Gift');
 
 define('ANONYMOUSY_INFO', 'Your Personal Information will not print on Delivery note');
 define('ANONYMOUSN_INFO', 'Would you like to send Gifts Anonymously ? If so select - Yes');
+define('SURPRISEY_INFO', 'Surprise Gift');
+define('SURPRISEN_INFO', 'Call before Deliver');
+

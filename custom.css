@@ -834,6 +834,7 @@ float:right;
 }
 .bg-gray{
     background-color: #FDFDFD;
+	border: 1px solid #F3F3F3;
 }
 
 .cartbx_total{
@@ -842,4 +843,16 @@ float:right;
     border-radius: 5px;
     color: white;
     font-size: 16px;
+}
+
+.datepicker-inline {
+    width: auto !important;
+}
+
+.bg-white{
+	background-color:#fff;
+	
+}
+.bg-gray2{
+	background-color:#F5F5F5
 }

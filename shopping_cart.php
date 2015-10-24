@@ -23,7 +23,7 @@
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
-
+<div class="card card-green animated fadeInRight" >
 <div class="page-header">
   <h1><?php echo HEADING_TITLE; ?></h1>
 </div>
@@ -193,7 +193,7 @@
 ?>
 
 </div>
-
+</div>
 </form>
   <div class="contentText">
 <div class="row">

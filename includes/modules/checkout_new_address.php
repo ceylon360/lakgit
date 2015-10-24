@@ -97,53 +97,36 @@ switch ($any_rest)
 
     <div class="form-group">
       <label for="inputFirstName" class="control-label col-sm-3"><?php echo ENTRY_FIRST_NAME; ?></label>
-      <div class="col-sm-9">
+      <div class="col-sm-4">
         <?php
         echo tep_draw_input_field('firstname', NULL, 'id="inputFirstName" aria-describedby="atFirstName" placeholder="' . ENTRY_FIRST_NAME . '"');
         if (tep_not_null(ENTRY_FIRST_NAME_TEXT)) echo '<span id="atFirstName" class="help-block">' . ENTRY_FIRST_NAME_TEXT . '</span>';
         ?>
       </div>
+		<div class="col-sm-5">
+			<?php
+				echo tep_draw_input_field('lastname', NULL, 'id="inputLastName" aria-describedby="atLastName" placeholder="' . ENTRY_LAST_NAME . '"');
+				if (tep_not_null(ENTRY_LAST_NAME_TEXT)) echo '<span id="atLastName" class="help-block">' . ENTRY_LAST_NAME_TEXT . '</span>';
+			?>
+		</div>
     </div>
-    <div class="form-group">
-      <label for="inputLastName" class="control-label col-sm-3"><?php echo ENTRY_LAST_NAME; ?></label>
-      <div class="col-sm-9">
-        <?php
-        echo tep_draw_input_field('lastname', NULL, 'id="inputLastName" aria-describedby="atLastName" placeholder="' . ENTRY_LAST_NAME . '"');
-        if (tep_not_null(ENTRY_LAST_NAME_TEXT)) echo '<span id="atLastName" class="help-block">' . ENTRY_LAST_NAME_TEXT . '</span>';
-        ?>
-      </div>
-    </div>
+
+
+
+
+	
+	  <div class="form-group">
+		  <label for="inputStreet" class="control-label col-sm-3"><?php echo ENTRY_STREET_ADDRESS; ?></label>
+		  <div class="col-sm-9">
+			  <?php //  echo tep_draw_input_field('street_address', NULL, 'id="inputStreet" aria-describedby="atStreetAddress" placeholder="' . ENTRY_STREET_ADDRESS . '"');
+				  echo tep_draw_textarea_field('street_address','soft', 30, 5, NULL, 'id="inputStreet" aria-describedby="atStreetAddress" placeholder="' . ENTRY_STREET_ADDRESS . '"');
+				  if (tep_not_null(ENTRY_STREET_ADDRESS_TEXT)) echo '<span id="atStreetAddress" class="help-block">' . ENTRY_STREET_ADDRESS_TEXT . '</span>';
+			  ?>
+		  </div>
+	  </div>
 
 <?php
-  if (ACCOUNT_COMPANY == 'true') {
-?>
-
-    <div class="form-group">
-      <label for="inputCompany" class="control-label col-sm-3"><?php echo ENTRY_COMPANY; ?></label>
-      <div class="col-sm-9">
-        <?php
-        echo tep_draw_input_field('company', NULL, 'id="inputCompany" aria-describedby="atCompany" placeholder="' . ENTRY_COMPANY . '"');
-        if (tep_not_null(ENTRY_COMPANY_TEXT)) echo '<span id="atCompany" class="help-block">' . ENTRY_COMPANY_TEXT . '</span>';
-        ?>
-      </div>
-    </div>
-
-<?php
-  }
-?>
-
-    <div class="form-group">
-      <label for="inputStreet" class="control-label col-sm-3"><?php echo ENTRY_STREET_ADDRESS; ?></label>
-      <div class="col-sm-9">
-        <?php
-        echo tep_draw_input_field('street_address', NULL, 'id="inputStreet" aria-describedby="atStreetAddress" placeholder="' . ENTRY_STREET_ADDRESS . '"');
-        if (tep_not_null(ENTRY_STREET_ADDRESS_TEXT)) echo '<span id="atStreetAddress" class="help-block">' . ENTRY_STREET_ADDRESS_TEXT . '</span>';
-        ?>
-      </div>
-    </div>
-
-<?php
-  if (ACCOUNT_SUBURB == 'true') {
+ /* if (ACCOUNT_SUBURB == 'true') {
 ?>
 
     <div class="form-group">
@@ -157,19 +140,19 @@ switch ($any_rest)
     </div>
 
 <?php
-  }
+  }*/
 ?>
 
-    <div class="form-group">
+  <!--  <div class="form-group">
       <label for="inputCity" class="control-label col-sm-3"><?php echo ENTRY_CITY; ?></label>
       <div class="col-sm-9">
-        <?php
+        <?php/*
         echo tep_draw_input_field('city', NULL, 'id="inputCity" aria-describedby="atCity" placeholder="' . ENTRY_CITY. '"');
         if (tep_not_null(ENTRY_CITY_TEXT)) echo '<span id="atCity" class="help-block">' . ENTRY_CITY_TEXT . '</span>';
-        ?>
+        */?>
       </div>
     </div>
-   <!-- <div class="form-group">
+    <div class="form-group">
       <label for="inputZip" class="control-label col-sm-3"><?php// echo ENTRY_POST_CODE; ?></label>
       <div class="col-sm-9">
         <?php/*
@@ -194,7 +177,7 @@ switch ($any_rest)
 
 <?php
 if($any_rest==3 || $any_rest==2){
-	echo '<div class="alert alert-warning">'.TEXT_RESTRICTION_P_MSG.'  <strong>'.$catrname.'</strong>. '.TEXT_RESTRICTION_D_MSG.' <strong>'.$rest_msg.'</strong></div>';
+	echo '<div class="notice notice-warning col-sm-offset-3">'.TEXT_RESTRICTION_P_MSG.'  <strong>'.$catrname.'</strong>. '.TEXT_RESTRICTION_D_MSG.' <strong>'.$rest_msg.'</strong></div>';
 }
 
   if (ACCOUNT_STATE == 'true') {
@@ -242,9 +225,28 @@ if($any_rest==3 || $any_rest==2){
         }
         if (tep_not_null(ENTRY_STATE_TEXT)) echo '<span class="help-block">' . ENTRY_STATE_TEXT . '</span>';
       */  ?>
+	  
       </div>
     </div>
 <?php
   }
 ?>
+<?php
+  if (ACCOUNT_COMPANY == 'true') {
+?>
+
+    <div class="form-group">
+      <label for="inputCompany" class="control-label col-sm-3"><?php echo ENTRY_TELEPHONE_NUMBER; ?></label>
+      <div class="col-sm-9">
+        <?php
+        echo tep_draw_input_field('company', NULL, 'id="inputCompany" aria-describedby="atCompany" placeholder="' . ENTRY_TELEPHONE_NUMBER . '"');
+        if (tep_not_null(ENTRY_TELEPHONE_NUMBER_TEXT)) echo '<span id="atCompany" class="help-block">' . ENTRY_TELEPHONE_NUMBER_TEXT . '</span>';
+        ?>
+      </div>
+    </div>
+
+<?php
+  }
+?>
+
 	</div>

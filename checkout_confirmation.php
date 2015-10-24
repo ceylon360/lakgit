@@ -96,33 +96,32 @@
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
-
-  <div class="row shop-tracking-status">
+<div class="card card-green animated fadeInRight" >
+<!--  step -->
+    <div class="row shop-tracking-status">
 		<div class="order-status">
-
-                <div class="order-status-timeline">
-                    <!-- class names: c0 c1 c2 c3 and c4 -->
-                    <div class="order-status-timeline-completion c3"></div>
-                </div>
-<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
+			
+			<div class="order-status-timeline">
+				<!-- class names: c0 c1 c2 c3 and c4 -->
+				<div class="order-status-timeline-completion c3"></div>
+			</div>
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
                 <div class="image-order-status image-order-status-new active img-circle">
-                    <span class="status">Delivery Information</span>
-                    <div class="icon"></div>
+                    <div class="icon fa fa-truck fa-flip-horizontal fa-2x"></div>
                 </div>
-				</a>
-				<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'); ?>">
+			</a>
+			
                 <div class="image-order-status image-order-status-active active img-circle">
-                    <span class="status">Payment Information</span>
-                    <div class="icon"></div>
+                     <div class="icon fa fa-calendar fa-2x"></div>
                 </div>
-				</a>
-                <div class="image-order-status image-order-status-completed active img-circle">
-                    <span class="status">Confirmation</span>
-                    <div class="icon"></div>
-                </div>
-
-            </div>
+			
+			<div class="image-order-status image-order-status-completed active img-circle">
+				<div class="icon fa fa-thumbs-up fa-2x"></div>
+			</div>
+			
+		</div>
 	</div>
+	<!-- end step -->
 <div class="page-header">
   <h1><?php echo HEADING_TITLE; ?></h1>
 </div>
@@ -144,7 +143,7 @@
 <div class="contentContainer">
   <div class="contentText">
 
-    <div class="panel panel-default">
+    <div class="card card-gray">
       <div class="panel-heading"><?php echo '<strong>' . HEADING_PRODUCTS . '</strong>' . tep_draw_button(TEXT_EDIT, 'glyphicon glyphicon-edit', tep_href_link(FILENAME_SHOPPING_CART), NULL, NULL, 'pull-right btn-info btn-xs' ); ?></div>
       <div class="panel-body">
     <table width="100%" class="table-hover order_confirmation">
@@ -216,8 +215,8 @@
     <?php
     if ($sendto != false) {
       ?>
-      <div class="col-sm-4">
-        <div class="panel panel-info">
+      <div class="col-sm-8">
+        <div class="card2 card-blue">
           <div class="panel-heading"><?php echo '<strong>' . HEADING_DELIVERY_ADDRESS . '</strong>' . tep_draw_button(TEXT_EDIT, 'glyphicon glyphicon-edit', tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs' ); ?></div>
           <div class="panel-body">
             <?php echo tep_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br />'); ?>
@@ -232,7 +231,7 @@
           if (tep_not_null($order->info['delivery_date'])) {
               ?>
 			  <div class="col-sm-4">
-      <div class="panel panel-warning">
+      <div class="card2 card-yellow">
         <div class="panel-heading">
 		
 		<?php echo '<strong>' . HEADING_SHIPPING_DATE . '</strong>' . tep_draw_button(TEXT_EDIT, 'glyphicon glyphicon-edit', tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs' ); ?>
@@ -256,7 +255,7 @@
 		if (tep_not_null($order->info['surprise'])) {
 		?>
 		<div class="col-sm-4">
-			<div class="panel panel-warning">
+			<div class="card2 card-yellow">
 				<div class="panel-heading">
 					
 					<?php echo '<strong>' . SURPRISE_TEXT . '</strong>' . tep_draw_button(TEXT_EDIT, 'glyphicon glyphicon-edit', tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs' ); ?>
@@ -274,7 +273,7 @@
 		if (tep_not_null($order->info['anonymous'])) {
 		?>
 		<div class="col-sm-4">
-			<div class="panel panel-warning">
+			<div class="card2 card-yellow">
 				<div class="panel-heading">
 					
 					<?php echo '<strong>' . ANONYMOUS_TEXT . '</strong>' . tep_draw_button(TEXT_EDIT, 'glyphicon glyphicon-edit', tep_href_link('account_pwa.php', '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs' ); ?>
@@ -302,7 +301,7 @@
       <?php
       if ($order->info['shipping_method']) {
         ?>
-        <div class="panel panel-info">
+        <div class="card2 card-blue">
           <div class="panel-heading"><?php echo '<strong>' . HEADING_SHIPPING_METHOD . '</strong>' . tep_draw_button(TEXT_EDIT, 'glyphicon glyphicon-edit', tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs' ); ?></div>
           <div class="panel-body">
             <?php echo $order->info['shipping_method']; ?>
@@ -313,7 +312,7 @@
       ?>
 	  </div>
 	  <div class="col-sm-4">
-      <div class="panel panel-warning">
+      <div class="card2 card-yellow">
         <div class="panel-heading"><?php echo '<strong>' . HEADING_PAYMENT_METHOD . '</strong>' . tep_draw_button(TEXT_EDIT, 'glyphicon glyphicon-edit', tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs' ); ?></div>
         <div class="panel-body">
           <?php echo $order->info['payment_method']; ?>
@@ -388,37 +387,33 @@
   </div>
 
   <div class="clearfix"></div>
-
-
-  
+<!--  step -->
     <div class="row shop-tracking-status">
 		<div class="order-status">
-
-                <div class="order-status-timeline">
-                    <!-- class names: c0 c1 c2 c3 and c4 -->
-                    <div class="order-status-timeline-completion c3"></div>
-                </div>
-<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
+			
+			<div class="order-status-timeline">
+				<!-- class names: c0 c1 c2 c3 and c4 -->
+				<div class="order-status-timeline-completion c3"></div>
+			</div>
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
                 <div class="image-order-status image-order-status-new active img-circle">
-                    <span class="status">Delivery Information</span>
-                    <div class="icon"></div>
+                    <div class="icon fa fa-truck fa-flip-horizontal fa-2x"></div>
                 </div>
-				</a>
-				<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'); ?>">
+			</a>
+			
                 <div class="image-order-status image-order-status-active active img-circle">
-                    <span class="status">Payment Information</span>
-                    <div class="icon"></div>
+                     <div class="icon fa fa-calendar fa-2x"></div>
                 </div>
-				</a>
-                <div class="image-order-status image-order-status-completed active img-circle">
-                    <span class="status">Confirmation</span>
-                    <div class="icon"></div>
-                </div>
-
-            </div>
+			
+			<div class="image-order-status image-order-status-completed active img-circle">
+				<div class="icon fa fa-thumbs-up fa-2x"></div>
+			</div>
+			
+		</div>
 	</div>
+	<!-- end step -->
 </div>
-
+</div>
 </form>
 
 <?php

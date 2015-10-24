@@ -1508,3 +1508,24 @@ function tep_get_category_restrict($category_id, $language_id) {
   }
   //man description 
   
+// Function to reset KISSit image thumbs cache entries and directories
+function tep_destroy_thumbs_dir( $dir = '' ) { 
+    if (!is_dir($dir) || is_link($dir)) return unlink($dir); 
+    foreach (scandir($dir) as $file) { 
+    	if ($file == '.' || $file == '..') continue; 
+		if (!tep_destroy_thumbs_dir($dir . '/' . $file)) { 
+			chmod($dir . '/' . $file, 0777); 
+			if (!tep_destroy_thumbs_dir($dir . '/' . $file)) return false; 
+		}; 
+    } 
+    return rmdir($dir); 
+}
+
+// Function to reset KISSit image thumbs cache entries
+function tep_cfg_reset_thumbs_cache( $action = 'false' ) {
+  	if ($action == 'reset' ) {
+		$dir = '../' . DIR_WS_IMAGES . KISSIT_THUMBS_MAIN_DIR;
+		tep_destroy_thumbs_dir($dir);
+		tep_db_query( "UPDATE configuration SET configuration_value='false' WHERE configuration_key='KISSIT_RESET_IMAGE_THUMBS'" );
+    }
+}
