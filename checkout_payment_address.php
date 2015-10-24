@@ -30,7 +30,7 @@
   $process = false;
   if (isset($HTTP_POST_VARS['action']) && ($HTTP_POST_VARS['action'] == 'submit') && isset($HTTP_POST_VARS['formid']) && ($HTTP_POST_VARS['formid'] == $sessiontoken)) {
 // process a new billing address
-    if (tep_not_null($HTTP_POST_VARS['firstname']) && tep_not_null($HTTP_POST_VARS['lastname']) && tep_not_null($HTTP_POST_VARS['street_address'])) {
+    if (tep_not_null($HTTP_POST_VARS['firstname']) && tep_not_null($HTTP_POST_VARS['lastname'])) {
       $process = true;
 
       if (ACCOUNT_GENDER == 'true') $gender = tep_db_prepare_input($HTTP_POST_VARS['gender']);
@@ -51,13 +51,13 @@
         $state = tep_db_prepare_input($HTTP_POST_VARS['state']);
       }
 
-      if (ACCOUNT_GENDER == 'true') {
+  /*    if (ACCOUNT_GENDER == 'true') {
         if ( ($gender != 'm') && ($gender != 'f') ) {
           $error = true;
 
           $messageStack->add('checkout_address', ENTRY_GENDER_ERROR);
         }
-      }
+      }*/
 
       if (strlen($firstname) < ENTRY_FIRST_NAME_MIN_LENGTH) {
         $error = true;
@@ -71,13 +71,13 @@
         $messageStack->add('checkout_address', ENTRY_LAST_NAME_ERROR);
       }
 
-      if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH) {
+      /* if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH) {
         $error = true;
 
         $messageStack->add('checkout_address', ENTRY_STREET_ADDRESS_ERROR);
       }
 
-      if (strlen($postcode) < ENTRY_POSTCODE_MIN_LENGTH) {
+     if (strlen($postcode) < ENTRY_POSTCODE_MIN_LENGTH) {
         $error = true;
 
         $messageStack->add('checkout_address', ENTRY_POST_CODE_ERROR);
@@ -87,9 +87,9 @@
         $error = true;
 
         $messageStack->add('checkout_address', ENTRY_CITY_ERROR);
-      }
+      }*/
 
-      if (ACCOUNT_STATE == 'true') {
+    /*  if (ACCOUNT_STATE == 'true') {
         $zone_id = 0;
         $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "'");
         $check = tep_db_fetch_array($check_query);
@@ -111,7 +111,7 @@
             $messageStack->add('checkout_address', ENTRY_STATE_ERROR);
           }
         }
-      }
+      }*/
 
       if ( (is_numeric($country) == false) || ($country < 1) ) {
         $error = true;
@@ -196,9 +196,33 @@
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
-
+<!--  step -->
+    <div class="row shop-tracking-status">
+		<div class="order-status">
+			
+			<div class="order-status-timeline">
+				<!-- class names: c0 c1 c2 c3 and c4 -->
+				<div class="order-status-timeline-completion c2"></div>
+			</div>
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
+                <div class="image-order-status image-order-status-new active img-circle">
+                    <div class="icon fa fa-truck fa-flip-horizontal fa-2x"></div>
+                </div>
+			</a>
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'); ?>">
+                <div class="image-order-status image-order-status-active active img-circle">
+                     <div class="icon fa fa-calendar fa-2x"></div>
+                </div>
+			</a>
+			<div class="image-order-status image-order-status-completed img-circle">
+				<div class="icon fa fa-thumbs-up fa-2x"></div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- end step -->
 <div class="page-header">
-  <h1><?php echo HEADING_TITLE; ?></h1>
+<h1><?php echo HEADING_TITLE; ?></h1>
 </div>
 
 <?php
@@ -210,7 +234,7 @@
 <?php echo tep_draw_form('checkout_address', tep_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL'), 'post', 'class="form-horizontal"', true); ?>
 
 <div class="contentContainer">
-
+<!--
 <?php
   if ($process == false) {
 ?>
@@ -269,7 +293,7 @@
       }
 ?>
 
-  </div>
+  </div>-->
 
 <?php
     }
@@ -278,11 +302,13 @@
   if ($addresses_count < MAX_ADDRESS_BOOK_ENTRIES) {
 ?>
 
-  <h2><?php echo TABLE_HEADING_NEW_PAYMENT_ADDRESS; ?></h2>
+  <h2><?php // echo TABLE_HEADING_NEW_PAYMENT_ADDRESS; ?></h2>
   
   <div class="alert alert-info"><?php echo TEXT_CREATE_NEW_PAYMENT_ADDRESS; ?></div>
 
-  <?php require(DIR_WS_MODULES . 'checkout_new_address.php'); ?>
+  
+  
+  <?php require(DIR_WS_MODULES . 'checkout_new_address_sender.php'); ?>
 
 <?php
   }
@@ -294,24 +320,31 @@
 
   <div class="clearfix"></div>
 
-  <div class="contentText">
-    <div class="stepwizard">
-      <div class="stepwizard-row">
-        <div class="stepwizard-step">
-          <button type="button" class="btn btn-default btn-circle" disabled="disabled">1</button>
-          <p><?php echo CHECKOUT_BAR_DELIVERY; ?></p>
-        </div>
-        <div class="stepwizard-step">
-          <button type="button" class="btn btn-primary btn-circle">2</button>
-          <p><?php echo CHECKOUT_BAR_PAYMENT; ?></p>
-        </div>
-        <div class="stepwizard-step">
-          <button type="button" class="btn btn-default btn-circle" disabled="disabled">3</button>
-          <p><?php echo CHECKOUT_BAR_CONFIRMATION; ?></p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!--  step -->
+    <div class="row shop-tracking-status">
+		<div class="order-status">
+			
+			<div class="order-status-timeline">
+				<!-- class names: c0 c1 c2 c3 and c4 -->
+				<div class="order-status-timeline-completion c2"></div>
+			</div>
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
+                <div class="image-order-status image-order-status-new active img-circle">
+                    <div class="icon fa fa-truck fa-flip-horizontal fa-2x"></div>
+                </div>
+			</a>
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'); ?>">
+                <div class="image-order-status image-order-status-active active img-circle">
+                     <div class="icon fa fa-calendar fa-2x"></div>
+                </div>
+			</a>
+			<div class="image-order-status image-order-status-completed img-circle">
+				<div class="icon fa fa-thumbs-up fa-2x"></div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- end step -->
 
 
 <?php

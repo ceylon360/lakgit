@@ -120,7 +120,7 @@
       $products_name .= '</td>';
 
       $products_name .= '  <td align="right" valign="top"><strong>' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</strong></td>' ;
-	   $products_name .= '  <td align="right" valign="top"><strong>' . $currencies->display_price_lk($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</strong></td>' .
+	  // $products_name .= '  <td align="right" valign="top"><strong>' . $currencies->display_price_lk($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</strong></td>' .
                         '</tr>';
     }
     echo $products_name;

@@ -37,6 +37,7 @@ if (($PHP_SELF == 'login.php')
      || ($PHP_SELF == 'checkout_shipping_address.php')	
      || ($PHP_SELF == 'checkout_shipping.php')	
      || ($PHP_SELF == 'checkout_payment.php')
+	 || ($PHP_SELF == 'checkout_payment_address.php')
      || ($PHP_SELF == 'checkout_confirmation.php')) {
       $cart_contents_string = '';
 

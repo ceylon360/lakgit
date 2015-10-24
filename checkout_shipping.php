@@ -41,7 +41,22 @@
       }
     }
   }
-
+// if no billing destination address was selected, use the customers own address as default
+if (!tep_session_is_registered('billto')) {
+    tep_session_register('billto');
+    $billto = $customer_default_address_id;
+} else {
+	// verify the selected billing address
+    if ( (is_array($billto) && empty($billto)) || is_numeric($billto) ) {
+		$check_address_query = tep_db_query("select count(*) as total from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customer_id . "' and address_book_id = '" . (int)$billto . "'");
+		$check_address = tep_db_fetch_array($check_address_query);
+		
+		if ($check_address['total'] != '1') {
+			$billto = $customer_default_address_id;
+			if (tep_session_is_registered('payment')) tep_session_unregister('payment');
+		}
+    }
+}
   require(DIR_WS_CLASSES . 'order.php');
   $order = new order;
 
@@ -250,16 +265,17 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
         </div> 
       <div class="col-sm-8">
 	  <h4 ><?php echo TABLE_HEADING_SHIPPING_ADDRESS; ?></h4>
+	  <?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'glyphicon glyphicon-home', tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs'); ?>
       <div class="notice notice-success">
         <div class="panel-heading hide"><?php echo TITLE_SHIPPING_ADDRESS; ?></div>
         <div class="panel-body">
           <?php echo tep_address_label($customer_id, $sendto, true, ' ', ''); ?>
 		  <div class="pull-right">
-          <?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'glyphicon glyphicon-home', tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL')); ?>
+          <?php //echo tep_draw_button(IMAGE_BUTTON_CHANGE_ADDRESS, 'glyphicon glyphicon-home', tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs'); ?>
         </div>
         </div>
       </div>
-	  
+
 	  	  <!--<div class="alert alert-warning">
         <?php /** echo TEXT_CHOOSE_SHIPPING_DESTINATION;**/ ?>
         <div class="clearfix"></div>
@@ -268,7 +284,31 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
       </div> -->
     </div>
 	 <!-- ship date -->
-  
+	  <div class="col-sm-8">
+	  		  
+					  
+				
+		  <h4 ><?php echo TABLE_HEADING_BILLING_ADDRESS; ?></h4>
+<?php echo tep_draw_button(IMAGE_BUTTON_CHANGE_NAME, 'glyphicon glyphicon-user', tep_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL'), NULL, NULL, 'pull-right btn-info btn-xs'); ?>
+		  <div class="notice notice-success">
+			  
+			  <div class="panel-body">
+			 
+				  <?php echo tep_address_label($customer_id, $billto, true, ' ', ''); ?>
+				   <?php //echo '</br> Telephone : '. $order->customer['telephone']; ?>
+				  
+				  
+			  </div>
+		  </div>
+	  </div>
+   <!--   <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><?php //echo TITLE_BILLING_ADDRESS; ?></div>
+        <div class="panel-body">
+          <?php// echo tep_address_label($customer_id, $billto, true, ' ', '<br />'); ?>
+        </div>
+      </div>
+    </div> -->
 <div class="col-sm-8">
   <hr>
 	<?php
