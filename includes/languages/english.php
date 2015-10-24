@@ -204,6 +204,7 @@ define('IMAGE_BUTTON_TELL_A_FRIEND', 'Tell a Friend');
 define('IMAGE_BUTTON_UPDATE', 'Update');
 define('IMAGE_BUTTON_UPDATE_CART', 'Update Cart');
 define('IMAGE_BUTTON_WRITE_REVIEW', 'Write Review');
+define('IMAGE_BUTTON_CHANGE_NAME', 'Change Name');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'Delete');
 define('SMALL_IMAGE_BUTTON_EDIT', 'Edit');

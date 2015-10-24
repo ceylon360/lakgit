@@ -72,6 +72,7 @@ function hasBlocks($group) {
      || ($PHP_SELF == 'checkout_shipping_address.php')	
      || ($PHP_SELF == 'checkout_shipping.php')	
      || ($PHP_SELF == 'checkout_payment.php')
+	 || ($PHP_SELF == 'checkout_payment_address.php')
      || ($PHP_SELF == 'checkout_confirmation.php')
      || ($PHP_SELF == 'checkout_success_pwa.php')
 	 ) {
