@@ -69,7 +69,7 @@
     $products_name = '<a href="' . tep_href_link('product_info.php', 'products_id=' . $product_info['products_id']) . '" itemprop="url"><span itemprop="name">' . $product_info['products_name'] . '</span></a>';
 $stock_check .='';
     if (tep_not_null($product_info['products_model'])) {
-      $products_name .= '<br /><small>[<span itemprop="model">' . $product_info['products_model'] . '</span>]</small>';
+      $products_name .= '<br /><small class="mdl">[<span itemprop="model">' . $product_info['products_model'] . '</span>]</small>';
     
 	//stock info
 	    if (tep_get_products_stock($product_info['products_id'])>0 ) {
@@ -193,7 +193,7 @@ $stock_check .='';
       echo '<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"><meta itemprop="ratingValue" content="' . $reviews['avgrating'] . '" /><meta itemprop="ratingCount" content="' . $reviews['count'] . '" /></span>';
     }
 ?>
-<div class="card card-gray animated fadeInLeft row" >
+<div class="card card-gray animated fadeIn row" >
 
 				<div class="col-md-4">
 				<?php
@@ -259,10 +259,34 @@ $stock_check .='';
 					<div class="product-title"  itemprop="offers" itemscope itemtype="http://schema.org/Offer"><?php echo $products_name; ?></div>
 					<div class="product-desc"><?php echo stripslashes($product_info['products_description']); ?></div>
 					<div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>
+					      <tr>
+		  <td><table border="0" cellspacing="0" cellpadding="2">
+			  
+			  <?php
+				  $text_attributes_query = tep_db_query("select pta.*, cbta.products_text_attributes_text from products_text_attributes as pta, products_text_attributes_enabled as ptae, customers_basket_text_attributes as cbta where ptae.products_text_attributes_id = pta.products_text_attributes_id and ptae.products_id = " . tep_get_prid($HTTP_GET_VARS['products_id']) . " and cbta.products_text_attributes_id = pta.products_text_attributes_id and cbta.session_id = '" . tep_session_id() . "'");
+				  if (tep_db_num_rows($text_attributes_query) == 0)  
+				  $text_attributes_query = tep_db_query("select pta.* from products_text_attributes as pta, products_text_attributes_enabled as ptae where ptae.products_text_attributes_id = pta.products_text_attributes_id and ptae.products_id = " . tep_get_prid($HTTP_GET_VARS['products_id']));
+				  
+				  while ($text_attributes = tep_db_fetch_array($text_attributes_query)) {
+				  ?>
+				  <tr>
+					  <td class=main><?php echo $text_attributes['products_text_attributes_name'] . ': </td><td>' . tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], tep_not_null($text_attributes['products_text_attributes_text']) ? $text_attributes['products_text_attributes_text'] : ''); ?></td>
+				  </tr>
+				  <?php
+				  }
+			  ?>
+			  
+		  </table></td>
+      </tr>
 					<hr>
-					<div class="product-price"><?php echo $products_price; ?></div>
-					<div class="product-stock">In Stock</div>
-					    <h4><?php echo TEXT_PRODUCT_OPTIONS; ?></h4>
+					
+<?php
+    $products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$HTTP_GET_VARS['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");
+    $products_attributes = tep_db_fetch_array($products_attributes_query);
+    if ($products_attributes['total'] > 0) {
+?>
+
+    <h4><?php echo TEXT_PRODUCT_OPTIONS; ?></h4>
 
     <p>
 <?php
@@ -283,11 +307,28 @@ $stock_check .='';
           $selected_attribute = false;
         }
 ?>
-      <strong><?php echo $products_options_name['products_options_name'] . ':'; ?></strong><br /><?php echo tep_draw_pull_down_menu('id[' . $products_options_name['products_options_id'] . ']', $products_options_array, $selected_attribute, 'style="width: 200px;"'); ?><br />
+      <strong><?php echo $products_options_name['products_options_name'] . ':'; ?></strong><?php echo tep_draw_pull_down_menu('id[' . $products_options_name['products_options_id'] . ']', $products_options_array, $selected_attribute, 'style="width: 200px;"'); ?><br />
 <?php
       }
 ?>
     </p>
+
+<?php
+    }
+?>
+
+	  <!-- denuz products text attributes -->
+	  
+
+	  
+	  <!-- eof denuz products text attributes -->
+	  
+
+    <div class="clearfix"></div>
+
+					<div class="product-price"><?php echo $products_price; ?></div>
+					<div class="product-stock">In Stock</div>
+					
 					<hr>
 					<div class="buttonSet row">
     <div class="col-xs-6"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'glyphicon glyphicon-shopping-cart', null, 'primary', null, 'btn-success'); ?></div>

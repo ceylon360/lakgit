@@ -135,7 +135,7 @@
         	$recently_viewed_content .= '<div class="row">';
 
         	foreach ($recently_viewed_array as $products_id) {
-        		$recently_viewed_content .= '  <div class="col-sm-6 col-md-3  lowMargin">';
+        		$recently_viewed_content .= '  <div class="col-sm-6 col-md-4  lowMargin">';
 
         		switch (MODULE_CONTENT_PRODUCT_INFO_RECENTLY_VIEWED_HEIGHT_MODE) {
         		case 'Equal Height':

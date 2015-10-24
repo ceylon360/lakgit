@@ -98,7 +98,7 @@
         $products_price_slave = $currencies->display_price($attributes_values['products_price'], tep_get_tax_rate($attributes_values['products_tax_class_id']));
       }
             
-      $optional_rel_prods_content .= '  <div class="col-sm-6 col-md-4">';
+      $optional_rel_prods_content .= '  <div class="col-sm-6 col-md-12">';
 
       switch (MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_HEIGHT_MODE) {
         case 'Equal Height':

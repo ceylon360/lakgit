@@ -299,3 +299,7 @@ a {
 .card-gray {
     border-top: 4px solid #9E9E9E;
 }
+.mdl {
+    color: #888;
+    font-size: 16px;
+}

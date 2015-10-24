@@ -58,7 +58,7 @@ $pagetext=stripslashes($page_check[pages_html_text]);
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
-
+<div class="card card-blue animated fadeIn" >
 <div class="page-header">
   <h1><?php echo HEADING_TITLE; ?></h1>
 </div>
@@ -128,7 +128,7 @@ $pagetext=stripslashes($page_check[pages_html_text]);
     <div class="text-right"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'glyphicon glyphicon-send', null, 'primary', null, 'btn-success'); ?></div>
   </div>
 </div>
-
+</div>
 </form>
 
 <?php
