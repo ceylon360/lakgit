@@ -28,15 +28,17 @@
 //////////
 @import "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
 .shop-tracking-status .form-horizontal{margin-bottom:50px}
-.shop-tracking-status .order-status{position:relative;margin:25px}
-.shop-tracking-status .order-status-timeline{height:12px;border:1px solid #ececec;border-radius:7px;background:#f5f5f5;}
-.shop-tracking-status .order-status-timeline .order-status-timeline-completion{height:8px;margin:1px;border-radius:7px;background:#73C367;width:0px}
+.shop-tracking-status .order-status{    position: relative;    margin: 25px;    WIDTH: 60%;    margin-left: auto;    margin-right: auto;}
+.shop-tracking-status .order-status-timeline{height:5px;border:1px solid #ececec;border-radius:7px;background:#f5f5f5;}
+.shop-tracking-status .order-status-timeline .order-status-timeline-completion{height: 4px;margin: 0px;border-radius: 7px;background: #8BC34A;width: 0px;}
 .shop-tracking-status .order-status-timeline .order-status-timeline-completion.c1{width:22%}
 .shop-tracking-status .order-status-timeline .order-status-timeline-completion.c1_1{width:30%}
 .shop-tracking-status .order-status-timeline .order-status-timeline-completion.c2{width:46%}
+.shop-tracking-status .order-status-timeline .order-status-timeline-completion.c2_2{width:80%}
 .shop-tracking-status .order-status-timeline .order-status-timeline-completion.c3{width:100%}
-.shop-tracking-status .image-order-status{border:1px solid #f4f4f4;padding:9px;background-color:#fdfdfd;position:absolute;margin-top:-32px}.shop-tracking-status .image-order-status.disabled{filter:url("data:image/svg+xml;utf8,<svg%20xmlns='http://www.w3.org/2000/svg'><filter%20id='grayscale'><feColorMatrix%20type='matrix'%20values='0.3333%200.3333%200.3333%200%200%200.3333%200.3333%200.3333%200%200%200.3333%200.3333%200.3333%200%200%200%200%200%201%200'/></filter></svg>#grayscale");filter:grayscale(100%);-webkit-filter:grayscale(100%);-moz-filter:grayscale(100%);-ms-filter:grayscale(100%);-o-filter:grayscale(100%);filter:gray;}
-.shop-tracking-status .image-order-status.active{border: 1px solid #73C367;}
+.shop-tracking-status .image-order-status{border:1px solid #f4f4f4;padding:9px;background-color:#fdfdfd;position:absolute;margin-top: -25px;font-size: 10px;}
+.shop-tracking-status .image-order-status.disabled{filter:url("data:image/svg+xml;utf8,<svg%20xmlns='http://www.w3.org/2000/svg'><filter%20id='grayscale'><feColorMatrix%20type='matrix'%20values='0.3333%200.3333%200.3333%200%200%200.3333%200.3333%200.3333%200%200%200.3333%200.3333%200.3333%200%200%200%200%200%201%200'/></filter></svg>#grayscale");filter:grayscale(100%);-webkit-filter:grayscale(100%);-moz-filter:grayscale(100%);-ms-filter:grayscale(100%);-o-filter:grayscale(100%);filter:gray;}
+.shop-tracking-status .image-order-status.active{border: 1px solid #73C367;color:#8BC34A;}
 .shop-tracking-status .image-order-status.active .status{color:#2ecc71;text-shadow:0px 0px 1px #777}
 .shop-tracking-status .image-order-status .icon{padding-left: 0px;}
 .shop-tracking-status .image-order-status .status{position:absolute;text-shadow:1px 1px #eee;color:#333;width:180px;top:-50px;left:50px}
@@ -232,3 +234,68 @@
 /* small margine for product grid */
 
 .lowMargin{padding-left:5px; padding-right:5px;}
+
+/* Gray Background */
+
+body {
+    background-color: #F5F5F5;
+}
+.page-header {
+    padding-bottom: 6px;
+    margin: 30px 0 15px;
+    border-bottom: 1px solid #eee;
+}
+.cat_nav ul li {
+    background: #FFFFFF none repeat scroll 0 0;
+    border-bottom: 1px solid #eaeaea;
+    border-left: 4px solid #FFFFFF;
+    /* color: #333333; */
+    /* padding: 5px 12px; */
+    /* position: relative; */
+    /* transition: all 0.6s ease 0s; */
+}
+a {
+    color: #3E3E3E;
+    text-decoration: none;
+}
+
+.breadcrumb {
+    /* padding: 8px 15px; */
+    /* margin-bottom: 20px; */
+    /* list-style: none; */
+    /* background-color: #f5f5f5; */
+    border-radius: 0px;
+    border-top: 1px solid #DDD;
+	border-bottom: 1px solid #DDD;
+}
+
+.card {
+	background-color: #FFF;
+    border: 1px solid #DDD;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+	padding:20px;
+	margin-bottom:30px;
+    
+}
+.card2 {
+	background-color: #FFF;
+    border: 1px solid #DDD;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+	padding:10px;
+	margin-bottom:15px;
+    
+}
+.card-blue{
+	border-top: 4px solid #3AA1F4;
+	
+}	
+.card-green{
+	border-top: 4px solid #8BC34A;
+}	
+
+.card-yellow{
+	border-top: 4px solid #FFC107;
+}
+.card-gray {
+    border-top: 4px solid #9E9E9E;
+}

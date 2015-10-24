@@ -219,6 +219,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
+<div class="card card-green animated fadeInRight" >
 <!--  step -->
     <div class="row shop-tracking-status">
 		<div class="order-status">
@@ -244,6 +245,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 		</div>
 	</div>
 	<!-- end step -->
+
 <div class="page-header">
   <h1><?php echo HEADING_TITLE; ?></h1>
 </div>
@@ -410,7 +412,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 		</div>
 	</div>
 	<!-- end step -->
-  
+ </div> 
 
 <?php
   if ($process == true) {

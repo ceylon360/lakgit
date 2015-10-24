@@ -102,7 +102,7 @@ function check_form() {
   }
 }
 //--></script>
-
+<div class="card card-blue animated fadeIn" >
 <div class="page-header">
   <h1><?php echo HEADING_TITLE_1; ?></h1>
 </div>
@@ -212,7 +212,7 @@ function check_form() {
   </div>
 
 </div>
-
+</div>
 </form>
 
 <?php

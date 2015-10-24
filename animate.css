@@ -1274,8 +1274,8 @@ Copyright (c) 2015 Daniel Eden
 @-webkit-keyframes fadeInLeftBig {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(-2000px, 0, 0);
-    transform: translate3d(-2000px, 0, 0);
+    -webkit-transform: translate3d(-500px, 0, 0);
+    transform: translate3d(-500px, 0, 0);
   }
 
   to {

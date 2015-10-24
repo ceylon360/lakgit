@@ -106,32 +106,30 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 ?>
 
 <?php echo $payment_modules->javascript_validation(); ?>
-  <!--  step -->
+<div class="card card-green animated fadeInRight" >
+<!--  step -->
     <div class="row shop-tracking-status">
 		<div class="order-status">
-
-                <div class="order-status-timeline">
-                    <!-- class names: c0 c1 c2 c3 and c4 -->
-                    <div class="order-status-timeline-completion c2"></div>
-                </div>
-<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
+			
+			<div class="order-status-timeline">
+				<!-- class names: c0 c1 c2 c3 and c4 -->
+				<div class="order-status-timeline-completion c2_2"></div>
+			</div>
+			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
                 <div class="image-order-status image-order-status-new active img-circle">
-                    <span class="status">Delivery Information</span>
-                    <div class="icon"></div>
+                    <div class="icon fa fa-truck fa-flip-horizontal fa-2x"></div>
                 </div>
-				</a>
-				
+			</a>
+			
                 <div class="image-order-status image-order-status-active active img-circle">
-                    <span class="status">Payment Information</span>
-                    <div class="icon"></div>
+                     <div class="icon fa fa-calendar fa-2x"></div>
                 </div>
-				
-                <div class="image-order-status image-order-status-completed active img-circle">
-                    <span class="status">Confirmation</span>
-                    <div class="icon"></div>
-                </div>
-
-            </div>
+			
+			<div class="image-order-status image-order-status-completed img-circle">
+				<div class="icon fa fa-thumbs-up fa-2x"></div>
+			</div>
+			
+		</div>
 	</div>
 	<!-- end step -->
 <div class="page-header">
@@ -158,7 +156,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 
   <h2><?php// echo TABLE_HEADING_BILLING_ADDRESS; ?></h2>
 
-  <div class="contentText row">
+  <div class="contentText row hide">
     <div class="col-sm-12">
       <div class="notice notice-info">
         <?php echo TEXT_PAYMENT_RULES; ?>
@@ -181,7 +179,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 
   <div class="clearfix"></div>
 
-  <h2><?php echo TABLE_HEADING_PAYMENT_METHOD; ?></h2>
+  <h4><?php echo TABLE_HEADING_PAYMENT_METHOD; ?></h4>
 
 <?php
   $selection = $payment_modules->selection();
@@ -304,29 +302,26 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
   <div class="clearfix"></div>
 
 
-    <!--  step -->
+  <!--  step -->
     <div class="row shop-tracking-status">
 		<div class="order-status">
 			
 			<div class="order-status-timeline">
 				<!-- class names: c0 c1 c2 c3 and c4 -->
-				<div class="order-status-timeline-completion c2"></div>
+				<div class="order-status-timeline-completion c2_2"></div>
 			</div>
 			<a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>">
                 <div class="image-order-status image-order-status-new active img-circle">
-                    <span class="status">Delivery Information</span>
-                    <div class="icon"></div>
+                    <div class="icon fa fa-truck fa-flip-horizontal fa-2x"></div>
                 </div>
 			</a>
 			
                 <div class="image-order-status image-order-status-active active img-circle">
-                    <span class="status">Payment Information</span>
-                    <div class="icon"></div>
+                     <div class="icon fa fa-calendar fa-2x"></div>
                 </div>
 			
-			<div class="image-order-status image-order-status-completed active img-circle">
-				<span class="status">Confirmation</span>
-				<div class="icon"></div>
+			<div class="image-order-status image-order-status-completed img-circle">
+				<div class="icon fa fa-thumbs-up fa-2x"></div>
 			</div>
 			
 		</div>
@@ -334,7 +329,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 	<!-- end step -->
 
 </div>
-
+</div>
 </form>
 
 <?php

@@ -245,7 +245,7 @@ if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
   require(DIR_WS_INCLUDES . 'template_top.php');
   require('includes/check_account.js.php');
 ?>
-
+<div class="card card-green animated fadeInRight" >
 <div class="page-header">
   <h1><?php echo HEADING_TITLE; ?></h1>
 </div>
@@ -507,7 +507,7 @@ if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
   </div>
 
 </div>
-
+</div>
 </form>
 
 <?php

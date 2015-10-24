@@ -190,7 +190,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
-
+<div class="card card-green animated fadeInRight" >
     <!--  step -->
     <div class="row shop-tracking-status">
 		<div class="order-status">
@@ -249,7 +249,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
         </div> 
       <div class="col-sm-8">
 	  <h4 ><?php echo TABLE_HEADING_SHIPPING_ADDRESS; ?></h4>
-      <div class="notice notice-success">
+      <div class="bg-gray">
         <div class="panel-heading hide"><?php echo TITLE_SHIPPING_ADDRESS; ?></div>
         <div class="panel-body">
           <?php echo tep_address_label($customer_id, $sendto, true, ' ', ''); ?>
@@ -570,7 +570,7 @@ else{
   <div class="clearfix"></div>
   </div>
 </div>
-
+</div>
 </form>
 
 <?php
