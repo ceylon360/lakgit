@@ -69,7 +69,7 @@
     $products_name = '<a href="' . tep_href_link('product_info.php', 'products_id=' . $product_info['products_id']) . '" itemprop="url"><span itemprop="name">' . $product_info['products_name'] . '</span></a>';
 $stock_check .='';
     if (tep_not_null($product_info['products_model'])) {
-      $products_name .= '<br /><small class="mdl">[<span itemprop="model">' . $product_info['products_model'] . '</span>]</small>';
+      $products_name .= '<br /><small class="mdl">[<span itemprop="sku">' . $product_info['products_model'] . '</span>]</small>';
     
 	//stock info
 	    if (tep_get_products_stock($product_info['products_id'])>0 ) {
@@ -88,13 +88,15 @@ $stock_check .='';
 
 
 <div itemscope itemtype="http://schema.org/Product">
-
+<meta itemprop="name" content="<?php echo $product_info['products_name'] ?>" />
+<meta itemprop="sku" content="<?php echo $product_info['products_model'] ?>" />
+<!--
 <div class="page-header">
   <h1 class="pull-right" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><?php echo $products_price; ?></h1>
   <h1><?php echo $products_name; ?></h1>
   <div><?php echo $stock_check; ?></div>
 </div>
-
+-->
 <?php
   if ($messageStack->size('product_action') > 0) {
     echo $messageStack->output('product_action');
@@ -105,70 +107,8 @@ $stock_check .='';
   <div class="contentText">
 
 
-<div itemprop="description">
-  <?php echo stripslashes($product_info['products_description']); ?>
-</div>
 
-<?php
-    $products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$HTTP_GET_VARS['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");
-    $products_attributes = tep_db_fetch_array($products_attributes_query);
-    if ($products_attributes['total'] > 0) {
-?>
 
-    <h4><?php echo TEXT_PRODUCT_OPTIONS; ?></h4>
-
-    <p>
-<?php
-      $products_options_name_query = tep_db_query("select distinct popt.products_options_id, popt.products_options_name from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$HTTP_GET_VARS['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "' order by popt.products_options_name");
-      while ($products_options_name = tep_db_fetch_array($products_options_name_query)) {
-        $products_options_array = array();
-        $products_options_query = tep_db_query("select pov.products_options_values_id, pov.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_OPTIONS_VALUES . " pov where pa.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pa.options_id = '" . (int)$products_options_name['products_options_id'] . "' and pa.options_values_id = pov.products_options_values_id and pov.language_id = '" . (int)$languages_id . "'");
-        while ($products_options = tep_db_fetch_array($products_options_query)) {
-          $products_options_array[] = array('id' => $products_options['products_options_values_id'], 'text' => $products_options['products_options_values_name']);
-          if ($products_options['options_values_price'] != '0') {
-            $products_options_array[sizeof($products_options_array)-1]['text'] .= ' (' . $products_options['price_prefix'] . $currencies->display_price($products_options['options_values_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) .') ';
-          }
-        }
-
-        if (is_string($HTTP_GET_VARS['products_id']) && isset($cart->contents[$HTTP_GET_VARS['products_id']]['attributes'][$products_options_name['products_options_id']])) {
-          $selected_attribute = $cart->contents[$HTTP_GET_VARS['products_id']]['attributes'][$products_options_name['products_options_id']];
-        } else {
-          $selected_attribute = false;
-        }
-?>
-      <strong><?php echo $products_options_name['products_options_name'] . ':'; ?></strong><br /><?php echo tep_draw_pull_down_menu('id[' . $products_options_name['products_options_id'] . ']', $products_options_array, $selected_attribute, 'style="width: 200px;"'); ?><br />
-<?php
-      }
-?>
-    </p>
-
-<?php
-    }
-?>
-
-	  <!-- denuz products text attributes -->
-	  
-      <tr>
-		  <td><table border="0" cellspacing="0" cellpadding="2">
-			  
-			  <?php
-				  $text_attributes_query = tep_db_query("select pta.*, cbta.products_text_attributes_text from products_text_attributes as pta, products_text_attributes_enabled as ptae, customers_basket_text_attributes as cbta where ptae.products_text_attributes_id = pta.products_text_attributes_id and ptae.products_id = " . tep_get_prid($HTTP_GET_VARS['products_id']) . " and cbta.products_text_attributes_id = pta.products_text_attributes_id and cbta.session_id = '" . tep_session_id() . "'");
-				  if (tep_db_num_rows($text_attributes_query) == 0)  
-				  $text_attributes_query = tep_db_query("select pta.* from products_text_attributes as pta, products_text_attributes_enabled as ptae where ptae.products_text_attributes_id = pta.products_text_attributes_id and ptae.products_id = " . tep_get_prid($HTTP_GET_VARS['products_id']));
-				  
-				  while ($text_attributes = tep_db_fetch_array($text_attributes_query)) {
-				  ?>
-				  <tr>
-					  <td class=main><?php echo $text_attributes['products_text_attributes_name'] . ': </td><td>' . tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], tep_not_null($text_attributes['products_text_attributes_text']) ? $text_attributes['products_text_attributes_text'] : ''); ?></td>
-				  </tr>
-				  <?php
-				  }
-			  ?>
-			  
-		  </table></td>
-      </tr>
-	  
-	  <!-- eof denuz products text attributes -->
 	  
 
     <div class="clearfix"></div>
@@ -256,8 +196,9 @@ $stock_check .='';
 				</div>
 					
 				<div class="col-md-8">
-					<div class="product-title"  itemprop="offers" itemscope itemtype="http://schema.org/Offer"><?php echo $products_name; ?></div>
-					<div class="product-desc"><?php echo stripslashes($product_info['products_description']); ?></div>
+				<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+					<div class="product-title"><?php echo $products_name; ?></div>
+					<div class="product-desc" itemprop="description"><?php echo stripslashes($product_info['products_description']); ?></div>
 			<!--		<div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div> -->
 					      <tr>
 		  <td><table border="0" cellspacing="0" cellpadding="2">
@@ -336,6 +277,7 @@ $stock_check .='';
 						}
 					
 					?>
+					</span>
 					<hr>
 					<div class="buttonSet row">
     <div class="col-xs-6"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'glyphicon glyphicon-shopping-cart', null, 'primary', null, 'btn-success'); ?></div>
@@ -346,10 +288,7 @@ $stock_check .='';
 		</div>
 </DIV>
 
-  <div class="buttonSet row">
-    <div class="col-xs-6"><?php echo tep_draw_button(IMAGE_BUTTON_REVIEWS . (($reviews['count'] > 0) ? ' (' . $reviews['count'] . ')' : ''), 'glyphicon glyphicon-comment', tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params())); ?></div>
-    <div class="col-xs-6 text-right"><?php echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'glyphicon glyphicon-shopping-cart', null, 'primary', null, 'btn-success'); ?></div>
-  </div>
+
 
   <div class="row">
     <?php echo $oscTemplate->getContent('product_info'); ?>
