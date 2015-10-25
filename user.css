@@ -253,6 +253,10 @@
 /* Gray Background */
 
 body {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAKCAYAAAB10jRKAAAAGXRFW…GbbwSH+qhA/6URXMyqBUhFBLIP6ip0ezk2zExqC58nwACVZwX67tO41gAAAABJRU5ErkJggg==), url(http://ir.ebaystatic.com/pictures/aw/pics/cmp/ds3/imgbg.jpg);
+    background-position: 0px 30px, 0px 0px, 0px 0px;
+    background-repeat: repeat-x, repeat, repeat;
+
     background-color: #F5F5F5;
 }
 .page-header {
