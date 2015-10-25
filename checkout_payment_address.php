@@ -196,6 +196,7 @@
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
+<div class="card card-green animated fadeInRight" >
 <!--  step -->
     <div class="row shop-tracking-status">
 		<div class="order-status">
@@ -231,14 +232,14 @@
   }
 ?>
 
-<?php echo tep_draw_form('checkout_address', tep_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL'), 'post', 'class="form-horizontal"', true); ?>
+<?php echo tep_draw_form('checkout_address', tep_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL'), 'post', 'class="form-horizontal" onsubmit="return check_form(checkout_address);"', true); ?>
 
 <div class="contentContainer">
-<!--
+
 <?php
   if ($process == false) {
 ?>
-
+<!--
   <h2><?php echo TABLE_HEADING_PAYMENT_ADDRESS; ?></h2>
 
   <div class="contentText row">
@@ -362,7 +363,7 @@
 </div>
 
 </form>
-
+</div>
 <?php
   require(DIR_WS_INCLUDES . 'template_bottom.php');
   require(DIR_WS_INCLUDES . 'application_bottom.php');
