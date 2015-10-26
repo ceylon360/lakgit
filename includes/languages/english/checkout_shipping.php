@@ -33,3 +33,5 @@ define('ERROR_NO_SHIPPING_AVAILABLE_TO_SHIPPING_ADDRESS', 'Shipping is currently
 // ship date
 define('TABLE_HEADING_SHIPPING_DATE','Preferred Delivery Date');
 define('TEXT_CHOOSE_SHIPPING_DATE','Please choose your preferred delivery date.');
+
+define('TABLE_HEADING_BILLING_ADDRESS', 'Sender Name');

@@ -67,12 +67,14 @@ ul.shoppingCartList li.newItemInCart, ul.shoppingCartList li.newItemInCart A {
 /* for the listings module rework ------------------------------------------- */
 
 .productHolder {
-  border: 1px solid #eee;
-  padding: 10px;
-  border-radius: 4px;
+  border: 1px solid #ddd;
+  padding: 5px;
+  border-radius: 1px;
   -webkit-transition: border .5s ease-in-out;
        -o-transition: border .5s ease-in-out;
           transition: border .5s ease-in-out;
+		 
+background-color:#fff	;	 
 }
 
 .productHolder:hover {
@@ -80,7 +82,8 @@ ul.shoppingCartList li.newItemInCart, ul.shoppingCartList li.newItemInCart A {
 }
 
 .productHolder h2 {
-  font-size: 1.3em;
+  font-size: 1.2em;
+  padding-top: 1em;
 }
 
 .item.list-group-item {

@@ -552,6 +552,15 @@
 
     return $product['products_description'];
   }
+  
+//product note
+function tep_get_products_note($product_id, $language_id) {
+    $product_query = tep_db_query("select products_note from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+	
+    return $product['products_note'];
+}
+//product note
 
   function tep_get_products_url($product_id, $language_id) {
     $product_query = tep_db_query("select products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
