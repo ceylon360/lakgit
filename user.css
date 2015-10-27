@@ -304,6 +304,14 @@ a {
 	margin-bottom:15px;
     
 }
+.card3 {
+	background-color: #FFF;
+    border: 1px solid #DDD;
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.06);
+	margin-bottom:15px;
+	padding:0px;
+    
+}
 .card-blue{
 	border-top: 4px solid #3AA1F4;
 	
@@ -321,4 +329,7 @@ a {
 .mdl {
     color: #888;
     font-size: 16px;
+}
+.n-padding{
+	padding:0px;
 }

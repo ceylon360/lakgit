@@ -59,7 +59,7 @@ $pagetext=stripslashes($page_check[pages_html_text]);
 </div> -->
 <div class="contentContainer">
   <div class="contentText">
-    <div class="row">
+    <div class="row card3">
 <?php
   if ($messageStack->size('product_action') > 0) {
     echo $messageStack->output('product_action');
@@ -71,21 +71,18 @@ $pagetext=stripslashes($page_check[pages_html_text]);
     $color = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
     
 ?>
-	<div class="col-md-12 ">
+	<div class="col-md-12 n-padding">
 		<div style="background: <?php echo $color; ?>;">
-			<?php echo'<img class="bg_blur_lv" src="'.DIR_WS_IMAGES . $category['categories_banner'].'" height="200" width="200">' ?>
+			<?php echo'<img class="bg_blur_lv hidden-sm" src="'.DIR_WS_IMAGES . $category['categories_banner'].'" height="200" width="200">' ?>
     	</div>
         <div class="col-md-12  col-xs-12">
-			<?php echo'<img class="img-thumbnail picture_lv hidden-xs" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
 			<?php echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
 		   <div class="header_lv">
-                <h1 class="hidden-xs cat_txt"><?php echo $category['categories_name']; ?></h1>
-                <h1 class="visible-xs cat_txt2"><?php echo $category['categories_name']; ?></h1>
+                <h1 class="cat_txt"><?php echo $category['categories_name']; ?></h1>
                 <span class="cat_des"><?php
 //cat description
 if (tep_not_null($category['categories_description'])) {
-  echo '<div class="hidden-xs cat_des">' . $category['categories_description'] . '</div>';
-  echo '<div class="visible-xs cat_des2">' . $category['categories_description'] . '</div>';
+  echo '<div class="cat_des">' . $category['categories_description'] . '</div>';
 }  
 //cat description
 ?></span>
