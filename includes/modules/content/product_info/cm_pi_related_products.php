@@ -98,7 +98,7 @@
         $products_price_slave = $currencies->display_price($attributes_values['products_price'], tep_get_tax_rate($attributes_values['products_tax_class_id']));
       }
             
-      $optional_rel_prods_content .= '  <div class="col-sm-6 col-md-12">';
+      $optional_rel_prods_content .= '  <div class="col-sm-6 col-md-12 lowMargin">';
 
       switch (MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_HEIGHT_MODE) {
         case 'Equal Height':
@@ -120,8 +120,12 @@
       $optional_rel_prods_content .= '      <div class="caption">';
 
       if (MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_SHOW_NAME == 'True') {
-        $optional_rel_prods_content .= '<h5 class="text-center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products_id_slave) . '">' . $products_name_slave . '</a><br />';
-        $optional_rel_prods_content .= '       <div class="col-xs-6 text-right">' . tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'sort', 'cPath')) . 'action=buy_now&products_id=' . $listing['products_id']), NULL, NULL, 'btn-success btn-sm') . '</div>';
+        $optional_rel_prods_content .= '<p class="text-center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products_id_slave) . '">' . $products_name_slave . '</a></p>';
+       // $optional_rel_prods_content .= '       <div class="col-xs-6 text-right">' . tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'sort', 'cPath')) . 'action=buy_now&products_id=' . $listing['products_id']), NULL, NULL, 'btn-success btn-sm') . '</div>';
+		if (MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_SHOW_PRICE == 'True') {
+        $optional_rel_prods_content .= '<p class="text-center">' . sprintf(MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_PRICE_TEXT, $products_price_slave) . '</p>';
+      }
+	   $optional_rel_prods_content .= '       <div class="text-center">' . tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'sort', 'cPath')) . 'action=buy_now&products_id=' . $listing['products_id']), NULL, NULL, 'btn-success btn-sm') . '</div>';
 		if (MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_SHOW_MODEL == 'True') {
           $optional_rel_prods_content .= '<small>' . sprintf(MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_MODEL_COMBO, $products_model_slave) . '</small></h5>';
 		  
@@ -132,9 +136,9 @@
       } elseif (MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_SHOW_MODEL == 'True') {
         $optional_rel_prods_content .=  '<h5 class="text-center small">' . $products_model_slave . '</h5>';
       }
-      if (MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_SHOW_PRICE == 'True') {
-        $optional_rel_prods_content .= '<h5 class="text-center">' . sprintf(MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_PRICE_TEXT, $products_price_slave) . '</h5>';
-      }
+    //  if (MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_SHOW_PRICE == 'True') {
+       // $optional_rel_prods_content .= '<h5 class="text-center">' . sprintf(MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_PRICE_TEXT, $products_price_slave) . '</h5>';
+     // }
       if (MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_SHOW_QUANTITY == 'True') {
         $optional_rel_prods_content .= '<h5 class="text-center">' . sprintf(MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_QUANTITY_TEXT, $products_qty_slave) . '</h5>';
       }

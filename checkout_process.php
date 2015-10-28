@@ -187,7 +187,7 @@
         }
         tep_db_query("update " . TABLE_PRODUCTS . " set products_quantity = '" . (int)$stock_left . "' where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
         if ( ($stock_left < 1) && (STOCK_ALLOW_CHECKOUT == 'false') ) {
-          tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0' where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+        //  tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0' where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
 		  if (SHOW_COUNTS == 'true') $update_category_cache = true;//cat state
         }
       }

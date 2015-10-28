@@ -308,3 +308,7 @@ define('MODULE_CONTENT_BOOTSTRAP_ROW_DESCRIPTION', '<p>Content Width can be 12 o
 //new pages
 define('BOX_TOOLS_PAGE_MANAGER', 'Extra info Pages Manager');
 define('TEXT_DISPLAY_NUMBER_OF_PAGES', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Pages)');
+// 
+
+define('BOX_CATALOG_QUICK_INVENTORY', 'Quick-Inventory');
+
