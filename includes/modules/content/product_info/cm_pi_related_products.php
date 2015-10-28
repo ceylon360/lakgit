@@ -125,7 +125,7 @@
 		if (MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_SHOW_PRICE == 'True') {
         $optional_rel_prods_content .= '<p class="text-center">' . sprintf(MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_PRICE_TEXT, $products_price_slave) . '</p>';
       }
-	   $optional_rel_prods_content .= '       <div class="text-center">' . tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'sort', 'cPath')) . 'action=buy_now&products_id=' . $listing['products_id']), NULL, NULL, 'btn-success btn-sm') . '</div>';
+	   $optional_rel_prods_content .= '       <div class="text-center">' . tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action', 'sort', 'cPath')) . 'action=buy_now&products_id=' . $products_id_slave), NULL, NULL, 'btn-success btn-sm') . '</div>';
 		if (MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_SHOW_MODEL == 'True') {
           $optional_rel_prods_content .= '<small>' . sprintf(MODULE_CONTENT_PRODUCT_INFO_RELATED_PRODUCTS_MODEL_COMBO, $products_model_slave) . '</small></h5>';
 		  
