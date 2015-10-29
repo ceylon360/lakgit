@@ -273,7 +273,7 @@ p.lead del {
 
 /* Footer ------------------------------------------------------------------- */
 .footer {
-  background: #eee;
+  background: #fff;
   border-top: 2px solid #ddd;
 }
 
@@ -282,7 +282,7 @@ p.lead del {
 }
 
 .footer-extra {
-  background: #111;
+  background: #212121;
   color: silver;
   line-height: 3;
 }
@@ -296,18 +296,27 @@ p.lead del {
   margin: 0;
   font-size: 1em;
   letter-spacing: 0.1em;
-  color: rgb(142,11,0);
-  text-shadow: 1px 1px 1px rgba(255,255,255,0.6);
+  color: rgb(93,93,93);
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
   margin-bottom: 10px;
   text-transform: uppercase;
+  font-weight: bolder;
 }
 
 .contact {
   border-left: 1px solid #ddd;
 }
-
+.account {
+	background-color:#3AA1F4;
+	height:246px;
+}
+.account h2 {
+	color:#fff;
+}
+.account a {
+	color:#fff;
+}
 /* Account History Info ----------------------------------------------------- */
 .timeline {
   list-style: none;

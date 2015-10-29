@@ -13,12 +13,12 @@
   define('MODULE_CONTENT_FOOTER_ACCOUNT_TITLE', 'Account Block');
   define('MODULE_CONTENT_FOOTER_ACCOUNT_DESCRIPTION', 'Adds an Account Block to the Footer Area of your site');
 
-  define('MODULE_CONTENT_FOOTER_ACCOUNT_HEADING_TITLE', 'Customer Services');
+  define('MODULE_CONTENT_FOOTER_ACCOUNT_HEADING_TITLE', 'Order Status');
 
   define('MODULE_CONTENT_FOOTER_ACCOUNT_BOX_ACCOUNT', 'My Account');
   define('MODULE_CONTENT_FOOTER_ACCOUNT_BOX_ADDRESS_BOOK', 'My Address Book');
   define('MODULE_CONTENT_FOOTER_ACCOUNT_BOX_ORDER_HISTORY', 'My Order History');
   define('MODULE_CONTENT_FOOTER_ACCOUNT_BOX_LOGOFF', 'Secure Log Off');
-  define('MODULE_CONTENT_FOOTER_ACCOUNT_BOX_CREATE_ACCOUNT', 'Create Account');
-  define('MODULE_CONTENT_FOOTER_ACCOUNT_BOX_LOGIN', 'Existing Customer? Log In');
+  define('MODULE_CONTENT_FOOTER_ACCOUNT_BOX_CREATE_ACCOUNT', 'Enter Token Number here for Check your Order Status');
+  define('MODULE_CONTENT_FOOTER_ACCOUNT_BOX_LOGIN', 'Enter Token, Here');
 
