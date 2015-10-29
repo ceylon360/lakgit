@@ -12,7 +12,7 @@
 
 ////
 // The HTML href link wrapper function
-  function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true) {
+ /* function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true) {
     global $request_type, $session_started, $SID;
 
     $page = tep_output_string($page);
@@ -69,7 +69,21 @@
     }
 
     return $link;
-  }
+  }*/
+  ////
+// Ultimate SEO URLs v2.2d
+// The HTML href link wrapper function
+ function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true) {
+   global $seo_urls;                
+   if ( !is_object($seo_urls) ){
+    if ( !class_exists('SEO_URL') ){
+     include_once(DIR_WS_CLASSES . 'seo.class.php');
+    }
+    global $languages_id;
+    $seo_urls = new SEO_URL($languages_id);
+   }
+   return $seo_urls->href_link($page, $parameters, $connection, $add_session_id);
+ }
 
 ////
 // New HTML image wrapper function modified for KISS Image Thumbnailer by FWR Media
