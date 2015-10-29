@@ -18,6 +18,12 @@
         'title' => BOX_CATALOG_CATEGORIES_PRODUCTS,
         'link' => tep_href_link(FILENAME_CATEGORIES)
       ),
+	
+	array(
+        'code' => FILENAME_QUICK_INVENTORY,
+        'title' => BOX_CATALOG_QUICK_INVENTORY,
+        'link' => tep_href_link(FILENAME_QUICK_INVENTORY)
+      ),
       array(
         'code' => FILENAME_PRODUCTS_ATTRIBUTES,
         'title' => BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES,

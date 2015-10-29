@@ -69,6 +69,7 @@
                           p.products_price,
                           p.products_tax_class_id,
                           p.products_image,
+						  p.products_quantity,
                           s.specials_new_products_price,
                           s.status
                         from
@@ -113,7 +114,10 @@
 			$featured__content .= '      	<div class="text-center">';
 			$featured__content .= '        	<div class="btn-group">';
 			$featured__content .= '          <a href="' . tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'products_id=' . $featured_products['products_id']) . '" class="btn btn-default" role="button">' . SMALL_IMAGE_BUTTON_VIEW . '</a>';
+			
+			if($featured_products['products_quantity']>0){
 			$featured__content .= '          <a href="' . tep_href_link($PHP_SELF, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $featured_products['products_id']) . '" class="btn btn-success" role="button">' . SMALL_IMAGE_BUTTON_BUY . '</a>';
+			}
 			$featured__content .= '       	</div>' . PHP_EOL;
 			$featured__content .= '      	</div>' . PHP_EOL;
             $featured__content .= '        </div>' . PHP_EOL;
