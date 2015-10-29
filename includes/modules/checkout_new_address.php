@@ -169,7 +169,7 @@ switch ($any_rest)
         if ( $country == '' && MODULE_HEADER_TAGS_GET_STATES_DEFAULT_COUNTRY == 'True') {
           $country = STORE_COUNTRY;
         }
-        echo tep_get_country_list('country', $country, 'onChange="getState(this.value)" required aria-required="true" id="inputCountry"');
+        echo tep_get_country_list('country', $country, 'onChange="getState(this.value)" required aria-required="true" id="inputCountry" disabled');
         if (tep_not_null(ENTRY_COUNTRY_TEXT)) echo '<span class="help-block">' . ENTRY_COUNTRY_TEXT . '</span>';
         ?>
       </div>
