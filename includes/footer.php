@@ -15,7 +15,7 @@
 </div>
 <?php echo $oscTemplate->getContent('footer_st'); ?>
 <footer>
-  <div class="footer">
+  <div class="footer card-blue">
     <div class="<?php echo BOOTSTRAP_CONTAINER; ?>">
       <div class="row">
         <?php echo $oscTemplate->getContent('footer'); ?>

@@ -211,9 +211,9 @@ $stock_check .='';
 				  
 				  while ($text_attributes = tep_db_fetch_array($text_attributes_query)) {
 				  ?>
-				  <tr>
-					  <td class=main><?php echo $text_attributes['products_text_attributes_name'] . ': </td><td>' . tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], tep_not_null($text_attributes['products_text_attributes_text']) ? $text_attributes['products_text_attributes_text'] : ''); ?></td>
-				  </tr>
+				  <div>
+					  <p class=main><?php echo $text_attributes['products_text_attributes_name'] . ': </p><p>' . tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], tep_not_null($text_attributes['products_text_attributes_text']) ? $text_attributes['products_text_attributes_text'] : ''); ?></p>
+				  </div>
 				  <?php
 				  }
 			  ?>
