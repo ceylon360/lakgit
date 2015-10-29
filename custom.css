@@ -865,3 +865,13 @@ float:right;
 .bg-gray2{
 	background-color:#F5F5F5
 }
+
+/* button modifiction */
+
+.btn{
+	    border-radius: 0px;
+}
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
