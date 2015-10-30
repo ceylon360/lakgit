@@ -133,29 +133,7 @@ if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
       $messageStack->add('create_account', ENTRY_COUNTRY_ERROR);
     }
 
-  /*  if (ACCOUNT_STATE == 'true') {
-      $zone_id = 0;
-      $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "'");
-      $check = tep_db_fetch_array($check_query);
-      $entry_state_has_zones = ($check['total'] > 0);
-      if ($entry_state_has_zones == true) {
-        $zone_query = tep_db_query("select distinct zone_id from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "' and (zone_name = '" . tep_db_input($state) . "' or zone_code = '" . tep_db_input($state) . "')");
-        if (tep_db_num_rows($zone_query) == 1) {
-          $zone = tep_db_fetch_array($zone_query);
-          $zone_id = $zone['zone_id'];
-        } else {
-          $error = true;
 
-          $messageStack->add('create_account', ENTRY_STATE_ERROR_SELECT);
-        }
-      } else {
-        if (strlen($state) < ENTRY_STATE_MIN_LENGTH) {
-          $error = true;
-
-          $messageStack->add('create_account', ENTRY_STATE_ERROR);
-        }
-      }
-    }*/
 
     if (GUEST_CHECKOUT_TELEPHONE == 'true'){
     if (strlen($telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {
@@ -267,34 +245,21 @@ if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
   <div class="contentText">
 
 <?php
- /* if (ACCOUNT_GENDER == 'true') {
+
 ?>
-    <div class="form-group has-feedback">
-      <label class="control-label col-sm-3"><?php echo ENTRY_GENDER; ?></label>
-      <div class="col-sm-9">
-        <label class="radio-inline">
-          <?php echo tep_draw_radio_field('gender', 'm', NULL, 'required aria-required="true"') . ' ' . MALE; ?>
-        </label>
-        <label class="radio-inline">
-          <?php echo tep_draw_radio_field('gender', 'f') . ' ' . FEMALE; ?>
-        </label>
-        <?php echo FORM_REQUIRED_INPUT; ?>
-        <?php if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_GENDER_TEXT . '</span>'; ?>
-      </div>
-    </div>
-<?php
-  }*/
-?>
+
     <div class="form-group has-feedback">
       <label for="inputFirstName" class="control-label col-xs-3"><?php echo ENTRY_FIRST_NAME; ?></label>
-      <div class="col-xs-4">
+      <div class="col-xs-9 col-md-4">
         <?php
         echo tep_draw_input_field('firstname', NULL, 'required aria-required="true" id="inputFirstName" placeholder="' . ENTRY_FIRST_NAME . '"');
         echo FORM_REQUIRED_INPUT;
         if (tep_not_null(ENTRY_FIRST_NAME_TEXT)) echo '<span class="help-block">' . ENTRY_FIRST_NAME_TEXT . '</span>';
         ?>
       </div>
-	   <div class="col-xs-5">
+	 
+	  <label for="inputLastName" class="control-label visible-xs col-xs-3 "><?php echo ENTRY_LAST_NAME; ?></label>
+	   <div class="col-xs-9 col-md-5">
         <?php
         echo tep_draw_input_field('lastname', NULL, 'required aria-required="true" id="inputLastName" placeholder="' . ENTRY_LAST_NAME . '"');
         echo FORM_REQUIRED_INPUT;
@@ -302,6 +267,7 @@ if (tep_not_null($HTTP_POST_VARS['anonymous'])) {
         ?>
       </div>
     </div>
+
     <!--<div class="form-group has-feedback">
       <label for="inputLastName" class="control-label col-xs-3"><?php echo ENTRY_LAST_NAME; ?></label>
 

@@ -139,7 +139,9 @@ FORM { display: inline; }
 #contentText {
   margin-left: 160px;
 }
-
+.headerBar {
+    background-color: #8BC34A;
+}
 /* Custom jQuery UI */
 .ui-widget { }
 .ui-dialog { min-width: 500px; }

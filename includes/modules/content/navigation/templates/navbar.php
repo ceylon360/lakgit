@@ -13,13 +13,13 @@
           <?php echo '<li><a class="store-brand" href="' . tep_href_link(FILENAME_DEFAULT) . '">' . HEADER_HOME . '</a></li>'; ?>
           <?php echo '<li><a href="' . tep_href_link(FILENAME_PRODUCTS_NEW) . '">' . HEADER_WHATS_NEW . '</a></li>'; ?>
           <?php echo '<li><a href="' . tep_href_link(FILENAME_SPECIALS) . '">' . HEADER_SPECIALS . '</a></li>'; ?>
-          <?php echo '<li><a href="' . tep_href_link(FILENAME_REVIEWS) . '">' . HEADER_REVIEWS . '</a></li>'; ?>
+          <?php //echo '<li><a href="' . tep_href_link(FILENAME_REVIEWS) . '">' . HEADER_REVIEWS . '</a></li>'; ?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <?php
           if (substr(basename($PHP_SELF), 0, 8) != 'checkout') {
             ?>
-            <li class="dropdown">
+          <!--  <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo HEADER_SITE_SETTINGS; ?></a>
               <ul class="dropdown-menu">
                 <li class="text-center text-muted bg-primary"><?php echo sprintf(USER_LOCALIZATION, ucwords($language), $currency); ?></li>
@@ -48,11 +48,11 @@
                 }
                 ?>
               </ul>
-            </li>
+            </li>-->
             <?php
           }
           ?>
-          <li class="dropdown">
+        <!--  <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo (tep_session_is_registered('customer_id')) ? sprintf(HEADER_ACCOUNT_LOGGED_IN, $customer_first_name) : HEADER_ACCOUNT_LOGGED_OUT; ?></a>
             <ul class="dropdown-menu">
               <?php
@@ -70,7 +70,7 @@
               <li><?php echo '<a href="' . tep_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL') . '">' . HEADER_ACCOUNT_ADDRESS_BOOK . '</a>'; ?></li>
               <li><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL') . '">' . HEADER_ACCOUNT_PASSWORD . '</a>'; ?></li>
             </ul>
-          </li>
+          </li>-->
           <?php
           if ($cart->count_contents() > 0) {
             ?>
