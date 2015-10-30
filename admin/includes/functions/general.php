@@ -1673,3 +1673,24 @@ function tep_get_manufacturer_seo_description($manufacturer_id, $language_id) {
 
     return $product['products_name'];
   }
+  // Function to reset SEO URLs database cache entries
+// Ultimate SEO URLs v2.2d
+function tep_reset_cache_data_seo_urls($action){        
+  switch ($action){
+    case 'reset':
+    case 'uninstall':
+       tep_db_query("DELETE FROM cache WHERE cache_name LIKE '%seo_urls%'");
+       tep_db_query("UPDATE configuration SET configuration_value='false' WHERE configuration_key='SEO_URLS_CACHE_RESET'");
+
+       if ($action == 'reset') break;
+    
+       tep_db_query("DELETE FROM configuration_group WHERE configuration_group_title LIKE '%seo_urls%'");
+	     tep_db_query("DELETE FROM configuration WHERE configuration_key LIKE 'SEO%' OR configuration_key LIKE 'USE_SEO%'");
+    break;    
+    default:
+    break;
+  }
+  # The return value is used to set the value upon viewing
+  # It's NOT returining a false to indicate failure!!
+  return 'false';
+}

@@ -286,6 +286,13 @@
 // include the language translations
   $_system_locale_numeric = setlocale(LC_NUMERIC, 0);
   require(DIR_WS_LANGUAGES . $language . '.php');
+   // Ultimate SEO URLs v2.2d
+ if ((!defined(SEO_ENABLED)) || (SEO_ENABLED == 'true')) {
+   include_once(DIR_WS_CLASSES . 'seo.class.php');
+   if ( !is_object($seo_urls) ){
+     $seo_urls = new SEO_URL($languages_id);
+   }
+ }
   setlocale(LC_NUMERIC, $_system_locale_numeric); // Prevent LC_ALL from setting LC_NUMERIC to a locale with 1,0 float/decimal values instead of 1.0 (see bug #634)
 
 // currency
