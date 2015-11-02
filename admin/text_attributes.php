@@ -127,7 +127,7 @@
       $contents = array('form' => tep_draw_form('products_text_attributes', FILENAME_TEXT_ATTRIBUTES, 'action=insert', 'post', 'enctype="multipart/form-data"'));
       $contents[] = array('text' => TEXT_NEW_INTRO);
       $contents[] = array('text' => '<br>' . TEXT_TEXT_ATTRIBUTES_NAME . '<br>' . tep_draw_input_field('products_text_attributes_name'));
-	  $contents[] = array('text' => '<br>' . TEXT_TEXT_ATTRIBUTES_OPTIONS . '<br>' . tep_draw_input_field('products_text_attributes_options'));
+	  $contents[] = array('text' => '<br>' . TEXT_TEXT_ATTRIBUTES_OPTIONS . '<br>' . tep_draw_input_field('products_text_attributes_options',null,'size="28"'));
 
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_TEXT_ATTRIBUTES, 'page=' . $HTTP_GET_VARS['page'] . '&taID=' . $HTTP_GET_VARS['taID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
@@ -137,7 +137,7 @@
       $contents = array('form' => tep_draw_form('products_text_attributes', FILENAME_TEXT_ATTRIBUTES, 'page=' . $HTTP_GET_VARS['page'] . '&taID=' . $taInfo->products_text_attributes_id . '&action=save', 'post', 'enctype="multipart/form-data"'));
       $contents[] = array('text' => TEXT_EDIT_INTRO);
       $contents[] = array('text' => '<br>' . TEXT_TEXT_ATTRIBUTES_NAME . '<br>' . tep_draw_input_field('products_text_attributes_name', $taInfo->products_text_attributes_name));
-     $contents[] = array('text' => '<br>' . TEXT_TEXT_ATTRIBUTES_OPTIONS . '<br>' . tep_draw_input_field('products_text_attributes_options', $taInfo->products_text_attributes_options));
+     $contents[] = array('text' => '<br>' . TEXT_TEXT_ATTRIBUTES_OPTIONS . '<br>' . tep_draw_input_field('products_text_attributes_options', $taInfo->products_text_attributes_options,'size="60"'));
 	 $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_TEXT_ATTRIBUTES, 'page=' . $HTTP_GET_VARS['page'] . '&taID=' . $taInfo->products_text_attributes_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'delete':
@@ -159,7 +159,7 @@
   }
 
   if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
-    echo '            <td width="25%" valign="top">' . "\n";
+    echo '            <td width="40%" valign="top">' . "\n";
 
     $box = new box;
     echo $box->infoBox($heading, $contents);
