@@ -202,6 +202,28 @@ $stock_check .='';
 					<div class="product-desc" itemprop="description"><?php echo stripslashes($product_info['products_description']); ?></div>
 			<!--		<div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div> -->
 					      <tr>
+		  <!-- <td><table border="0" cellspacing="0" cellpadding="2">
+			 
+			  <?php
+				  $text_attributes_query = tep_db_query("select pta.*, cbta.products_text_attributes_text from products_text_attributes as pta, products_text_attributes_enabled as ptae, customers_basket_text_attributes as cbta where ptae.products_text_attributes_id = pta.products_text_attributes_id and ptae.products_id = " . tep_get_prid($HTTP_GET_VARS['products_id']) . " and cbta.products_text_attributes_id = pta.products_text_attributes_id and cbta.session_id = '" . tep_session_id() . "'");
+				  if (tep_db_num_rows($text_attributes_query) == 0)  
+				  $text_attributes_query = tep_db_query("select pta.* from products_text_attributes as pta, products_text_attributes_enabled as ptae where ptae.products_text_attributes_id = pta.products_text_attributes_id and ptae.products_id = " . tep_get_prid($HTTP_GET_VARS['products_id']));
+				  
+				  while ($text_attributes = tep_db_fetch_array($text_attributes_query)) {
+				  ?>
+				  <div>
+<<<<<<< HEAD
+					  <p class=main><?php echo $text_attributes['products_text_attributes_name'] . ': </p><p>' . tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], tep_not_null($text_attributes['products_text_attributes_text']) ? $text_attributes['products_text_attributes_text'] : '',null,null,null,'class="form-control1"'); ?></p>
+=======
+					  <p class="main"><?php echo $text_attributes['products_text_attributes_name'] . ': </p><p>' . tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], tep_not_null($text_attributes['products_text_attributes_text']) ? $text_attributes['products_text_attributes_text'] : ''); ?></p>
+>>>>>>> refs/remotes/origin/future-addon
+				  </div>
+				  <?php
+				  }
+			  ?>
+			  
+		  </table></td>
+		  test-->
 		  <td><table border="0" cellspacing="0" cellpadding="2">
 			  
 			  <?php
@@ -211,17 +233,41 @@ $stock_check .='';
 				  
 				  while ($text_attributes = tep_db_fetch_array($text_attributes_query)) {
 				  ?>
-				  <div>
-					  <p class=main><?php echo $text_attributes['products_text_attributes_name'] . ': </p><p>' . tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], tep_not_null($text_attributes['products_text_attributes_text']) ? $text_attributes['products_text_attributes_text'] : '',null,null,null,'class="form-control1"'); ?></p>
-				  </div>
+				  <div class="group">
+				  
+					<!--  <p class="main"><?php echo $text_attributes['products_text_attributes_name'] . ': </p><p>' . tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], tep_not_null($text_attributes['products_text_attributes_text']) ? $text_attributes['products_text_attributes_text'] : ''); ?></p>-->
+				  <?php 
+				 // $attr_options="type,value,min,max,placeholder,required";
+				 
+				 // $tx_attr_options="number,10,2,50,num,required";
+				  $tx_attr_options=$text_attributes['products_text_attributes_options'];
+				  
+				  list($tx_attr_options_type, $tx_attr_options_value, $tx_attr_options_min,$tx_attr_options_max,$tx_attr_options_placeholder,$tx_attr_options_required,$tx_attr_options_length ) = explode(',', $tx_attr_options);
+				 
+				// echo $text_attributes['products_text_attributes_name'];
+				 if($tx_attr_options_type=='textarea'){
+					echo	tep_draw_textarea_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], 'soft', $tx_attr_options_min, $tx_attr_options_max, $tx_attr_options_value, 'placeholder="' . $tx_attr_options_placeholder . '" maxlength="' . $tx_attr_options_length . '" '.$tx_attr_options_required, $reinsert_value = true);
+				 }
+				 else{
+				  echo tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'],$tx_attr_options_value, 'placeholder="' . $tx_attr_options_placeholder . '" max="' . $tx_attr_options_max . '"  min="' . $tx_attr_options_min . '" '.$tx_attr_options_required, $tx_attr_options_type, $reinsert_value = true, 'class="form-control1"');
+				  
+				 }
+				echo '<span class="highlight"></span>';
+				 echo '<span class="bar"></span>';
+				  echo '<label>'.$text_attributes['products_text_attributes_name'].'</label>';
+				  ?>
+					
+						</div>
 				  <?php
 				  }
 			  ?>
 			  
 		  </table></td>
+		  <!--test-->
       </tr>
 					<hr>
 					
+
 <?php
     $products_attributes_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_ATTRIBUTES . " patrib where patrib.products_id='" . (int)$HTTP_GET_VARS['products_id'] . "' and patrib.options_id = popt.products_options_id and popt.language_id = '" . (int)$languages_id . "'");
     $products_attributes = tep_db_fetch_array($products_attributes_query);
@@ -249,8 +295,12 @@ $stock_check .='';
           $selected_attribute = false;
         }
 ?>
-      <strong><?php echo $products_options_name['products_options_name'] . ':'; ?></strong><?php echo tep_draw_pull_down_menu('id[' . $products_options_name['products_options_id'] . ']', $products_options_array, $selected_attribute, 'style="width: 200px;"'); ?><br />
-<?php
+      
+	  <strong><?php echo $products_options_name['products_options_name'] . ':'; ?></strong><?php echo tep_draw_pull_down_menu('id[' . $products_options_name['products_options_id'] . ']', $products_options_array, $selected_attribute, 'style="width: 200px;"'); ?><br />
+
+		
+			<?php
+
       }
 ?>
     </p>
@@ -259,15 +309,37 @@ $stock_check .='';
     }
 ?>
 
-	  <!-- denuz products text attributes -->
+	  <!-- countdown time-->
+	  <?php if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
+$expdate=tep_get_products_special_date($product_info['products_id'])?>
+					
+					<script type="text/javascript" src="http://harshen.github.io/jquery-countdownTimer/jquery.countdownTimer.min.js"></script>
+					 
+					<p>End In</p>
+					<input type="hidden" id="exp" name="expire_date" value="<?php echo $expdate;?>">
+					<div id="countdowntimer"><span id="future_date"><span></div>
+					</br>
+					<script type="text/javascript">
+$(function(){
+    var expier= $("#exp").val();
+    expier = expier.replace("-", "/");
+    $("#future_date").countdowntimer({
+        dateAndTime : expier,
+    size : "lg",
+        regexpMatchFormat: "([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})",
+            regexpReplaceWith: "<div id='exp-ct'>$1<div id='exp-tt'>days</div></div>  <div id='exp-ct'>$2<div id='exp-tt'>hours</div ></div>  <div id='exp-ct'>$3<div id='exp-tt'>min</div></div>  <div id='exp-ct'>$4<div id='exp-tt'>sec</div></div>"
+    });
+});
+</script>
+	  <?php
+	  }
+	  else{
+			
+	  }
+	  ?>
 	  
-
-	  
-	  <!-- eof denuz products text attributes -->
-	  
-
     <div class="clearfix"></div>
-
+<br>
 					<div class="product-price"><?php echo $products_price; ?></div>
 					<?php	if (tep_not_null($product_info['products_note'])) {
 						echo '<div class="notice notice-danger">' . $product_info['products_note'] . '</div>';

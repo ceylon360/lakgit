@@ -117,7 +117,15 @@
 
     return $product['specials_new_products_price'];
   }
-
+////
+// Return a product's special expiredate (returns nothing if there is no offer)
+// TABLES: products
+function tep_get_products_special_date($product_id) {
+    $product_query = tep_db_query("select expires_date from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status = 1");
+    $product = tep_db_fetch_array($product_query);
+	
+    return $product['expires_date'];
+}
 ////
 // Return a product's stock
 // TABLES: products
