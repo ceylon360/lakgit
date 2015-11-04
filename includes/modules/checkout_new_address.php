@@ -67,32 +67,7 @@ switch ($any_rest)
 
   <div class="contentText">
 
-<?php /*
-  if (ACCOUNT_GENDER == 'true') {
-    if (isset($gender)) {
-      $male = ($gender == 'm') ? true : false;
-      $female = ($gender == 'f') ? true : false;
-    } else {
-      $male = false;
-      $female = false;
-    }
-?>
-
-    <div class="form-group">
-      <label class="control-label col-sm-3"><?php echo ENRY_GIFT_DELIVER; ?></label>
-      <div class="col-sm-9">
-        <label class="radio-inline">
-          <?php echo tep_draw_radio_field('gender', 'm', $male, 'required aria-required="true" aria-describedby="atGender"') . ' ' .'Yes'; ?>
-        </label>
-        <label class="radio-inline">
-          <?php echo tep_draw_radio_field('gender', 'f', $female) . ' '. 'No'; ?>
-        </label>
-        <?php if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span id="atGender" class="help-block">' . ENTRY_GENDER_TEXT . '</span>'; ?>
-      </div>
-    </div>
-
-<?php
-  }*/
+<?php 
 ?>
 
     <div class="form-group">
@@ -126,41 +101,10 @@ switch ($any_rest)
 	  </div>
 
 <?php
- /* if (ACCOUNT_SUBURB == 'true') {
+
 ?>
 
-    <div class="form-group">
-      <label for="inputSuburb" class="control-label col-sm-3"><?php echo ENTRY_SUBURB; ?></label>
-      <div class="col-sm-9">
-        <?php
-        echo tep_draw_input_field('suburb', NULL, 'id="inputSuburb" aria-describedby="atSuburb" placeholder="' . ENTRY_SUBURB . '"');
-        if (tep_not_null(ENTRY_SUBURB_TEXT)) echo '<span id="atSuburb" class="help-block">' . ENTRY_SUBURB_TEXT . '</span>';
-        ?>
-      </div>
-    </div>
-
-<?php
-  }*/
-?>
-
-  <!--  <div class="form-group">
-      <label for="inputCity" class="control-label col-sm-3"><?php echo ENTRY_CITY; ?></label>
-      <div class="col-sm-9">
-        <?php/*
-        echo tep_draw_input_field('city', NULL, 'id="inputCity" aria-describedby="atCity" placeholder="' . ENTRY_CITY. '"');
-        if (tep_not_null(ENTRY_CITY_TEXT)) echo '<span id="atCity" class="help-block">' . ENTRY_CITY_TEXT . '</span>';
-        */?>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputZip" class="control-label col-sm-3"><?php// echo ENTRY_POST_CODE; ?></label>
-      <div class="col-sm-9">
-        <?php/*
-        echo tep_draw_input_field('postcode', NULL, 'id="inputZip" aria-describedby="atZip" placeholder="' . ENTRY_POST_CODE . '"');
-        if (tep_not_null(ENTRY_POST_CODE_TEXT)) echo '<span id="atZip" class="help-block">' . ENTRY_POST_CODE_TEXT . '</span>';
-        */?>
-      </div>
-    </div>-->
+ 
 
 <div class="form-group has-feedback">
       <label for="inputCountry" class="control-label col-sm-3"><?php echo ENTRY_COUNTRY; ?></label>
@@ -169,7 +113,7 @@ switch ($any_rest)
         if ( $country == '' && MODULE_HEADER_TAGS_GET_STATES_DEFAULT_COUNTRY == 'True') {
           $country = STORE_COUNTRY;
         }
-        echo tep_get_country_list('country', $country, 'onChange="getState(this.value)" required aria-required="true" id="inputCountry"');
+        echo tep_get_country_list('country', $country, 'onChange="getState(this.value)" required aria-required="true" id="inputCountry" disabled');
         if (tep_not_null(ENTRY_COUNTRY_TEXT)) echo '<span class="help-block">' . ENTRY_COUNTRY_TEXT . '</span>';
         ?>
       </div>
@@ -208,23 +152,7 @@ if($any_rest==3 || $any_rest==2){
 		
 		
 		
-   /*    $check_query = tep_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int)$country . "'");
-        $check = tep_db_fetch_array($check_query);
-        $entry_state_has_zones = ($check['total'] > 0);
-      
-        if ($entry_state_has_zones == true) {
-          $zones_array = array();
-          $zones_array[0] = array('id' => '', 'text' => PULL_DOWN_DEFAULT);                        
-          $zones_query = tep_db_query("select zone_name from zones where zone_country_id = '" . (int)$country . "' order by zone_name");
-            while ($zones_values = tep_db_fetch_array($zones_query)) {
-            	$zones_array[] = array('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
-            }
-            echo tep_draw_pull_down_menu('state', $zones_array, '', 'id="inputState"');
-        } else {
-          echo tep_draw_input_field('state', NULL, 'id="inputState" class="form-control" placeholder="' . ENTRY_STATE . '"');
-        }
-        if (tep_not_null(ENTRY_STATE_TEXT)) echo '<span class="help-block">' . ENTRY_STATE_TEXT . '</span>';
-      */  ?>
+     ?>
 	  
       </div>
     </div>

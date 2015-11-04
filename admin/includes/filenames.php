@@ -60,4 +60,7 @@
   //new pages
   define('FILENAME_PAGE_MANAGER', 'extra_info_pages.php');
     define('FILENAME_PAGES', '/../extra_info_pages.php');
+//
+
+define('FILENAME_QUICK_INVENTORY', 'quick_inventory.php');
 ?>

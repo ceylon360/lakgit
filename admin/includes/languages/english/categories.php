@@ -41,9 +41,13 @@ define('TEXT_EDIT_CATEGORIES_ID', 'Category ID:');
 define('TEXT_EDIT_CATEGORIES_NAME', 'Category Name:');
 define('TEXT_EDIT_CATEGORIES_IMAGE', 'Category Image:');
 define('TEXT_EDIT_CATEGORIES_BANNER', 'Category Background Banner:');
+define('TEXT_CATEGORIES_BANNER', 'Category Background Banner:');
 define('TEXT_EDIT_SORT_ORDER', 'Sort Order:');
 define('TEXT_EDIT_CATEGORIES_NOTE', 'Category special Note:');
-define('TEXT_EDIT_CATEGORIES_NOTE_SEL', 'Category special Note color:');
+define('TEXT_EDIT_CATEGORIES_NOTE_SEL', 'Category special Note color:</br></br><span style="color:#fff"><span style="background-color:#d73814">1:Red</span> <span style="background-color:#45ABCD">2:blue</span> <span style="background-color:green">3:green</span> <span style="background-color:#FEAF20">4:yellow</span> <span style="background-color:gray">default:gray</span></span> </br>');
+
+define('TEXT_CATEGORIES_NOTE', 'Category special Note:');
+define('TEXT_CATEGORIES_NOTE_SEL', 'Category special Note color:</br></br><span style="color:#fff"><span style="background-color:#d73814">1:Red</span> <span style="background-color:#45ABCD">2:blue</span> <span style="background-color:green">3:green</span> <span style="background-color:#FEAF20">4:yellow</span> <span style="background-color:gray">default:gray</span></span> </br>');
 
 define('TEXT_INFO_COPY_TO_INTRO', 'Please choose a new category you wish to copy this product to');
 define('TEXT_INFO_CURRENT_CATEGORIES', 'Current Categories:');
@@ -114,4 +118,24 @@ define('ERROR_CATEGORY_CACHE', 'Failed to create category cache file!');
 define('TEXT_CATEGORIES_DESCRIPTION', 'Category Description:<br><small>shows in category page</small>');
 define('TEXT_EDIT_CATEGORIES_DESCRIPTION', 'Edit the Category Description:');
 //cat description
+define('TEXT_EDIT_CATEGORIES_RESTRICT', '<strong>Product shipping restriction zones:</strong></br> 1 : for all island shipping</br> 2 : for colombo and selected cities shipping</br> 3 : for colombo and suburb shipping(pizza)');
+define('TEXT_CATEGORIES_RESTRICT', '<strong>Product shipping restriction zones:</strong></br> 1 : for all island shipping</br> 2 : for colombo and selected cities shipping</br> 3 : for colombo and suburb shipping(pizza)');
+
+define('TEXT_PRODUCTS_SEO_TITLE', 'Products Title for SEO:<br><small>Replaces the product name in the &lt;title&gt; Meta Element.<br>Leave blank to default to product name.</small>');
+
+define('TEXT_CATEGORIES_SEO_TITLE', 'Category Title for SEO:<br><small>Replaces the category name in the &lt;title&gt; Meta Element.<br>Leave blank to default to category name.</small>');
+define('TEXT_EDIT_CATEGORIES_SEO_TITLE', 'Edit the Category Title for SEO:');
+
+define('TEXT_CATEGORIES_SEO_DESCRIPTION', 'Category Meta Description for SEO:<br><small>Add a &lt;description&gt; Meta Element.</small>');
+define('TEXT_EDIT_CATEGORIES_SEO_DESCRIPTION', 'Edit the Category Meta Description for SEO:<br><small>Changes the &lt;description&gt; Meta Element.</small>');
+
+define('TEXT_CATEGORIES_SEO_KEYWORDS', 'Category Meta Keywords for SEO:<br><small>Add a &lt;keyword&gt; Meta Element.<br>Must be comma separated.</small>');
+define('TEXT_EDIT_CATEGORIES_SEO_KEYWORDS', 'Edit the Category Meta Keywords for SEO:<br><small>Changes the &lt;keyword&gt; Meta Element.<br>Must be comma separated.</small>');
+
+define('TEXT_PRODUCTS_SEO_DESCRIPTION', 'Product Meta Description for SEO:<br><small>Add a &lt;description&gt; Meta Element.</small>');
+define('TEXT_PRODUCTS_SEO_KEYWORDS', 'Product Meta Keywords for SEO:<br><small>Add a &lt;keyword&gt; Meta Element.<br>Must be comma separated.</small>');
+
+define('TEXT_PRODUCTS_MINI_DESCRIPTION', 'Product Mini Description:<br><small>Used in the "product list" in Category Pages.</small>');
+define('TEXT_PRODUCTS_NOTE', 'Product special Note:')
+
 ?>

@@ -1538,3 +1538,159 @@ function tep_cfg_reset_thumbs_cache( $action = 'false' ) {
 		tep_db_query( "UPDATE configuration SET configuration_value='false' WHERE configuration_key='KISSIT_RESET_IMAGE_THUMBS'" );
     }
 }
+function tep_get_manufacturer_seo_description($manufacturer_id, $language_id) {
+    $manufacturer_query = tep_db_query("select manufacturers_seo_description from " . TABLE_MANUFACTURERS_INFO . " where manufacturers_id = '" . (int)$manufacturer_id . "' and languages_id = '" . (int)$language_id . "'");
+    $manufacturer = tep_db_fetch_array($manufacturer_query);
+
+    return $manufacturer['manufacturers_seo_description'];
+  }
+  
+  function tep_get_manufacturer_seo_keywords($manufacturer_id, $language_id) {
+    $manufacturer_query = tep_db_query("select manufacturers_seo_keywords from " . TABLE_MANUFACTURERS_INFO . " where manufacturers_id = '" . (int)$manufacturer_id . "' and languages_id = '" . (int)$language_id . "'");
+    $manufacturer = tep_db_fetch_array($manufacturer_query);
+
+    return $manufacturer['manufacturers_seo_keywords'];
+  }
+  
+  function tep_get_products_seo_title($product_id, $language_id = 0) {
+    global $languages_id;
+
+    if ($language_id == 0) $language_id = $languages_id;
+    $product_query = tep_db_query("select products_seo_title from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['products_seo_title'];
+  }
+  
+  function tep_get_products_seo_description($product_id, $language_id = 0) {
+    global $languages_id;
+
+    if ($language_id == 0) $language_id = $languages_id;
+    $product_query = tep_db_query("select products_seo_description from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['products_seo_description'];
+  }
+  
+  function tep_get_products_seo_keywords($product_id, $language_id = 0) {
+    global $languages_id;
+
+    if ($language_id == 0) $language_id = $languages_id;
+    $product_query = tep_db_query("select products_seo_keywords from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['products_seo_keywords'];
+  }
+  
+  function tep_get_category_seo_title($category_id, $language_id = 0) {
+    global $languages_id;
+
+    if ($language_id == 0) $language_id = $languages_id;
+    $category_query = tep_db_query("select categories_seo_title from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . (int)$category_id . "' and language_id = '" . (int)$language_id . "'");
+    $category = tep_db_fetch_array($category_query);
+
+    return $category['categories_seo_title'];
+  }
+  
+  function tep_get_category_seo_description($category_id, $language_id) {
+    $category_query = tep_db_query("select categories_seo_description from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . (int)$category_id . "' and language_id = '" . (int)$language_id . "'");
+    $category = tep_db_fetch_array($category_query);
+
+    return $category['categories_seo_description'];
+  }
+  
+  function tep_get_category_seo_keywords($category_id, $language_id) {
+    $category_query = tep_db_query("select categories_seo_keywords from " . TABLE_CATEGORIES_DESCRIPTION . " where categories_id = '" . (int)$category_id . "' and language_id = '" . (int)$language_id . "'");
+    $category = tep_db_fetch_array($category_query);
+
+    return $category['categories_seo_keywords'];
+  }
+  
+  function tep_get_products_mini_description($product_id, $language_id = 0) {
+    global $languages_id;
+
+    if ($language_id == 0) $language_id = $languages_id;
+    $product_query = tep_db_query("select products_mini_description from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return $product['products_mini_description'];
+  }
+  
+  
+  // admin - add reviews
+// www.clubosc.com
+
+  function tep_draw_products($name, $parameters = '', $exclude = '') {
+    global $languages_id;
+
+    if ($exclude == '') {
+      $exclude = array();
+    }
+
+    $select_string = '<select name="' . $name . '"';
+
+    if ($parameters) {
+      $select_string .= ' ' . $parameters;
+    }
+
+    $select_string .= '>';
+
+    $products_query = tep_db_query("select p.products_id, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' order by products_name");
+    while ($products = tep_db_fetch_array($products_query)) {
+      if (!in_array($products['products_id'], $exclude)) {
+        $select_string .= '<option value="' . $products['products_id'] . '">' . $products['products_name'] . '</option>';
+      }
+    }
+
+    $select_string .= '</select>';
+
+    return $select_string;
+  }
+
+
+  function tep_draw_customers($name) {
+
+    $select_string = '<select name="' . $name . '">';
+
+    $customers_query = tep_db_query("select customers_id, customers_firstname, customers_lastname from " . TABLE_CUSTOMERS . " order by customers_lastname");
+    while ($customers = tep_db_fetch_array($customers_query)) {
+        $select_string .= '<option value="' . $customers['customers_id'] . '">' . $customers['customers_lastname'] . ', ' . $customers['customers_firstname'] . '</option>';
+    }
+
+    $select_string .= '</select>';
+
+    return $select_string;
+  }
+  
+  function tep_get_products_name_review($product_id, $language_id = 0) {
+    global $languages_id;
+
+    if ($language_id == 0) $language_id = $languages_id;
+    $product_query = tep_db_query("select products_name from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_id . "' and language_id = '" . (int)$language_id . "'");
+    $product = tep_db_fetch_array($product_query);
+    
+    if (!is_array($product)) $product = array('products_name' => ADMIN_TESTIMONIAL);
+
+    return $product['products_name'];
+  }
+  // Function to reset SEO URLs database cache entries
+// Ultimate SEO URLs v2.2d
+function tep_reset_cache_data_seo_urls($action){        
+  switch ($action){
+    case 'reset':
+    case 'uninstall':
+       tep_db_query("DELETE FROM cache WHERE cache_name LIKE '%seo_urls%'");
+       tep_db_query("UPDATE configuration SET configuration_value='false' WHERE configuration_key='SEO_URLS_CACHE_RESET'");
+
+       if ($action == 'reset') break;
+    
+       tep_db_query("DELETE FROM configuration_group WHERE configuration_group_title LIKE '%seo_urls%'");
+	     tep_db_query("DELETE FROM configuration WHERE configuration_key LIKE 'SEO%' OR configuration_key LIKE 'USE_SEO%'");
+    break;    
+    default:
+    break;
+  }
+  # The return value is used to set the value upon viewing
+  # It's NOT returining a false to indicate failure!!
+  return 'false';
+}

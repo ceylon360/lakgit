@@ -117,7 +117,15 @@
 
     return $product['specials_new_products_price'];
   }
-
+////
+// Return a product's special expiredate (returns nothing if there is no offer)
+// TABLES: products
+function tep_get_products_special_date($product_id) {
+    $product_query = tep_db_query("select expires_date from " . TABLE_SPECIALS . " where products_id = '" . (int)$product_id . "' and status = 1");
+    $product = tep_db_fetch_array($product_query);
+	
+    return $product['expires_date'];
+}
 ////
 // Return a product's stock
 // TABLES: products
@@ -1440,5 +1448,22 @@ function tep_get_products_catrest_p($products_id,$any_rest) {
     } else {
       return str_replace($from, $to, $string);
     }
+  }
+  function osc_split_mini_description($products_precis) {
+    $content = strip_tags($products_precis);
+
+    if (strlen($content) > 156 ) {
+      $content = substr($content, 0, strpos($content, ' ', 156));
+    }
+    return $content;
+  }
+
+  function osc_get_mini_description($products_id) {
+    global $languages_id;
+
+    $product_query = tep_db_query("select coalesce(NULLIF(products_mini_description, ''), NULLIF(products_seo_description, ''), LEFT(products_description, 300)) as products_precis from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "' and language_id = '" . (int)$languages_id . "'");
+    $product = tep_db_fetch_array($product_query);
+
+    return osc_split_mini_description($product['products_precis']);
   }
 ?>

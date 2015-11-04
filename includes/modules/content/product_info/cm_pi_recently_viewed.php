@@ -92,6 +92,8 @@
         
         while ($products = tep_db_fetch_array ($products_query) ) {
         	$products_id = $products['products_id'];
+
+
         	$products_data[$products_id] = array ('id' => $products_id,
                                               	'name' => $products['products_name']
                                            			);
@@ -135,7 +137,7 @@
         	$recently_viewed_content .= '<div class="row">';
 
         	foreach ($recently_viewed_array as $products_id) {
-        		$recently_viewed_content .= '  <div class="col-sm-6 col-md-4  lowMargin">';
+        		$recently_viewed_content .= '  <div class="col-sm-6 col-md-4 lowMargin">';
 
         		switch (MODULE_CONTENT_PRODUCT_INFO_RECENTLY_VIEWED_HEIGHT_MODE) {
         		case 'Equal Height':
@@ -194,7 +196,12 @@
         			}
         			$recently_viewed_content .= '</p>';
         		} //if (MODULE_CONTENT_PRODUCT_INFO_RECENTLY_VIEWED_SHOW_PRICE
-        		
+        		$recently_viewed_content .= '      <div class="text-center">';
+        			$recently_viewed_content .= '        <div class="btn-group">';
+        			$recently_viewed_content .= '          <a href="' . tep_href_link('product_info.php', tep_get_all_get_params(array('action')) . 'products_id=' . $products_data[$products_id]['id']) . '" class="btn btn-default" role="button">' . SMALL_IMAGE_BUTTON_VIEW . '</a>';
+        		    
+					$recently_viewed_content .= '        </div>';
+        			$recently_viewed_content .= '      </div>';
         		$recently_viewed_content .= '      </div>'; // caption
         		$recently_viewed_content .= '    </div>'; // thumbnail
         		$recently_viewed_content .= '  </div>'; // col-sm-6 col-md-4

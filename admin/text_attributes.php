@@ -14,9 +14,11 @@
       case 'save':
         if (isset($HTTP_GET_VARS['taID'])) $products_text_attributes_id = tep_db_prepare_input($HTTP_GET_VARS['taID']);
         $products_text_attributes_name = tep_db_prepare_input($HTTP_POST_VARS['products_text_attributes_name']);
-
-        $sql_data_array = array('products_text_attributes_name' => $products_text_attributes_name);
-
+		$products_text_attributes_options = tep_db_prepare_input($HTTP_POST_VARS['products_text_attributes_options']);
+		
+		
+        $sql_data_array = array('products_text_attributes_name' => $products_text_attributes_name,
+								'products_text_attributes_options' => $products_text_attributes_options);
         if ($action == 'insert') {
           tep_db_perform(TABLE_TEXT_ATTRIBUTES, $sql_data_array);
           $products_text_attributes_id = tep_db_insert_id();
@@ -76,7 +78,7 @@
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-  $products_text_attributes_query_raw = "select products_text_attributes_id, products_text_attributes_name from " . TABLE_TEXT_ATTRIBUTES . " order by products_text_attributes_name";
+  $products_text_attributes_query_raw = "select products_text_attributes_id, products_text_attributes_name,products_text_attributes_options from " . TABLE_TEXT_ATTRIBUTES . " order by products_text_attributes_name";
   $products_text_attributes_split = new splitPageResults($HTTP_GET_VARS['page'], MAX_DISPLAY_SEARCH_RESULTS, $products_text_attributes_query_raw, $products_text_attributes_query_numrows);
   $products_text_attributes_query = tep_db_query($products_text_attributes_query_raw);
   while ($products_text_attributes = tep_db_fetch_array($products_text_attributes_query)) {
@@ -125,6 +127,7 @@
       $contents = array('form' => tep_draw_form('products_text_attributes', FILENAME_TEXT_ATTRIBUTES, 'action=insert', 'post', 'enctype="multipart/form-data"'));
       $contents[] = array('text' => TEXT_NEW_INTRO);
       $contents[] = array('text' => '<br>' . TEXT_TEXT_ATTRIBUTES_NAME . '<br>' . tep_draw_input_field('products_text_attributes_name'));
+	  $contents[] = array('text' => '<br>' . TEXT_TEXT_ATTRIBUTES_OPTIONS . '<br>' . tep_draw_input_field('products_text_attributes_options',null,'size="28"'));
 
       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_TEXT_ATTRIBUTES, 'page=' . $HTTP_GET_VARS['page'] . '&taID=' . $HTTP_GET_VARS['taID']) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
@@ -134,7 +137,8 @@
       $contents = array('form' => tep_draw_form('products_text_attributes', FILENAME_TEXT_ATTRIBUTES, 'page=' . $HTTP_GET_VARS['page'] . '&taID=' . $taInfo->products_text_attributes_id . '&action=save', 'post', 'enctype="multipart/form-data"'));
       $contents[] = array('text' => TEXT_EDIT_INTRO);
       $contents[] = array('text' => '<br>' . TEXT_TEXT_ATTRIBUTES_NAME . '<br>' . tep_draw_input_field('products_text_attributes_name', $taInfo->products_text_attributes_name));
-      $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_TEXT_ATTRIBUTES, 'page=' . $HTTP_GET_VARS['page'] . '&taID=' . $taInfo->products_text_attributes_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+     $contents[] = array('text' => '<br>' . TEXT_TEXT_ATTRIBUTES_OPTIONS . '<br>' . tep_draw_input_field('products_text_attributes_options', $taInfo->products_text_attributes_options,'size="60"'));
+	 $contents[] = array('align' => 'center', 'text' => '<br>' . tep_image_submit('button_save.gif', IMAGE_SAVE) . ' <a href="' . tep_href_link(FILENAME_TEXT_ATTRIBUTES, 'page=' . $HTTP_GET_VARS['page'] . '&taID=' . $taInfo->products_text_attributes_id) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     case 'delete':
       $heading[] = array('text' => '<b>' . TEXT_HEADING_DELETE_TEXT_ATTRIBUTE . '</b>');
@@ -155,7 +159,7 @@
   }
 
   if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
-    echo '            <td width="25%" valign="top">' . "\n";
+    echo '            <td width="40%" valign="top">' . "\n";
 
     $box = new box;
     echo $box->infoBox($heading, $contents);

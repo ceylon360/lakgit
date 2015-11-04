@@ -9,7 +9,6 @@
 
   Released under the GNU General Public License
 */
-
   require('includes/application_top.php');
   //new pages
 #################
@@ -139,11 +138,14 @@ if (tep_not_null($category['categories_description'])) {
 
     while ($categories = tep_db_fetch_array($categories_query)) {
       $cPath_new = tep_get_path($categories['categories_id']);
+		$categories_products_query2 = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_TO_CATEGORIES . " where categories_id = '" . $categories['categories_id'] . "'");
+		$categories_products2 = tep_db_fetch_array($categories_products_query2);
       echo '<div class="col-sm-6 col-md-2 lowMargin animated fadeInLeft">';
       echo '  <div class="text-center">';
       echo '    <a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a>';
       echo '    <div class="caption text-center">';
       echo '      <h5><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . $categories['categories_name'] . '</a></h5>';
+	  echo '    <div>'.$categories_products2['total'].'</div>';
       echo '    </div>';
       echo '  </div>';
       echo '</div>';

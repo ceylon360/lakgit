@@ -28,10 +28,10 @@
     include('includes/configure.php');
   }
 
-  if (DB_SERVER == '') {
+  if (strlen(DB_SERVER) < 1) {
     if (is_dir('install')) {
       header('Location: install/index.php');
-      exit;
+      
     }
   }
 
@@ -96,8 +96,8 @@
       $PHP_SELF = str_replace(getenv('PATH_INFO'), '', $PHP_SELF);
       $vars = explode('/', substr(getenv('PATH_INFO'), 1));
       do_magic_quotes_gpc($vars);
-      $n=sizeof($vars);
-      for ($i=0; $i<$n; $i++) {
+            for ($i=0, $n=sizeof($vars); 
+			$i<$n; $i++) {
         if (strpos($vars[$i], '[]')) {
           $GET_array[substr($vars[$i], 0, -2)][] = $vars[$i+1];
         } else {
@@ -106,8 +106,8 @@
         $i++;
       }
 
-      if ($GET_array !== null) {
-        foreach($GET_array as $key => $value) {
+      if (sizeof($GET_array) > 0) {
+        while (list($key, $value) = each($GET_array)) {
           $HTTP_GET_VARS[$key] = $value;
         }
       }
@@ -174,8 +174,8 @@
     if (tep_not_null($user_agent)) {
       $spiders = file(DIR_WS_INCLUDES . 'spiders.txt');
 
-      $n=sizeof($spiders);
-      for ($i=0; $i<$n; $i++) {
+      for ($i=0, $n=sizeof($spiders);
+       $i<$n; $i++) {
         if (tep_not_null($spiders[$i])) {
           if (is_integer(strpos($user_agent, trim($spiders[$i])))) {
             $spider_flag = true;
@@ -286,6 +286,13 @@
 // include the language translations
   $_system_locale_numeric = setlocale(LC_NUMERIC, 0);
   require(DIR_WS_LANGUAGES . $language . '.php');
+   // Ultimate SEO URLs v2.2d
+ if ((!defined(SEO_ENABLED)) || (SEO_ENABLED == 'true')) {
+   include_once(DIR_WS_CLASSES . 'seo.class.php');
+   if ( !is_object($seo_urls) ){
+     $seo_urls = new SEO_URL($languages_id);
+   }
+ }
   setlocale(LC_NUMERIC, $_system_locale_numeric); // Prevent LC_ALL from setting LC_NUMERIC to a locale with 1,0 float/decimal values instead of 1.0 (see bug #634)
 
 // currency
@@ -333,8 +340,8 @@
     }
     switch ($HTTP_GET_VARS['action']) {
       // customer wants to update the product quantity in their shopping cart
-      case 'update_product' : $n=sizeof($HTTP_POST_VARS['products_id']);
-                              for ($i=0; $i<$n; $i++) {
+      case 'update_product' : for ($i=0, $n=sizeof($HTTP_POST_VARS['products_id']);
+                              $i<$n; $i++) {
                                 if (in_array($HTTP_POST_VARS['products_id'][$i], (is_array($HTTP_POST_VARS['cart_delete']) ? $HTTP_POST_VARS['cart_delete'] : array()))) {
                                   $cart->remove($HTTP_POST_VARS['products_id'][$i]);
 								  //denuz text attr
@@ -392,8 +399,8 @@
                                   tep_redirect(tep_href_link($PHP_SELF, tep_get_all_get_params(array('action', 'notify'))));
                                 }
                                 if (!is_array($notify)) $notify = array($notify);
-                                $n=sizeof($notify);
-                                for ($i=0; $i<$n; $i++) {
+                                for ($i=0, $n=sizeof($notify);
+                                 $i<$n; $i++) {
                                   $check_query = tep_db_query("select count(*) as count from " . TABLE_PRODUCTS_NOTIFICATIONS . " where products_id = '" . (int)$notify[$i] . "' and customers_id = '" . (int)$customer_id . "'");
                                   $check = tep_db_fetch_array($check_query);
                                   if ($check['count'] < 1) {
@@ -472,7 +479,7 @@
   if (tep_not_null($cPath)) {
     $cPath_array = tep_parse_category_path($cPath);
     $cPath = implode('_', $cPath_array);
-    $current_category_id = end($cPath_array);
+    $current_category_id = $cPath_array[(sizeof($cPath_array)-1)];
   } else {
     $current_category_id = 0;
   }
@@ -530,7 +537,9 @@
       }
     }
   } elseif (isset($HTTP_GET_VARS['manufacturers_id'])) {
-    $manufacturers_query = tep_db_query("select manufacturers_name from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "'");
+    // header tags seo - reloaded
+    $manufacturers_query = tep_db_query("select coalesce(NULLIF(manufacturers_seo_title, ''), manufacturers_name) as manufacturers_name from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "'");
+    // eof
     if (tep_db_num_rows($manufacturers_query)) {
       $manufacturers = tep_db_fetch_array($manufacturers_query);
       $breadcrumb->add($manufacturers['manufacturers_name'], tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $HTTP_GET_VARS['manufacturers_id']));
@@ -539,7 +548,9 @@
 
 // add the products model to the breadcrumb trail
   if (isset($HTTP_GET_VARS['products_id'])) {
-    $model_query = tep_db_query("select products_model from " . TABLE_PRODUCTS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "'");
+   // header tags seo - reloaded
+    $model_query = tep_db_query("select coalesce(NULLIF(pd.products_seo_title, ''), p.products_model) as products_model from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+    // eof
     if (tep_db_num_rows($model_query)) {
       $model = tep_db_fetch_array($model_query);
       $breadcrumb->add($model['products_model'], tep_href_link(FILENAME_PRODUCT_INFO, 'cPath=' . $cPath . '&products_id=' . $HTTP_GET_VARS['products_id']));
