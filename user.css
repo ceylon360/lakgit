@@ -337,7 +337,7 @@ a {
 	margin:0px;
 }
 
-<<<<<<< HEAD
+
 /* form feild modifications */
 
 .form-control1 {
@@ -440,7 +440,7 @@ a {
     background: #2b3340;
     color: silver;
     line-height: 3;
-=======
+}
 /*countdown*/
 div#exp-ct {
     background-color: #8BC34A;
@@ -569,5 +569,5 @@ textarea:focus ~ .highlight {
 @keyframes inputHighlighter {
 	from { background:#5264AE; }
   to 	{ width:0; background:transparent; }
->>>>>>> refs/remotes/origin/future-addon
+
 }
