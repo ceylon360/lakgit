@@ -532,7 +532,7 @@ echo '
 ?>
 
 <div class="contentContainer">
-<div class=""><?php echo $oscTemplate->getBlocks('front_page'); ?></div>
+<div class="row"><?php echo $oscTemplate->getBlocks('front_page'); ?></div>
  <!-- <div class="alert alert-info">
     <?php // echo tep_customer_greeting(); ?>
   </div> -->
