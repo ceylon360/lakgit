@@ -58,5 +58,8 @@
   define('TABLE_WHOS_ONLINE', 'whos_online');
   define('TABLE_ZONES', 'zones');
   //new pages
+// BOF: Information Pages Unlimited
+  define('TABLE_INFORMATION', 'information');
+// EOF: Information Pages Unlimited
 
 ?>
