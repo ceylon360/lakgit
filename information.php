@@ -38,7 +38,7 @@
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
 
-<h1><?php echo $title; ?></h1>
+<!--<h1><?php echo $title; ?></h1>-->
 
 <div class="contentContainer">
   <div class="contentText">

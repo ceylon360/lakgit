@@ -116,9 +116,7 @@
                         <tr>
 						<td class="main"><?php echo ENTRY_TEXT ; ?></td>
                         <td class="ui-widget-content">
-                        <?php  
-                          echo tep_draw_textarea_field('information_description[' . $languages[$i]['id'] . ']', '', '140', '80', (isset($information_description[$languages[$i]['id']]) ? stripslashes($edit[information_description]) : tep_get_information_entry($information_id, $languages[$i]['id'], 'information_description'))); 						
-                       ?>
+                        <?php echo tep_draw_textarea_field('information_description[' . $languages[$i]['id'] . ']', '', '100', '20', (($languages[$i]['id'] == $languages_id) ? stripslashes($edit[information_description]) : tep_get_information_entry($information_id, $languages[$i]['id'], 'information_description'))); ?>
                        </td>						
                        </tr>
                       </table>
@@ -157,11 +155,8 @@
     </tr>
 <script>
 <!--   bof sub tabs product description  -->
-    $(function() {
-		$( "#tab_descrip" ).tabs( ) ;
-	});
-	</script>
-<!-- eof tabs ui -->			
+
+<!-- eof tabs ui -->	
     </table>
     </td>  
     </tr>
