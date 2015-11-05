@@ -456,4 +456,15 @@ border-radius:2px;
 div#exp-tt {
     font-size: 13px;
 }
+.navbar-inverse .navbar-text {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 10px;
+    font-size: 12px;
+    
+}
 
+.navbar-text {
+ margin-top: 0px;
+ margin-bottom: 0px;
+}
