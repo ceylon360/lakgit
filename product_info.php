@@ -244,17 +244,18 @@ $stock_check .='';
 				  
 				  list($tx_attr_options_type, $tx_attr_options_value, $tx_attr_options_min,$tx_attr_options_max,$tx_attr_options_placeholder,$tx_attr_options_required,$tx_attr_options_length ) = explode(',', $tx_attr_options);
 				 
+				 echo '<label>'.$text_attributes['products_text_attributes_name'].'</label>';
 				// echo $text_attributes['products_text_attributes_name'];
 				 if($tx_attr_options_type=='textarea'){
 					echo	tep_draw_textarea_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], 'soft', $tx_attr_options_min, $tx_attr_options_max, $tx_attr_options_value, 'placeholder="' . $tx_attr_options_placeholder . '" maxlength="' . $tx_attr_options_length . '" '.$tx_attr_options_required, $reinsert_value = true);
 				 }
 				 else{
-				  echo tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'],$tx_attr_options_value, 'placeholder="' . $tx_attr_options_placeholder . '" max="' . $tx_attr_options_max . '"  min="' . $tx_attr_options_min . '" '.$tx_attr_options_required, $tx_attr_options_type, $reinsert_value = true, 'class="form-control1"');
+				  echo tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'],$tx_attr_options_value, 'placeholder="' . $tx_attr_options_placeholder . '" max="' . $tx_attr_options_max . '"  min="' . $tx_attr_options_min . '" '.$tx_attr_options_required, $tx_attr_options_type, $reinsert_value = true, 'class="form-control"');
 				  
 				 }
-				echo '<span class="highlight"></span>';
+				/*echo '<span class="highlight"></span>';
 				 echo '<span class="bar"></span>';
-				  echo '<label>'.$text_attributes['products_text_attributes_name'].'</label>';
+				  echo '<label>'.$text_attributes['products_text_attributes_name'].'</label>';*/
 				  ?>
 					
 						</div>

@@ -37,6 +37,6 @@ define('TEXT_DELETE_WARNING_PRODUCTS', '<b>WARNING:</b> There are %s products st
 
 define('ERROR_DIRECTORY_NOT_WRITEABLE', 'Error: I can not write to this directory. Please set the right user permissions on: %s');
 define('ERROR_DIRECTORY_DOES_NOT_EXIST', 'Error: Directory does not exist: %s');
-define('TEXT_TEXT_ATTRIBUTES_OPTIONS', 'Field attributes options:<br> <small><strong>Please insert values this order</strong><br><br><span style="color:red;">type,value,min,max,placeholder,required</span><br>ex: text,happy birthday,2,50,enter your message,required<br><br>if input type textarea use this order <br><br><span style="color:red;">type,value,rows,cols,placeholder,required,maxlength</span><br>ex: textarea,happy birthday,5,6,enter your message,required,50</small>');
+define('TEXT_TEXT_ATTRIBUTES_OPTIONS', 'Field attributes options:<br> <small><strong>Please insert values this order</strong><br><br><span style="color:red;">type,value,min,max,placeholder,required</span><br>ex: text,happy birthday,2,50,enter your message,required<br><br>if input type textarea use this order <br><br><span style="color:red;">type,value,rows,cols,placeholder,required,maxlength</span><br>ex: textarea,happy birthday,5,6,enter your message,required,50</small><br><span style="color:red;">note:');
 
 ?>
