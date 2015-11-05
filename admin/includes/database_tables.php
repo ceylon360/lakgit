@@ -62,5 +62,10 @@
 // denuz
 define('TABLE_TEXT_ATTRIBUTES', 'products_text_attributes');
 //new pages
+// BOF: Information Pages Unlimited
+  define('TABLE_INFORMATION', 'information');
+  define('TABLE_INFORMATION_GROUP', 'information_group');
+// EOF: Information Pages Unlimited
+
 
 ?>
