@@ -63,5 +63,5 @@
   // category cache
   define('FILENAME_CATEGORY_CACHE', 'category_cache.php');
   //new page
-  define('FILENAME_PAGES', 'extra_info_pages.php');
+  
 ?>

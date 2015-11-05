@@ -58,6 +58,5 @@
   define('TABLE_WHOS_ONLINE', 'whos_online');
   define('TABLE_ZONES', 'zones');
   //new pages
-define('TABLE_PAGES', 'pages');
-define('TABLE_PAGES_DESCRIPTION', 'pages_description');
+
 ?>

@@ -10,14 +10,7 @@
   Released under the GNU General Public License
 */
   require('includes/application_top.php');
-  //new pages
-#################
-$page_query = tep_db_query("select p.pages_id, p.sort_order, p.status, s.pages_title, s.pages_html_text from " . TABLE_PAGES . " p LEFT JOIN " .TABLE_PAGES_DESCRIPTION . " s on p.pages_id = s.pages_id where p.status = 1 and s.language_id = '" . (int)$languages_id . "' and p.page_type = 1");
-$page_check = tep_db_fetch_array($page_query);
-
-$pagetext=stripslashes($page_check[pages_html_text]);
-#####################
-  //new pages
+  
 
 // the following cPath references come from application_top.php
   $category_depth = 'top';
@@ -554,9 +547,7 @@ echo '
 
 <?php
     }
-	//new pages
-//echo $pagetext;
-//new pages
+	
    // include(DIR_WS_MODULES . FILENAME_NEW_PRODUCTS);
    // include(DIR_WS_MODULES . FILENAME_UPCOMING_PRODUCTS);
 ?>
