@@ -468,3 +468,7 @@ div#exp-tt {
  margin-top: 0px;
  margin-bottom: 0px;
 }
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 5px 15px;
