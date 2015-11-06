@@ -65,10 +65,10 @@
 ?>
 	<div class="col-md-12 n-padding">
 		<div style="background: <?php echo $color; ?>;">
-			<?php echo'<img class="bg_blur_lv hidden-sm" src="'.DIR_WS_IMAGES . $category['categories_banner'].'" height="200" width="200">' ?>
+			<?php echo'<img class="bg_blur_lv" src="'.DIR_WS_IMAGES . $category['categories_banner'].'" height="200" width="200">' ?>
     	</div>
         <div class="col-md-12  col-xs-12">
-			<?php echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>
+		<!--	<?php// echo'<img class="img-thumbnail visible-xs picture_mob" src="'.DIR_WS_IMAGES . $category['categories_image'].'" height="200" width="200">' ?>-->
 		   <div class="header_lv">
                 <h1 class="cat_txt"><?php echo $category['categories_name']; ?></h1>
                 <span class="cat_des"><?php
