@@ -319,3 +319,10 @@ define('BOX_HEADING_INFORMATION', 'Info manager');
 // BOF: Information Pages Unlimited
 define('IMAGE_NEW_PAGE', 'New Page');
 // EOF: Information Pages Unlimited
+//kgt - discount coupons
+define('BOX_CATALOG_DISCOUNT_COUPONS', 'Discount Coupons');
+//end kgt - discount coupons
+
+//kgt - discount coupons report
+define('BOX_REPORTS_DISCOUNT_COUPONS', 'Discount Coupons');
+//end kgt - discount coupons report

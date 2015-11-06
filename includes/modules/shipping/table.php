@@ -111,7 +111,12 @@
     function getShippableTotal() {
       global $order, $cart, $currencies;
 
-      $order_total = $cart->show_total();
+      //kgt - discount coupons
+        $order_total = $order->info['subtotal'];
+        /**************
+        $order_total = $cart->show_total();
+        **************/
+        //end kgt - discount coupons
 
       if ($order->content_type == 'mixed') {
         $order_total = 0;

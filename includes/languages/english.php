@@ -323,4 +323,13 @@ define('ANONYMOUSY_INFO', 'Your Personal Information will not print on Delivery 
 define('ANONYMOUSN_INFO', 'Would you like to send Gifts Anonymously ? If so select - Yes');
 define('SURPRISEY_INFO', 'Surprise Gift');
 define('SURPRISEN_INFO', 'Call before Deliver');
-
+//kgt - discount coupons
+define('ENTRY_DISCOUNT_COUPON_ERROR', 'The coupon code you have entered is not valid.');
+define('ENTRY_DISCOUNT_COUPON_AVAILABLE_ERROR', 'The coupon code you have entered is no longer valid.');
+define('ENTRY_DISCOUNT_COUPON_USE_ERROR', 'Our records show that you have used this coupon %s time(s).  You may not use this code more than %s time(s).');
+define('ENTRY_DISCOUNT_COUPON_MIN_PRICE_ERROR', 'The minimum order total for this coupon is %s');
+define('ENTRY_DISCOUNT_COUPON_MIN_QUANTITY_ERROR', 'The minimum number of products required for this coupon is %s');
+define('ENTRY_DISCOUNT_COUPON_EXCLUSION_ERROR', 'Some or all of the products in your cart are excluded.' );
+define('ENTRY_DISCOUNT_COUPON', 'Coupon Code:');
+define('ENTRY_DISCOUNT_COUPON_SHIPPING_CALC_ERROR', 'Your calculated shipping charges have changed.');
+//end kgt - discount coupons
