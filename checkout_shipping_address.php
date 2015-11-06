@@ -137,11 +137,11 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
         }
       }
 
-      if ( (is_numeric($country) == false) || ($country < 1) ) {
+    /*  if ( (is_numeric($country) == false) || ($country < 1) ) {
         $error = true;
 
         $messageStack->add('checkout_address', ENTRY_COUNTRY_ERROR);
-      }
+      }*/
 
       if ($error == false) {
         $sql_data_array = array('customers_id' => $customer_id,
