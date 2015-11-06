@@ -18,6 +18,7 @@
         'title' => BOX_TOOLS_ACTION_RECORDER,
         'link' => tep_href_link(FILENAME_ACTION_RECORDER)
       ),
+	 
       array(
         'code' => FILENAME_BACKUP,
         'title' => BOX_TOOLS_BACKUP,
@@ -63,11 +64,7 @@
         'title' => BOX_TOOLS_VERSION_CHECK,
         'link' => tep_href_link(FILENAME_VERSION_CHECK)
       ),
-	  array(
-	  'code' => FILENAME_PAGE_MANAGER,
-	  'title' => BOX_TOOLS_PAGE_MANAGER,
-	  'link' => tep_href_link(FILENAME_PAGE_MANAGER)
-		),
+	  
       array(
         'code' => FILENAME_WHOS_ONLINE,
         'title' => BOX_TOOLS_WHOS_ONLINE,

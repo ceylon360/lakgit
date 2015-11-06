@@ -58,9 +58,13 @@
   //IMPRINT
   define('FILENAME_TEXT_ATTRIBUTES', 'text_attributes.php');
   //new pages
-  define('FILENAME_PAGE_MANAGER', 'extra_info_pages.php');
-    define('FILENAME_PAGES', '/../extra_info_pages.php');
+// BOF: Information Pages Unlimited
+  define('FILENAME_INFORMATION_MANAGER', 'information_manager.php');
+// EOF: Information Pages Unlimited
+
 //
 
 define('FILENAME_QUICK_INVENTORY', 'quick_inventory.php');
+
+
 ?>

@@ -212,11 +212,11 @@ $stock_check .='';
 				  while ($text_attributes = tep_db_fetch_array($text_attributes_query)) {
 				  ?>
 				  <div>
-<<<<<<< HEAD
+
 					  <p class=main><?php echo $text_attributes['products_text_attributes_name'] . ': </p><p>' . tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], tep_not_null($text_attributes['products_text_attributes_text']) ? $text_attributes['products_text_attributes_text'] : '',null,null,null,'class="form-control1"'); ?></p>
-=======
+
 					  <p class="main"><?php echo $text_attributes['products_text_attributes_name'] . ': </p><p>' . tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], tep_not_null($text_attributes['products_text_attributes_text']) ? $text_attributes['products_text_attributes_text'] : ''); ?></p>
->>>>>>> refs/remotes/origin/future-addon
+
 				  </div>
 				  <?php
 				  }
@@ -244,17 +244,18 @@ $stock_check .='';
 				  
 				  list($tx_attr_options_type, $tx_attr_options_value, $tx_attr_options_min,$tx_attr_options_max,$tx_attr_options_placeholder,$tx_attr_options_required,$tx_attr_options_length ) = explode(',', $tx_attr_options);
 				 
+				 echo '<label>'.$text_attributes['products_text_attributes_name'].'</label>';
 				// echo $text_attributes['products_text_attributes_name'];
 				 if($tx_attr_options_type=='textarea'){
 					echo	tep_draw_textarea_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'], 'soft', $tx_attr_options_min, $tx_attr_options_max, $tx_attr_options_value, 'placeholder="' . $tx_attr_options_placeholder . '" maxlength="' . $tx_attr_options_length . '" '.$tx_attr_options_required, $reinsert_value = true);
 				 }
 				 else{
-				  echo tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'],$tx_attr_options_value, 'placeholder="' . $tx_attr_options_placeholder . '" max="' . $tx_attr_options_max . '"  min="' . $tx_attr_options_min . '" '.$tx_attr_options_required, $tx_attr_options_type, $reinsert_value = true, 'class="form-control1"');
+				  echo tep_draw_input_field('products_text_attributes_' . $text_attributes['products_text_attributes_id'],$tx_attr_options_value, 'placeholder="' . $tx_attr_options_placeholder . '" max="' . $tx_attr_options_max . '"  min="' . $tx_attr_options_min . '" '.$tx_attr_options_required, $tx_attr_options_type, $reinsert_value = true, 'class="form-control"');
 				  
 				 }
-				echo '<span class="highlight"></span>';
+				/*echo '<span class="highlight"></span>';
 				 echo '<span class="bar"></span>';
-				  echo '<label>'.$text_attributes['products_text_attributes_name'].'</label>';
+				  echo '<label>'.$text_attributes['products_text_attributes_name'].'</label>';*/
 				  ?>
 					
 						</div>
@@ -310,7 +311,8 @@ $stock_check .='';
 ?>
 
 	  <!-- countdown time-->
-	  <?php if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
+	  <?php /* 
+	  if ($new_price = tep_get_products_special_price($product_info['products_id'])) {
 $expdate=tep_get_products_special_date($product_info['products_id'])?>
 					
 					<script type="text/javascript" src="http://harshen.github.io/jquery-countdownTimer/jquery.countdownTimer.min.js"></script>
@@ -336,7 +338,7 @@ $(function(){
 	  else{
 			
 	  }
-	  ?>
+	  */?>
 	  
     <div class="clearfix"></div>
 <br>

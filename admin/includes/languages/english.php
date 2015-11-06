@@ -312,3 +312,10 @@ define('TEXT_DISPLAY_NUMBER_OF_PAGES', 'Displaying <b>%d</b> to <b>%d</b> (of <b
 define('PLACEHOLDER_COMMA_SEPARATION', 'Must, Be, Comma, Separated');
 define('BOX_CATALOG_QUICK_INVENTORY', 'Quick-Inventory');
 
+// BOF: Information Pages Unlimited
+// localizaion box text in includes/boxes/information.php
+define('BOX_HEADING_INFORMATION', 'Info manager');
+// EOF: Information Pages Unlimited
+// BOF: Information Pages Unlimited
+define('IMAGE_NEW_PAGE', 'New Page');
+// EOF: Information Pages Unlimited

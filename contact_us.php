@@ -13,15 +13,7 @@
   require('includes/application_top.php');
 
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_CONTACT_US);
-  //new pages
-  #################
-$page_query = tep_db_query("select p.pages_id, p.sort_order, p.status, s.pages_title, s.pages_html_text from " . TABLE_PAGES . " p LEFT JOIN " .TABLE_PAGES_DESCRIPTION . " s on p.pages_id = s.pages_id where p.status = 1 and s.language_id = '" . (int)$languages_id . "' and p.page_type = 2");
-$page_check = tep_db_fetch_array($page_query);
-
-$pagetext=stripslashes($page_check[pages_html_text]);
-
-#################
-  //new pages
+  
 
   if (isset($HTTP_GET_VARS['action']) && ($HTTP_GET_VARS['action'] == 'send') && isset($HTTP_POST_VARS['formid']) && ($HTTP_POST_VARS['formid'] == $sessiontoken)) {
     $error = false;
@@ -89,9 +81,7 @@ $pagetext=stripslashes($page_check[pages_html_text]);
 
 <div class="contentContainer">
   <div class="contentText">
-  <!--new pages
-  <div><?php echo $pagetext; ?></div>
-    new pages-->
+ 
     <p class="inputRequirement text-right"><?php echo FORM_REQUIRED_INFORMATION; ?></p>
     <div class="clearfix"></div>
 
