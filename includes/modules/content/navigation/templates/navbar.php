@@ -1,6 +1,11 @@
-<nav class="navbar navbar-inverse navbar-no-corners navbar-no-margin" role="navigation">
+<nav class="navbar navbar-default navbar-no-corners navbar-no-margin" role="navigation">
   <div class="<?php echo BOOTSTRAP_CONTAINER; ?>">
     <div class="navbar-header">
+		<a class="navbar-brand" href="#">
+			<img alt="Brand" src="http://127.0.0.1/lakgit/images/logo sm2.png" style="
+			width: 174px;
+			">
+		</a>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-core-nav">
         <span class="sr-only"><?php echo HEADER_TOGGLE_NAV; ?></span>
         <span class="icon-bar"></span>
