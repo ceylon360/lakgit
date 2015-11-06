@@ -134,11 +134,11 @@ if (tep_not_null($category['categories_description'])) {
 		$categories_products_query2 = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_TO_CATEGORIES . " where categories_id = '" . $categories['categories_id'] . "'");
 		$categories_products2 = tep_db_fetch_array($categories_products_query2);
       echo '<div class="col-sm-6 col-md-2 lowMargin animated fadeInLeft">';
-      echo '  <div class="text-center">';
+      echo '  <div class="text-center catimg">';
       echo '    <a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '</a>';
       echo '    <div class="caption text-center">';
-      echo '      <h5><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . $categories['categories_name'] . '</a></h5>';
-	  echo '    <div>'.$categories_products2['total'].'</div>';
+      echo '      <h5><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . $categories['categories_name'] . '</h5>';
+	  echo '    <small class="catlink">View all '.$categories_products2['total'].' <i class="fa fa-angle-double-right"></i></small></a>';
       echo '    </div>';
       echo '  </div>';
       echo '</div>';
@@ -286,7 +286,7 @@ $listing_sql .= $hiddenlist;
 ?>
 	<div class="row">
 		<div class="col-md-4">
-			<!--<img class="bg_blur" src="http://www3.hilton.com/resources/media/hi/COLHITW/en_US/img/shared/full_page_image_gallery/main/HL_exterior_675x359_FitToBoxSmallDimension_Center.jpg" alt="">-->
+			
 			<?php echo'<img class="bg_blur" src="'.DIR_WS_IMAGES . $image['categories_banner'].'" height="200" width="200">' ?>
 			</div>
         <div class="col-md-8  col-xs-12">
