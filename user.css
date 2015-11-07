@@ -279,10 +279,7 @@ a {
 }
 
 .breadcrumb {
-    /* padding: 8px 15px; */
-    /* margin-bottom: 20px; */
-    /* list-style: none; */
-    /* background-color: #f5f5f5; */
+     padding: 3px 15px;
     border-radius: 0px;
     border-top: 1px solid #DDD;
 	border-bottom: 1px solid #DDD;
@@ -472,3 +469,25 @@ div#exp-tt {
     float: left;
     height: 50px;
     padding: 5px 15px;
+}
+.productHolder h2 {
+    font-size: 1em;
+    padding-top: 1em;
+    height: 2.2em;
+}
+.header {
+    color: #808080;
+    margin-left: 10%;
+    margin-top: 20px;
+    text-align: justify;
+}
+body {font-size: 13px;}
+
+.catlink {
+    font-size: 85%;
+    color: #3F51B5;
+}
+.caption.text-center h5 {
+    margin-bottom: 0px;
+    font-weight: 700;
+}
