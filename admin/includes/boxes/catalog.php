@@ -29,6 +29,13 @@
         'title' => BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES,
         'link' => tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES)
       ),
+	  //kgt - discount coupons  
+	   array(
+     'code' => FILENAME_DISCOUNT_COUPONS,
+     'title' => BOX_CATALOG_DISCOUNT_COUPONS,
+     'link' => tep_href_link(FILENAME_DISCOUNT_COUPONS)
+     ),
+     //end kgt - discount coupons  
 	 // recent view product
 	  array(
 		'code' => 'text_attributes.php',

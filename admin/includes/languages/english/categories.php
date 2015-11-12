@@ -118,8 +118,8 @@ define('ERROR_CATEGORY_CACHE', 'Failed to create category cache file!');
 define('TEXT_CATEGORIES_DESCRIPTION', 'Category Description:<br><small>shows in category page</small>');
 define('TEXT_EDIT_CATEGORIES_DESCRIPTION', 'Edit the Category Description:');
 //cat description
-define('TEXT_EDIT_CATEGORIES_RESTRICT', '<strong>Product shipping restriction zones:</strong></br> 1 : for all island shipping</br> 2 : for colombo and selected cities shipping</br> 3 : for colombo and suburb shipping(pizza)');
-define('TEXT_CATEGORIES_RESTRICT', '<strong>Product shipping restriction zones:</strong></br> 1 : for all island shipping</br> 2 : for colombo and selected cities shipping</br> 3 : for colombo and suburb shipping(pizza)');
+define('TEXT_EDIT_CATEGORIES_RESTRICT', '<strong>Product shipping restriction zones:</strong></br> 1 : for all island shipping(res:all)</br> 2 : for selected cities shipping(res:pizza)</br> 3 : for colombo only(res:colombo)');
+define('TEXT_CATEGORIES_RESTRICT',  '<strong>Product shipping restriction zones:</strong></br> 1 : for all island shipping(res:all)</br> 2 : for selected cities shipping(res:pizza)</br> 3 : for colombo only(res:colombo)');
 
 define('TEXT_PRODUCTS_SEO_TITLE', 'Products Title for SEO:<br><small>Replaces the product name in the &lt;title&gt; Meta Element.<br>Leave blank to default to product name.</small>');
 

@@ -42,6 +42,11 @@
   if (isset($HTTP_POST_VARS['comments']) && tep_not_null($HTTP_POST_VARS['comments'])) {
     $comments = tep_db_prepare_input($HTTP_POST_VARS['comments']);
   }
+  //kgt - discount coupons
+  if (!tep_session_is_registered('coupon')) tep_session_register('coupon');
+  //this needs to be set before the order object is created, but we must process it after
+  $coupon = tep_db_prepare_input($HTTP_POST_VARS['coupon']);
+  //end kgt - discount coupons
 // ship date
   if (!tep_session_is_registered('datum')) tep_session_register('datum');
   if (tep_not_null($HTTP_POST_VARS['datum'])) {
@@ -66,7 +71,26 @@
   if (is_array($payment_modules->modules)) {
     $payment_modules->pre_confirmation_check();
   }
-
+//kgt - discount coupons
+  if( tep_not_null( $coupon ) && is_object( $order->coupon ) ) { //if they have entered something in the coupon field
+    $order->coupon->verify_code();
+    if( MODULE_ORDER_TOTAL_DISCOUNT_COUPON_DEBUG != 'true' ) {
+		  if( !$order->coupon->is_errors() ) { //if we have passed all tests (no error message), make sure we still meet free shipping requirements, if any
+			  if( $order->coupon->is_recalc_shipping() ) tep_redirect( tep_href_link( FILENAME_CHECKOUT_SHIPPING, 'error_message=' . urlencode( ENTRY_DISCOUNT_COUPON_SHIPPING_CALC_ERROR ), 'SSL' ) ); //redirect to the shipping page to reselect the shipping method
+		  } else {
+			  if( tep_session_is_registered('coupon') ) tep_session_unregister('coupon'); //remove the coupon from the session
+			  tep_redirect( tep_href_link( FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode( implode( ' ', $order->coupon->get_messages() ) ), 'SSL' ) ); //redirect to the payment page
+		  }
+    }
+	} else { //if the coupon field is empty, unregister the coupon from the session
+		if( tep_session_is_registered('coupon') ) { //we had a coupon entered before, so we need to unregister it
+      tep_session_unregister('coupon');
+      //now check to see if we need to recalculate shipping:
+      require_once( DIR_WS_CLASSES.'discount_coupon.php' );
+      if( discount_coupon::is_recalc_shipping() ) tep_redirect( tep_href_link( FILENAME_CHECKOUT_SHIPPING, 'error_message=' . urlencode( ENTRY_DISCOUNT_COUPON_SHIPPING_CALC_ERROR ), 'SSL' ) ); //redirect to the shipping page to reselect the shipping method
+    }
+	}
+	//end kgt - discount coupons
 // load the selected shipping module
   require(DIR_WS_CLASSES . 'shipping.php');
   $shipping_modules = new shipping($shipping);

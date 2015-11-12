@@ -61,5 +61,13 @@
 // BOF: Information Pages Unlimited
   define('TABLE_INFORMATION', 'information');
 // EOF: Information Pages Unlimited
-
+//kgt - discount coupons
+  define('TABLE_DISCOUNT_COUPONS', 'discount_coupons');
+  define('TABLE_DISCOUNT_COUPONS_TO_ORDERS', 'discount_coupons_to_orders');
+  define('TABLE_DISCOUNT_COUPONS_TO_CATEGORIES', 'discount_coupons_to_categories');
+  define('TABLE_DISCOUNT_COUPONS_TO_PRODUCTS', 'discount_coupons_to_products');
+  define('TABLE_DISCOUNT_COUPONS_TO_MANUFACTURERS', 'discount_coupons_to_manufacturers');
+  define('TABLE_DISCOUNT_COUPONS_TO_CUSTOMERS', 'discount_coupons_to_customers');
+  define('TABLE_DISCOUNT_COUPONS_TO_ZONES', 'discount_coupons_to_zones');
+  //end kgt - discount coupons
 ?>

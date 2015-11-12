@@ -150,7 +150,13 @@
                           'customer_notified' => $customer_notification,
                           'comments' => $order->info['comments']);
   tep_db_perform(TABLE_ORDERS_STATUS_HISTORY, $sql_data_array);
-
+//kgt - discount coupons
+  if( tep_session_is_registered( 'coupon' ) && is_object( $order->coupon ) ) {
+	  $sql_data_array = array( 'coupons_id' => $order->coupon->coupon['coupons_id'],
+                             'orders_id' => $insert_id );
+	  tep_db_perform( TABLE_DISCOUNT_COUPONS_TO_ORDERS, $sql_data_array );
+  }
+  //end kgt - discount coupons
 // initialized for the email confirmation
   $products_ordered = '';
   //cat state
@@ -352,6 +358,9 @@
   tep_session_unregister('shipping');
   tep_session_unregister('payment');
   tep_session_unregister('comments');
+  //kgt - discount coupons
+  tep_session_unregister('coupon');
+  //end kgt - discount coupons 
 
   tep_session_is_registered('customer_is_guest') ? tep_redirect(tep_href_link('checkout_success_pwa.php', '', 'SSL')) : tep_redirect(tep_href_link(FILENAME_CHECKOUT_SUCCESS, '', 'SSL'));
 

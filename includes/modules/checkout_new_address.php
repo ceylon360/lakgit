@@ -121,7 +121,7 @@ switch ($any_rest)
 
 <?php
 if($any_rest==3 || $any_rest==2){
-	echo '<div class="notice notice-warning col-sm-offset-3">'.TEXT_RESTRICTION_P_MSG.'  <strong>'.$catrname.'</strong>. '.TEXT_RESTRICTION_D_MSG.' <strong>'.$rest_msg.'</strong></div>';
+	echo '<div class="notice notice-warning col-sm-offset-3">'.TEXT_RESTRICTION_P_MSG.'  <strong>'.$catrname.'</strong>. '.TEXT_RESTRICTION_D_MSG.' <strong>'.$rest_msg.'</strong>'.TEXT_RESTRICTION_E_MSG.'</div>';
 }
 
   if (ACCOUNT_STATE == 'true') {

@@ -291,6 +291,21 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
         <?php
         echo tep_draw_textarea_field('comments', 'soft', 60, 5, $comments, 'id="inputComments" placeholder="' . TABLE_HEADING_COMMENTS . '"');
         ?>
+	<?php	/* kgt - discount coupons */
+	if( MODULE_ORDER_TOTAL_DISCOUNT_COUPON_STATUS == 'true' ) {
+?>
+<h3><?php echo TABLE_HEADING_COUPON; ?></h3>
+
+  <div class="contentText">
+  	 </div>
+   
+        <div class="contentText">
+        <?php echo ENTRY_DISCOUNT_COUPON.' '.tep_draw_input_field('coupon', '', 'size="32"', $coupon); ?>
+  	 </div>
+		
+<?php
+	}
+/* end kgt - discount coupons */ ?>
       </div>
     </div>
   </div>
