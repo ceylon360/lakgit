@@ -294,7 +294,14 @@
 		}
 		//surprise
 		//anonymous
+		if ($order->info['anonymous']='yes'){
+				$anonymous_text=ENTRY_ANONYMOUSY;
+		  }
+		  else{
+				$anonymous_text=ENTRY_ANONYMOUSN;
+		  }
 		if (tep_not_null($order->info['anonymous'])) {
+				
 		?>
 		<div class="col-sm-4">
 			<div class="card2 card-yellow">
@@ -304,7 +311,7 @@
 				</div>
 				<div class="panel-body">
 					
-					<?php echo $order->info['anonymous']; ?>
+					<?php echo $anonymous_text; ?>
 				</div>
 			</div>
 		</div>

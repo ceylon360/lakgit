@@ -67,10 +67,10 @@
 
     $products_price .= '<meta itemprop="priceCurrency" content="' . tep_output_string($currency) . '" />';
 
-    $products_name = '<a href="' . tep_href_link('product_info.php', 'products_id=' . $product_info['products_id']) . '" itemprop="url"><span itemprop="name">' . $product_info['products_name'] . '</span></a>';
+    $products_name = '<a href="' . tep_href_link('product_info.php', 'products_id=' . $product_info['products_id']) . '" itemprop="url"><span itemprop="name"><h1 class="product-title">' . $product_info['products_name'] . '</h1></span></a>';
 $stock_check .='';
     if (tep_not_null($product_info['products_model'])) {
-      $products_name .= '<br /><small class="mdl">[<span itemprop="sku">' . $product_info['products_model'] . '</span>]</small>';
+      $products_name .= '<small class="md2">[<span itemprop="sku">' . $product_info['products_model'] . '</span>]</small></br>';
     
 	//stock info
 	    if (tep_get_products_stock($product_info['products_id'])>0 ) {
@@ -198,7 +198,7 @@ $stock_check .='';
 					
 				<div class="col-md-8">
 				<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-					<div class="product-title"><?php echo $products_name; ?></div>
+					<div class="product-title-box"><?php echo $products_name; ?></div>
 					<div class="product-desc" itemprop="description"><?php echo stripslashes($product_info['products_description']); ?></div>
 			<!--		<div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div> -->
 					      <tr>

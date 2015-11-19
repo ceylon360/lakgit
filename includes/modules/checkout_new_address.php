@@ -74,13 +74,13 @@ switch ($any_rest)
       <label for="inputFirstName" class="control-label col-sm-3"><?php echo ENTRY_FIRST_NAME; ?></label>
       <div class="col-sm-4">
         <?php
-        echo tep_draw_input_field('firstname', NULL, 'id="inputFirstName" aria-describedby="atFirstName" placeholder="' . ENTRY_FIRST_NAME . '"');
+        echo tep_draw_input_field('firstname', NULL, 'id="inputFirstName" required aria-required="true" aria-describedby="atFirstName" placeholder="' . ENTRY_FIRST_NAME . '"');
         if (tep_not_null(ENTRY_FIRST_NAME_TEXT)) echo '<span id="atFirstName" class="help-block">' . ENTRY_FIRST_NAME_TEXT . '</span>';
         ?>
       </div>
 		<div class="col-sm-5">
 			<?php
-				echo tep_draw_input_field('lastname', NULL, 'id="inputLastName" aria-describedby="atLastName" placeholder="' . ENTRY_LAST_NAME . '"');
+				echo tep_draw_input_field('lastname', NULL, 'id="inputLastName" required aria-required="true" aria-describedby="atLastName" placeholder="' . ENTRY_LAST_NAME . '"');
 				if (tep_not_null(ENTRY_LAST_NAME_TEXT)) echo '<span id="atLastName" class="help-block">' . ENTRY_LAST_NAME_TEXT . '</span>';
 			?>
 		</div>
@@ -94,7 +94,7 @@ switch ($any_rest)
 		  <label for="inputStreet" class="control-label col-sm-3"><?php echo ENTRY_STREET_ADDRESS; ?></label>
 		  <div class="col-sm-9">
 			  <?php //  echo tep_draw_input_field('street_address', NULL, 'id="inputStreet" aria-describedby="atStreetAddress" placeholder="' . ENTRY_STREET_ADDRESS . '"');
-				  echo tep_draw_textarea_field('street_address','soft', 30, 5, NULL, 'id="inputStreet" aria-describedby="atStreetAddress" placeholder="' . ENTRY_STREET_ADDRESS . '"');
+				  echo tep_draw_textarea_field('street_address','soft', 30, 5, NULL, 'id="inputStreet" required aria-required="true" aria-describedby="atStreetAddress" placeholder="' . ENTRY_STREET_ADDRESS . '"');
 				  if (tep_not_null(ENTRY_STREET_ADDRESS_TEXT)) echo '<span id="atStreetAddress" class="help-block">' . ENTRY_STREET_ADDRESS_TEXT . '</span>';
 			  ?>
 		  </div>
@@ -113,7 +113,7 @@ switch ($any_rest)
         if ( $country == '' && MODULE_HEADER_TAGS_GET_STATES_DEFAULT_COUNTRY == 'True') {
           $country = STORE_COUNTRY;
         }
-        echo tep_get_country_list('country', $country, 'onChange="getState(this.value)" required aria-required="true" id="inputCountry" disabled');
+        echo tep_get_country_list('country', $country, 'onChange="getState(this.value)"  id="inputCountry" disabled');
         if (tep_not_null(ENTRY_COUNTRY_TEXT)) echo '<span class="help-block">' . ENTRY_COUNTRY_TEXT . '</span>';
         ?>
       </div>
@@ -167,7 +167,7 @@ if($any_rest==3 || $any_rest==2){
       <label for="inputCompany" class="control-label col-sm-3"><?php echo ENTRY_TELEPHONE_NUMBER; ?></label>
       <div class="col-sm-9">
         <?php
-        echo tep_draw_input_field('company', NULL, 'id="inputCompany" aria-describedby="atCompany" placeholder="' . ENTRY_TELEPHONE_NUMBER . '"');
+        echo tep_draw_input_field('company', NULL, 'id="inputCompany" required aria-required="true" aria-describedby="atCompany" placeholder="' . ENTRY_TELEPHONE_NUMBER . '"');
         if (tep_not_null(ENTRY_TELEPHONE_NUMBER_TEXT)) echo '<span id="atCompany" class="help-block">' . ENTRY_TELEPHONE_NUMBER_TEXT . '</span>';
         ?>
       </div>

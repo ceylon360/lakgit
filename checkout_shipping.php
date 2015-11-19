@@ -260,7 +260,7 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
 
 </script>
   <div class="contentText">
-    <?php echo TEXT_CHOOSE_SHIPPING_DATE . '<br /><br />' . tep_draw_input_field('delivery_date','', 'id="delivery_date" readonly="readonly"'); ?>
+    <?php echo TEXT_CHOOSE_SHIPPING_DATE . '<br /><br />' . tep_draw_input_field('delivery_date','', 'id="delivery_date" required aria-required="true" readonly="readonly"'); ?>
   </div>
         </div> 
       <div class="col-sm-8">
@@ -351,8 +351,8 @@ else{
         <?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_SURPRISE_TEXT . '</span>'; ?>
       </div>
 	  <div class="col-sm-12">
-			<div class="animated fadeInUp notice notice-success surprise_yes" style="display:none"><?php echo SURPRISEY_INFO?></div>
-		    <div class="animated fadeInUp notice notice-warning surprise_no" style="display:none" ><?php echo SURPRISEN_INFO?></div>
+			<div class="animated fadeInUp notice notice-warning surprise_yes" style="display:none"><?php echo SURPRISEY_INFO?></div>
+		    <div class="animated fadeInUp notice notice-success surprise_no" style="display:none" ><?php echo SURPRISEN_INFO?></div>
 		</div>
     </div>
 	<!-- eof surprise -->
@@ -373,8 +373,8 @@ else{
 			<?php //if (tep_not_null(ENTRY_GENDER_TEXT)) echo '<span class="help-block">' . ENTRY_ANONYMOUS_TEXT . '</span>'; ?>
 		</div>
 		<div class="col-sm-12">
-			<div class="animated fadeInUp notice notice-success anonymous_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
-		<div class="animated fadeInUp notice notice-warning anonymous_no" style="display:none"><?php echo ANONYMOUSN_INFO?></div>
+			<div class="animated fadeInUp notice notice-warning anonymous_yes" style="display:none"><?php echo ANONYMOUSY_INFO?></div>
+		<div class="animated fadeInUp notice notice-success anonymous_no" style="display:none"><?php echo ANONYMOUSN_INFO?></div>
 			</div>
     </div>
 	

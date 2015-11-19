@@ -287,7 +287,7 @@ $listing_sql .= $hiddenlist;
 	<div class="row">
 		<div class="col-md-4">
 			
-			<?php echo'<img class="bg_blur" src="'.DIR_WS_IMAGES . $image['categories_banner'].'" height="200" width="200">' ?>
+			<!--<?php //echo'<img class="bg_blur" src="'.DIR_WS_IMAGES . $image['categories_banner'].'" height="200" width="200">' ?>-->
 			</div>
         <div class="col-md-8  col-xs-12">
 			<?php echo'<img class="img-thumbnail picture hidden-xs hidden-sm" src="'.DIR_WS_IMAGES . $image['categories_image'].'" height="200" width="200">' ?>
