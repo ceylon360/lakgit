@@ -669,23 +669,19 @@ padding-left: 20px;
 }
 .header{
     color : #808080;
-    margin-left:10%;
-    margin-top:20px;
+	min-height:150px;
 }
 
 .picture{
     height:150px;
     width:150px;
     position:absolute;
-    top: 25px;
-    left:-120px;
+    top: 0px;
+    left:0px;
 }
 
 .picture_mob{
-    position: absolute;
-    width: 22%;
-    left: 35%;
-    bottom: 90%;
+
 }
 .cat_des{
 	font-size:13px;
@@ -807,7 +803,7 @@ li.notice.notice-success a {
 .caticon-selected{
 	border-right: solid 1px #DEDEDE;
     border-left: solid 1px #DEDEDE;
-    border-top: solid 1px #DEDEDE;
+    border-top: solid 4px #4CAF50;
     top: 6px;
 	margin: 0px;
     padding: 3px;
