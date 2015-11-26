@@ -486,7 +486,12 @@ p.lead del {
 }
 
 .product-title{
-	font-size: 20px;
+font-size: 20px;
+	    margin-bottom: 0px;
+}
+
+.product-title-box{
+	    margin-bottom: 12px;
 }
 
 .product-desc{

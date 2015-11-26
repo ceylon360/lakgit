@@ -291,25 +291,30 @@ if (isset($HTTP_POST_VARS['anonymous']) && tep_not_null($HTTP_POST_VARS['anonymo
         <?php
         echo tep_draw_textarea_field('comments', 'soft', 60, 5, $comments, 'id="inputComments" placeholder="' . TABLE_HEADING_COMMENTS . '"');
         ?>
-	<?php	/* kgt - discount coupons */
-	if( MODULE_ORDER_TOTAL_DISCOUNT_COUPON_STATUS == 'true' ) {
-?>
-<h3><?php echo TABLE_HEADING_COUPON; ?></h3>
 
-  <div class="contentText">
-  	 </div>
-   
-        <div class="contentText">
-        <?php echo ENTRY_DISCOUNT_COUPON.' '.tep_draw_input_field('coupon', '', 'size="32"', $coupon); ?>
-  	 </div>
-		
-<?php
-	}
-/* end kgt - discount coupons */ ?>
       </div>
     </div>
   </div>
-
+<!--coupon-->.
+	<?php	/* kgt - discount coupons */
+		if( MODULE_ORDER_TOTAL_DISCOUNT_COUPON_STATUS == 'true' ) {
+		?>
+		<div class="row">
+			<div class="col-sm-12">
+				<h4><?php echo TABLE_HEADING_COUPON; ?></h4>
+			</div>
+		<div class="col-sm-4">
+		<label for="coupon"><?php echo ENTRY_DISCOUNT_COUPON; ?></label>
+		</div>
+		
+        <div class="col-sm-4">
+        <?php echo tep_draw_input_field('coupon', '', 'size="32"', $coupon); ?>
+		</div>
+		</div>
+		<?php
+		}
+	/* end kgt - discount coupons */ ?>
+<!--coupon-->
   <div class="buttonSet">
     <div class="text-right"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'glyphicon glyphicon-chevron-right', null, 'primary', null, 'btn-success'); ?></div>
   </div>

@@ -26,7 +26,7 @@ define('TEXT_ALL_MANUFACTURERS', 'All Manufacturers');
 
 // seo
 if ( ($category_depth == 'top') && (!isset($HTTP_GET_VARS['manufacturers_id'])) ) {
-  define('META_SEO_TITLE', 'Index Page Title');
+  define('META_SEO_TITLE', 'Lakwimana');
   define('META_SEO_DESCRIPTION', 'This is the description of your site to be used in the META Description Element');
   /*
   keywords are USELESS unless you are selling into China and want to be listed in Baidu Search Engine
