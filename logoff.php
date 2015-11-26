@@ -39,6 +39,9 @@ if ( tep_session_is_registered('payment') ) {
 
 if ( tep_session_is_registered('comments') ) {
   tep_session_unregister('comments');
+  //kgt - discount coupons
+  tep_session_unregister('coupon');
+  //end kgt - discount coupons 
 }
 
   $cart->reset();

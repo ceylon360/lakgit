@@ -292,6 +292,15 @@
 
       $index = 0;
       $products = $cart->get_products();
+	   //kgt - discount coupons
+      global $coupon;
+      if( tep_session_is_registered( 'coupon' ) && tep_not_null( $coupon ) ) {
+        require_once( DIR_WS_CLASSES.'discount_coupon.php' );
+        $this->coupon = new discount_coupon( $coupon, $this->delivery );
+        $this->coupon->total_valid_products( $products );
+        $valid_products_count = 0;
+      }
+      //end kgt - discount coupons
       for ($i=0, $n=sizeof($products); $i<$n; $i++) {
         $this->products[$index] = array('qty' => $products[$i]['quantity'],
                                         'name' => $products[$i]['name'],
@@ -321,8 +330,23 @@
           }
         }
 
-        $shown_price = $currencies->calculate_price($this->products[$index]['final_price'], $this->products[$index]['tax'], $this->products[$index]['qty']);
+//kgt - discount coupons
+        if( is_object( $this->coupon ) ) {
+          $applied_discount = 0;
+          $discount = $this->coupon->calculate_discount( $this->products[$index], $valid_products_count );
+          if( $discount['applied_discount'] > 0 ) $valid_products_count++;
+          $shown_price = $this->coupon->calculate_shown_price( $discount, $this->products[$index] );
+          $this->info['subtotal'] += $shown_price['shown_price'];
+          $shown_price = $shown_price['actual_shown_price'];
+        } else {
+          $shown_price = tep_add_tax($this->products[$index]['final_price'], $this->products[$index]['tax']) * $this->products[$index]['qty'];
+          $this->info['subtotal'] += $shown_price;
+        }
+        /**************
+        $shown_price = tep_add_tax($this->products[$index]['final_price'], $this->products[$index]['tax']) * $this->products[$index]['qty'];
         $this->info['subtotal'] += $shown_price;
+        **************/
+        //end kgt - discount coupons
 
         $products_tax = $this->products[$index]['tax'];
         $products_tax_description = $this->products[$index]['tax_description'];
@@ -350,6 +374,11 @@
       } else {
         $this->info['total'] = $this->info['subtotal'] + $this->info['tax'] + $this->info['shipping_cost'];
       }
+	  //kgt - discount coupon
+      if( is_object( $this->coupon ) ) {
+        $this->info['total'] = $this->coupon->finalize_discount( $this->info );
+      }
+      //end kgt - discount coupon
     }
   }
 ?>

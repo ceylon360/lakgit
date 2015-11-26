@@ -27,7 +27,13 @@
         'code' => FILENAME_STATS_CUSTOMERS,
         'title' => BOX_REPORTS_ORDERS_TOTAL,
         'link' => tep_href_link(FILENAME_STATS_CUSTOMERS)
+      ),
+	  array(
+      'code' => FILENAME_STATS_DISCOUNT_COUPONS,
+      'title' => BOX_REPORTS_DISCOUNT_COUPONS ,
+      'link' => tep_href_link(FILENAME_STATS_DISCOUNT_COUPONS)
       )
+    //end kgt - discount coupons 
     )
   );
 ?>

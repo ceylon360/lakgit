@@ -66,5 +66,13 @@
 
 define('FILENAME_QUICK_INVENTORY', 'quick_inventory.php');
 
-
+//kgt - discount coupons
+  define('FILENAME_DISCOUNT_COUPONS','coupons.php');
+  define('FILENAME_DISCOUNT_COUPONS_MANUAL', 'coupons_manual.html');
+  define('FILENAME_DISCOUNT_COUPONS_EXCLUSIONS', 'coupons_exclusions.php');
+  //end kgt - discount coupons
+  
+  //kgt - discount coupons report
+	define('FILENAME_STATS_DISCOUNT_COUPONS', 'stats_discount_coupons.php');
+  //end kgt - discount coupons report
 ?>

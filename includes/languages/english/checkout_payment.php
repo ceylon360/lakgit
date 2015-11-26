@@ -29,4 +29,8 @@ define('TABLE_HEADING_COMMENTS', 'Add Comments About Your Order');
 define('TITLE_CONTINUE_CHECKOUT_PROCEDURE', 'Continue Checkout Procedure');
 define('TEXT_CONTINUE_CHECKOUT_PROCEDURE', 'to confirm this order.');
 define('TEXT_PAYMENT_RULES', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/>Praesent ultrices augue a suscipit porttitor.<br/>Aenean a nisl ac nunc mattis tempor.<br/>consectetur augue a adipiscing elit.');
+//kgt - discount coupons
+define('TABLE_HEADING_COUPON', 'Do you have a promotional code or discount coupon?' );
+//end kgt - discount coupons
+
 ?>
