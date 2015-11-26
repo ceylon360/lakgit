@@ -123,9 +123,9 @@
     $prod_list_contents .= '    <div class="caption">';
     $prod_list_contents .= '      <h2 class="group inner list-group-item-heading">';
     if (isset($HTTP_GET_VARS['manufacturers_id']) && tep_not_null($HTTP_GET_VARS['manufacturers_id'])) {
-      $prod_list_contents .= '    <a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $HTTP_GET_VARS['manufacturers_id'] . '&products_id=' . $listing['products_id']) . '">' . $listing['products_name'] . '</a>';
+      $prod_list_contents .= '    <a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $HTTP_GET_VARS['manufacturers_id'] . '&products_id=' . $listing['products_id']) . '">' . substr($listing['products_name'],0,5) . '</a>';
     } else {
-      $prod_list_contents .= '    <a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing['products_id']) . '">' . $listing['products_name'] . '</a>';
+      $prod_list_contents .= '    <a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing['products_id']) . '">' . substr($listing['products_name'],0,25) . '</a>';
     }
     $prod_list_contents .= '      </h2>';
 
