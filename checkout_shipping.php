@@ -462,7 +462,7 @@ else{
     if (sizeof($quotes) > 1 && sizeof($quotes[0]) > 1) {
 ?>
 
-  <div class="contentText">
+ <!-- <div class="contentText">
     <div class="alert alert-warning">
       <div class="row">
         <div class="col-xs-8">
@@ -473,15 +473,15 @@ else{
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
 
 <?php
     } elseif ($free_shipping == false) {
 ?>
 
-  <div class="contentText">
+ <!-- <div class="contentText">
     <div class="alert alert-info"><?php echo TEXT_ENTER_SHIPPING_INFORMATION; ?></div>
-  </div>
+  </div>-->
 
 <?php
     }

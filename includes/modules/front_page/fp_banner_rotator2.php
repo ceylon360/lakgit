@@ -49,6 +49,7 @@
                     " . TABLE_BANNERS . "
                   where
                     banners_group = '" . MODULE_FRONT_PAGE_BANNER_ROTATOR2_GROUP . "'
+					and status = 1
                   order by
                     " . MODULE_FRONT_PAGE_BANNER_ROTATOR2_BANNER_ORDER . "
                   limit
